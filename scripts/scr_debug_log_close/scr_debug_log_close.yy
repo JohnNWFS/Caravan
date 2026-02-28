@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_debug_log_close",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_debug_log_close",
+  "parent":{
+    "name":"Commands",
+    "path":"folders/Scripts/Commands.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

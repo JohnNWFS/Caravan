@@ -1,0 +1,58 @@
+You've analyzed my codebase and understand the architecture. Now I need a code health check.
+
+**Your task: Identify orphaned code, redundant implementations, and architectural inefficiencies.**
+
+Please analyze and report:
+
+1. **ORPHANED SCRIPTS**
+   Find scripts that are never called:
+   - Script name
+   - Where it SHOULD be called (if obvious)
+   - Whether it's dead code or incomplete implementation
+   - Recommendation: DELETE or INTEGRATE?
+
+2. **REDUNDANT FUNCTIONS**
+   Find duplicate or near-duplicate implementations:
+   - Function/script names that do the same thing
+   - Percentage of code overlap
+   - Which one is better/more complete
+   - Recommendation: MERGE, DEPRECATE one, or SPECIALIZE both?
+
+3. **INCOMPLETE MIGRATIONS**
+   Find evidence of refactoring that wasn't finished:
+   - Old and new versions of same system
+   - Half-updated function calls
+   - Deprecated patterns still in use
+   - Mixed naming conventions (old vs new)
+
+4. **UNUSED VARIABLES/STRUCTS**
+   Find data structures that are created but never read:
+   - Variable/struct name and location
+   - Where it's created
+   - Whether it's truly unused or just not yet used
+   - Recommendation: REMOVE or COMPLETE feature?
+
+
+
+5. **ARCHITECTURAL INEFFICIENCIES**
+   Find structural issues:
+   - Functions that should be combined
+   - Repeated code blocks that should be extracted
+   - Over-complicated implementations with simpler alternatives
+   - Data passed through multiple layers unnecessarily
+
+6. **NAMING INCONSISTENCIES**
+   Find patterns that violate the codebase conventions:
+   - Mixed naming styles (scr_ vs cmd_ vs no prefix)
+   - Similar functions with different naming patterns
+   - Recommendation for standardization
+
+**Detection methodology:**
+- Cross-reference all script definitions with all script calls
+- Look for similar function names (scr_get_X vs scr_fetch_X)
+- Compare code blocks for structural similarity
+- Check variable assignments vs. variable reads
+- Analyze comment TODO/FIXME/HACK markers
+
+**Output format:**
+For each issue found:

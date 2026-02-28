@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_world_tick",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_world_tick",
+  "parent":{
+    "name":"Economy",
+    "path":"folders/Scripts/Economy.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

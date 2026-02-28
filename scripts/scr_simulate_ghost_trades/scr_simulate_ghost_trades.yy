@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_simulate_ghost_trades",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_simulate_ghost_trades",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

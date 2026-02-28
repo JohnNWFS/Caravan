@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir:*)",
+      "Bash(findstr /n \"competitors\\\\|scr_run_all\\\\|scr_create_comp\" \"C:\\\\Users\\\\hoffe\\\\GameMakerProjects\\\\Caravan\\\\scripts\\\\world_generate\\\\world_generate.gml\")",
+      "Bash(findstr /n \"competitors\" \"C:\\\\Users\\\\hoffe\\\\GameMakerProjects\\\\Caravan\\\\scripts\\\\world_generate\\\\world_generate.gml\")",
+      "Bash(findstr \"competitors\" \"C:\\\\Users\\\\hoffe\\\\GameMakerProjects\\\\Caravan\\\\scripts\\\\world_generate\\\\world_generate.gml\")",
+      "Bash(findstr \"scr_run_all_competitors\" \"C:\\\\Users\\\\hoffe\\\\GameMakerProjects\\\\Caravan\\\\scripts\\\\scr_begin_journey\\\\scr_begin_journey.gml\")",
+      "Bash(findstr \"comp\")",
+      "Bash(findstr \"scr_competitor\\\\|scr_create_comp\\\\|scr_run_all\\\\|scr_run_comp\" \"C:\\\\Users\\\\hoffe\\\\GameMakerProjects\\\\Caravan\\\\Caravan.yyp\")"
+    ]
+  }
+}

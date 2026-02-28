@@ -1,0 +1,1 @@
+Get-ChildItem -Recurse -Filter "*.gml" | Get-Content | Out-File -FilePath "all_gml_files.txt" -Encoding UTF8

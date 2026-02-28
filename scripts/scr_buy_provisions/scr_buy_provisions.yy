@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_buy_provisions",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_buy_provisions",
+  "parent":{
+    "name":"Commands",
+    "path":"folders/Scripts/Commands.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -1,0 +1,43 @@
+I have a DESIGN.md document that outlines the intended features, systems, and architecture for my trading caravan game. You've already analyzed the current codebase snapshot.
+
+**Your task: Compare the implemented code against the design document and identify discrepancies.**
+
+Please provide:
+
+1. **IMPLEMENTATION STATUS VERIFICATION**
+   Compare the "Current Implementation Status" section in DESIGN.md against actual code:
+   - ✅ Features marked complete that ARE implemented correctly
+   - ⚠️ Features marked complete but PARTIALLY implemented or buggy
+   - ❌ Features marked complete but NOT FOUND in code
+   - 🆕 Features IMPLEMENTED but not documented in DESIGN.md
+
+2. **DESIGN DRIFT ANALYSIS**
+   Identify where code diverges from design:
+   - Systems implemented differently than designed
+   - New patterns or approaches not in design doc
+   - Abandoned design concepts (in doc but not coded)
+   - Better alternatives discovered during implementation
+
+3. **DESIGN DOC UPDATE RECOMMENDATIONS**
+   Suggest specific updates to DESIGN.md:
+   - Move features from "Not Yet Implemented" to "Completed"
+   - Update "Partially Implemented" statuses
+   - Document new implementation decisions
+   - Remove/archive abandoned concepts
+   - Add discovered patterns to "Design Decisions & Rationale"
+
+4. **MISSING DESIGN DOCUMENTATION**
+   Identify implemented systems that need design documentation:
+   - New scripts/systems not mentioned in DESIGN.md
+   - Implementation details that should be documented
+   - Design decisions that should be captured
+
+**Output format:**
+- Use clear sections with ✅⚠️❌🆕 markers
+- Quote specific sections from DESIGN.md when referencing
+- Provide specific line-item updates for the design doc
+- Prioritize: Critical mismatches first, minor documentation gaps last
+
+**Goal:** Ensure DESIGN.md accurately reflects what's actually built, and identify any implementation that contradicts intended design.
+
+[Note: You already have the code snapshot from Prompt 1. DESIGN.md is included in the snapshot.]

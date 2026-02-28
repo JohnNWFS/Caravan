@@ -1,0 +1,5325 @@
+GameMaker Project Snapshot 
+Generated: Sat 01/17/2026  8:21:44.17 
+================================================ 
+ 
+ 
+[SNAPSHOT METADATA] 
+=================== 
+Snapshot Date: Sat 01/17/2026  8:21:44.22 
+Project Path: C:\Users\hoffe\GameMakerProjects\Caravan 
+Total Files Captured: [manually count or add counter] 
+ 
+[PROJECT CONFIGURATION] 
+======================== 
+File: Caravan.yyp 
+{
+  "$GMProject":"v1",
+  "%Name":"Caravan",
+  "AudioGroups":[
+    {"$GMAudioGroup":"v1","%Name":"audiogroup_default","exportDir":"","name":"audiogroup_default","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
+  ],
+  "configs":{
+    "children":[],
+    "name":"Default",
+  },
+  "defaultScriptType":1,
+  "Folders":[
+    {"$GMFolder":"","%Name":"Objects","folderPath":"folders/Objects.yy","name":"Objects","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"Scripts","folderPath":"folders/Scripts.yy","name":"Scripts","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"Commands","folderPath":"folders/Scripts/Commands.yy","name":"Commands","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"Economy","folderPath":"folders/Scripts/Economy.yy","name":"Economy","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"Asset Management","folderPath":"folders/Scripts/Asset Management.yy","name":"Asset Management","resourceType":"GMFolder","resourceVersion":"2.0",},
+  ],
+  "ForcedPrefabProjectReferences":[],
+  "IncludedFiles":[],
+  "isEcma":false,
+  "LibraryEmitters":[],
+  "MetaData":{
+    "IDEVersion":"2024.14.2.213",
+  },
+  "name":"Caravan",
+  "resources":[
+    {"id":{"name":"fnt_console","path":"fonts/fnt_console/fnt_console.yy",},},
+    {"id":{"name":"obj_console","path":"objects/obj_console/obj_console.yy",},},
+    {"id":{"name":"obj_heartbeat","path":"objects/obj_heartbeat/obj_heartbeat.yy",},},
+    {"id":{"name":"obj_input","path":"objects/obj_input/obj_input.yy",},},
+    {"id":{"name":"obj_player","path":"objects/obj_player/obj_player.yy",},},
+    {"id":{"name":"rm_main","path":"rooms/rm_main/rm_main.yy",},},
+    {"id":{"name":"cmd_parse","path":"scripts/cmd_parse/cmd_parse.yy",},},
+    {"id":{"name":"console_print","path":"scripts/console_print/console_print.yy",},},
+    {"id":{"name":"scr_add_ghost_commodity","path":"scripts/scr_add_ghost_commodity/scr_add_ghost_commodity.yy",},},
+    {"id":{"name":"scr_begin_journey","path":"scripts/scr_begin_journey/scr_begin_journey.yy",},},
+    {"id":{"name":"scr_buy_provisions","path":"scripts/scr_buy_provisions/scr_buy_provisions.yy",},},
+    {"id":{"name":"scr_calculate_buy_price","path":"scripts/scr_calculate_buy_price/scr_calculate_buy_price.yy",},},
+    {"id":{"name":"scr_calculate_daily_consumption","path":"scripts/scr_calculate_daily_consumption/scr_calculate_daily_consumption.yy",},},
+    {"id":{"name":"scr_calculate_journey_time","path":"scripts/scr_calculate_journey_time/scr_calculate_journey_time.yy",},},
+    {"id":{"name":"scr_calculate_sell_price","path":"scripts/scr_calculate_sell_price/scr_calculate_sell_price.yy",},},
+    {"id":{"name":"scr_calculate_travel_cost","path":"scripts/scr_calculate_travel_cost/scr_calculate_travel_cost.yy",},},
+    {"id":{"name":"scr_can_afford_journey","path":"scripts/scr_can_afford_journey/scr_can_afford_journey.yy",},},
+    {"id":{"name":"scr_cmd_buy","path":"scripts/scr_cmd_buy/scr_cmd_buy.yy",},},
+    {"id":{"name":"scr_cmd_go","path":"scripts/scr_cmd_go/scr_cmd_go.yy",},},
+    {"id":{"name":"scr_cmd_inventory","path":"scripts/scr_cmd_inventory/scr_cmd_inventory.yy",},},
+    {"id":{"name":"scr_cmd_market","path":"scripts/scr_cmd_market/scr_cmd_market.yy",},},
+    {"id":{"name":"scr_cmd_sell","path":"scripts/scr_cmd_sell/scr_cmd_sell.yy",},},
+    {"id":{"name":"scr_cmd_travel","path":"scripts/scr_cmd_travel/scr_cmd_travel.yy",},},
+    {"id":{"name":"scr_cmd_work","path":"scripts/scr_cmd_work/scr_cmd_work.yy",},},
+    {"id":{"name":"scr_consume_water","path":"scripts/scr_consume_water/scr_consume_water.yy",},},
+    {"id":{"name":"scr_create_commodity_database","path":"scripts/scr_create_commodity_database/scr_create_commodity_database.yy",},},
+    {"id":{"name":"scr_determine_terrain_static","path":"scripts/scr_determine_terrain_static/scr_determine_terrain_static.yy",},},
+    {"id":{"name":"scr_filter_commodities_by_terrain","path":"scripts/scr_filter_commodities_by_terrain/scr_filter_commodities_by_terrain.yy",},},
+    {"id":{"name":"scr_find_commodity_by_name","path":"scripts/scr_find_commodity_by_name/scr_find_commodity_by_name.yy",},},
+    {"id":{"name":"scr_find_empty_cargo_slot","path":"scripts/scr_find_empty_cargo_slot/scr_find_empty_cargo_slot.yy",},},
+    {"id":{"name":"scr_generate_location_economy","path":"scripts/scr_generate_location_economy/scr_generate_location_economy.yy",},},
+    {"id":{"name":"scr_get_commodity_by_id","path":"scripts/scr_get_commodity_by_id/scr_get_commodity_by_id.yy",},},
+    {"id":{"name":"scr_get_max_water_capacity","path":"scripts/scr_get_max_water_capacity/scr_get_max_water_capacity.yy",},},
+    {"id":{"name":"scr_get_total_water","path":"scripts/scr_get_total_water/scr_get_total_water.yy",},},
+    {"id":{"name":"scr_get_travel_options","path":"scripts/scr_get_travel_options/scr_get_travel_options.yy",},},
+    {"id":{"name":"scr_pick_random_commodity","path":"scripts/scr_pick_random_commodity/scr_pick_random_commodity.yy",},},
+    {"id":{"name":"scr_reduce_random_commodity","path":"scripts/scr_reduce_random_commodity/scr_reduce_random_commodity.yy",},},
+    {"id":{"name":"scr_refill_water","path":"scripts/scr_refill_water/scr_refill_water.yy",},},
+    {"id":{"name":"scr_simulate_ghost_trades","path":"scripts/scr_simulate_ghost_trades/scr_simulate_ghost_trades.yy",},},
+    {"id":{"name":"world_generate","path":"scripts/world_generate/world_generate.yy",},},
+  ],
+  "resourceType":"GMProject",
+  "resourceVersion":"2.0",
+  "RoomOrderNodes":[
+    {"roomId":{"name":"rm_main","path":"rooms/rm_main/rm_main.yy",},},
+  ],
+  "templateType":"game",
+  "TextureGroups":[
+    {"$GMTextureGroup":"","%Name":"Default","autocrop":true,"border":2,"compressFormat":"bz2","customOptions":"","directory":"","groupParent":null,"isScaled":true,"loadType":"default","mipsToGenerate":0,"name":"Default","resourceType":"GMTextureGroup","resourceVersion":"2.0","targets":-1,},
+  ],
+} 
+ 
+[OBJECTS] 
+========= 
+ 
+--- Object: obj_console.yy --- 
+{
+  "$GMObject":"",
+  "%Name":"obj_console",
+  "eventList":[
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":64,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+  ],
+  "managed":true,
+  "name":"obj_console",
+  "overriddenProperties":[],
+  "parent":{
+    "name":"Objects",
+    "path":"folders/Objects.yy",
+  },
+  "parentObjectId":null,
+  "persistent":true,
+  "physicsAngularDamping":0.1,
+  "physicsDensity":0.5,
+  "physicsFriction":0.2,
+  "physicsGroup":1,
+  "physicsKinematic":false,
+  "physicsLinearDamping":0.1,
+  "physicsObject":false,
+  "physicsRestitution":0.1,
+  "physicsSensor":false,
+  "physicsShape":1,
+  "physicsShapePoints":[],
+  "physicsStartAwake":true,
+  "properties":[],
+  "resourceType":"GMObject",
+  "resourceVersion":"2.0",
+  "solid":false,
+  "spriteId":null,
+  "spriteMaskId":null,
+  "visible":true,
+} 
+ 
+--- Object: obj_heartbeat.yy --- 
+{
+  "$GMObject":"",
+  "%Name":"obj_heartbeat",
+  "eventList":[
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+  ],
+  "managed":true,
+  "name":"obj_heartbeat",
+  "overriddenProperties":[],
+  "parent":{
+    "name":"Objects",
+    "path":"folders/Objects.yy",
+  },
+  "parentObjectId":null,
+  "persistent":true,
+  "physicsAngularDamping":0.1,
+  "physicsDensity":0.5,
+  "physicsFriction":0.2,
+  "physicsGroup":1,
+  "physicsKinematic":false,
+  "physicsLinearDamping":0.1,
+  "physicsObject":false,
+  "physicsRestitution":0.1,
+  "physicsSensor":false,
+  "physicsShape":1,
+  "physicsShapePoints":[],
+  "physicsStartAwake":true,
+  "properties":[],
+  "resourceType":"GMObject",
+  "resourceVersion":"2.0",
+  "solid":false,
+  "spriteId":null,
+  "spriteMaskId":null,
+  "visible":true,
+} 
+ 
+--- Object: obj_input.yy --- 
+{
+  "$GMObject":"",
+  "%Name":"obj_input",
+  "eventList":[
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":64,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+  ],
+  "managed":true,
+  "name":"obj_input",
+  "overriddenProperties":[],
+  "parent":{
+    "name":"Objects",
+    "path":"folders/Objects.yy",
+  },
+  "parentObjectId":null,
+  "persistent":true,
+  "physicsAngularDamping":0.1,
+  "physicsDensity":0.5,
+  "physicsFriction":0.2,
+  "physicsGroup":1,
+  "physicsKinematic":false,
+  "physicsLinearDamping":0.1,
+  "physicsObject":false,
+  "physicsRestitution":0.1,
+  "physicsSensor":false,
+  "physicsShape":1,
+  "physicsShapePoints":[],
+  "physicsStartAwake":true,
+  "properties":[],
+  "resourceType":"GMObject",
+  "resourceVersion":"2.0",
+  "solid":false,
+  "spriteId":null,
+  "spriteMaskId":null,
+  "visible":true,
+} 
+ 
+--- Object: obj_player.yy --- 
+{
+  "$GMObject":"",
+  "%Name":"obj_player",
+  "eventList":[
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+  ],
+  "managed":true,
+  "name":"obj_player",
+  "overriddenProperties":[],
+  "parent":{
+    "name":"Objects",
+    "path":"folders/Objects.yy",
+  },
+  "parentObjectId":null,
+  "persistent":false,
+  "physicsAngularDamping":0.1,
+  "physicsDensity":0.5,
+  "physicsFriction":0.2,
+  "physicsGroup":1,
+  "physicsKinematic":false,
+  "physicsLinearDamping":0.1,
+  "physicsObject":false,
+  "physicsRestitution":0.1,
+  "physicsSensor":false,
+  "physicsShape":1,
+  "physicsShapePoints":[],
+  "physicsStartAwake":true,
+  "properties":[],
+  "resourceType":"GMObject",
+  "resourceVersion":"2.0",
+  "solid":false,
+  "spriteId":null,
+  "spriteMaskId":null,
+  "visible":true,
+} 
+ 
+--- Event Code: Create_0.gml --- 
+/// @description Insert description here
+// You can write your code in this editor
+// === DISPLAY SETTINGS ===
+char_width = 8;   // Approximate character width in pixels
+char_height = 16; // Character height in pixels
+cols = 80;        // Characters per row
+rows = 25;        // Total rows visible
+
+// === TEXT STORAGE ===
+lines = [];       // Array of strings - our scrollback buffer
+max_lines = 1000; // Keep last 1000 lines in memory
+scroll_offset = 0; // How many lines scrolled up from bottom
+
+// === STATUS PANE (optional for now) ===
+status_text = "";  // Top status line
+
+// === COLORS ===
+col_bg = c_black;
+col_text = c_lime;     // Classic green terminal
+col_status = c_yellow;
+col_error = c_red;
+col_info = c_aqua;
+
+// === MAKE PERSISTENT ===
+persistent = true; 
+ 
+--- Event Code: Draw_64.gml --- 
+/// @description Insert description here
+// You can write your code in this editor
+// Clear background
+draw_clear(col_bg);
+
+// Set font
+draw_set_font(fnt_console);
+draw_set_halign(fa_left);
+draw_set_valign(fa_top);
+
+// === DRAW STATUS LINE (if any) ===
+if (status_text != "") {
+    draw_set_color(col_status);
+    draw_text(0, 0, status_text);
+    draw_set_color(col_text); // Reset to default
+}
+
+// === DRAW TEXT LINES ===
+var start_y = (status_text != "") ? char_height : 0;
+var visible_rows = (status_text != "") ? rows - 2 : rows - 1; // Reserve bottom row for input
+
+// Calculate which lines to show (bottom-up, accounting for scroll)
+var total_lines = array_length(lines);
+var first_visible = max(0, total_lines - visible_rows - scroll_offset);
+var last_visible = total_lines - scroll_offset;
+
+for (var i = first_visible; i < last_visible; i++) {
+    var row = i - first_visible;
+    var y_pos = start_y + (row * char_height);
+    
+    // Parse for color tags (we'll add this feature later)
+    // For now, just draw the line
+    draw_set_color(col_text);
+    draw_text(0, y_pos, lines[i]);
+}
+
+// === DRAW INPUT LINE AT BOTTOM ===
+// We'll let obj_input draw its own line 
+ 
+--- Event Code: Step_0.gml --- 
+/// @description Insert description here
+// You can write your code in this editor
+/// @description Handle scrolling
+
+// Calculate max scroll (how far back can we go?)
+var total_lines = array_length(lines);
+var visible_rows = rows - 1; // Account for input row
+var max_scroll = max(0, total_lines - visible_rows);
+
+// Page Up - scroll up (into history)
+if (keyboard_check_pressed(vk_pageup) || mouse_wheel_up()) {
+    scroll_offset = min(scroll_offset + visible_rows, max_scroll);
+}
+
+// Page Down - scroll down (toward present)
+if (keyboard_check_pressed(vk_pagedown) || mouse_wheel_down()) {
+    scroll_offset = max(scroll_offset - visible_rows, 0);
+}
+
+// Home - jump to top
+if (keyboard_check_pressed(vk_home)) {
+    scroll_offset = max_scroll;
+}
+
+// End - jump to bottom
+if (keyboard_check_pressed(vk_end)) {
+    scroll_offset = 0;
+} 
+ 
+--- Event Code: Create_0.gml --- 
+/// @description Insert description here
+// You can write your code in this editor
+// === CORE STATE ===
+game_state = "BOOT";  // BOOT, MENU, TOWN, TRAVEL, EVENT, etc.
+day = 1;
+turn = 0;
+
+// === RNG ===
+world_seed = irandom(999999);
+randomize();  // We'll use GML's built-in for now
+
+// === REFERENCES (instance IDs) ===
+console = noone;  // Will store obj_console's ID
+input = noone;    // Will store obj_input's ID
+
+// === GAME DATA (we'll add these as we go) ===
+player = noone;      // Will be a struct
+caravan = noone;     // Will be a struct
+world = noone;       // Will be a struct
+
+// === GAME DATA ===
+world = noone;  // Will hold world struct
+
+// === COMMODITY DATABASE ===
+global.commodities = scr_create_commodity_database();
+
+// === MAKE PERSISTENT ===
+persistent = true; 
+ 
+--- Event Code: Step_0.gml --- 
+/// @description Insert description here
+// You can write your code in this editor
+// Main game loop dispatcher
+switch(game_state) {
+case "BOOT":
+    // Initialize console and input if not already done
+    if (console == noone) {
+        console = instance_find(obj_console, 0);
+    }
+    if (input == noone) {
+        input = instance_find(obj_input, 0);
+    }
+    
+    // Generate world
+    if (world == noone) {
+        console_print("=== CARAVAN ===");
+        console_print("Generating world...");
+        world = world_generate(world_seed);
+        console_print("World created with " + string(array_length(world.locations)) + " locations.");
+        console_print("");
+        
+        // Set player's starting location
+        obj_player.current_location = world.start_location_id;
+        
+        // Find the actual location name
+        for (var i = 0; i < array_length(world.locations); i++) {
+            if (world.locations[i].id == obj_player.current_location) {
+                console_print("You begin your journey in " + world.locations[i].name + ".");
+                console_print("Type HELP for commands.");
+                console_print("");
+                break;
+            }
+        }
+    }
+        
+        game_state = "TOWN";
+        break;
+        
+    case "MENU":
+        // We'll fill this in next
+        break;
+        
+    case "TOWN":
+        // Town state
+        break;
+        
+    case "TRAVEL":
+        // Travel state
+        break;
+} 
+ 
+--- Event Code: Create_0.gml --- 
+/// @description Insert description here
+// You can write your code in this editor
+// === INPUT BUFFER ===
+input_buffer = "";
+cursor_blink = 0;
+cursor_visible = true;
+
+// === COMMAND HISTORY ===
+history = [];       // Array of past commands
+history_index = -1; // -1 means not browsing history
+max_history = 50;
+
+// === INPUT STATE ===
+input_active = true;  // Can we type?
+prompt = "> ";        // Command prompt symbol
+
+// === MAKE PERSISTENT ===
+persistent = true; 
+ 
+--- Event Code: Draw_64.gml --- 
+/// @description Insert description here
+// You can write your code in this editor
+// Draw input line at bottom of screen
+draw_set_font(fnt_console);
+draw_set_halign(fa_left);
+draw_set_valign(fa_top);
+draw_set_color(c_white);
+
+var input_y = room_height - obj_console.char_height - 6; // Bottom row with paddingvar input_y = room_height - char_height; // Bottom row
+var cursor_char = cursor_visible ? "_" : " ";
+
+draw_text(0, input_y, prompt + input_buffer + cursor_char); 
+ 
+--- Event Code: Step_0.gml --- 
+/// @description Insert description here
+// You can write your code in this editor
+if (!input_active) exit;
+
+// === CURSOR BLINK ===
+cursor_blink++;
+if (cursor_blink > 30) {
+    cursor_visible = !cursor_visible;
+    cursor_blink = 0;
+}
+
+// === KEYBOARD INPUT ===
+if (keyboard_check_pressed(vk_enter)) {
+    // Submit command
+    if (input_buffer != "") {
+        // Add to history
+        history[array_length(history)] = input_buffer;
+        if (array_length(history) > max_history) {
+            array_delete(history, 0, 1);
+        }
+        history_index = -1;
+        
+        // Echo command to console
+        console_print(prompt + input_buffer);
+        
+        // Parse and execute command
+        cmd_parse(input_buffer);
+        
+        // Clear buffer
+        input_buffer = "";
+    }
+}
+
+if (keyboard_check_pressed(vk_backspace)) {
+    if (string_length(input_buffer) > 0) {
+        input_buffer = string_delete(input_buffer, string_length(input_buffer), 1);
+    }
+}
+
+// === HISTORY NAVIGATION ===
+if (keyboard_check_pressed(vk_up)) {
+    if (array_length(history) > 0) {
+        if (history_index == -1) {
+            history_index = array_length(history) - 1;
+        } else {
+            history_index = max(0, history_index - 1);
+        }
+        input_buffer = history[history_index];
+    }
+}
+
+if (keyboard_check_pressed(vk_down)) {
+    if (history_index != -1) {
+        history_index++;
+        if (history_index >= array_length(history)) {
+            history_index = -1;
+            input_buffer = "";
+        } else {
+            input_buffer = history[history_index];
+        }
+    }
+}
+
+// === CHARACTER INPUT ===
+var key = keyboard_lastchar;
+if (key != "") {
+    // Filter to printable ASCII
+    var char_code = ord(key);
+    if (char_code >= 32 && char_code <= 126) {
+        input_buffer += key;
+    }
+    keyboard_lastchar = ""; // Clear so we don't double-input
+} 
+ 
+--- Event Code: Create_0.gml --- 
+/// @description Initialize player and caravan with hybrid slot system
+
+// === PERSONAL STATS ===
+gold = 150;
+hp = 100;
+max_hp = 100;
+reputation = 0;
+current_location = noone;  // Will be set by world gen
+
+// === RESOURCES ===
+provisions = 50;  // Food for people and animals
+
+// === RELATIONSHIPS ===
+relationships = {};
+
+// === PERSONAL INVENTORY ===
+inventory = [];
+
+// === CARAVAN ===
+caravan = {
+    wagons: [],
+    followers: [],
+    total_capacity: 0,
+    total_speed: 0,
+    total_defense: 0
+};
+
+// === CREATE STARTING WAGON (HANDCART) ===
+var starting_wagon = {
+    id: "wagon_001",
+    type: "HANDCART",
+    condition: 100,
+    
+    slots: {
+        // NEW: Slot-based cargo system
+        cargo: {
+            capacity: 4,  // 4 cargo slots for trade goods
+            contents: []  // Array of slot structs (or undefined for empty)
+        },
+        // NEW: Livestock slots for large animals (cattle, horses)
+        livestock_trade: {
+            capacity: 0,  // HANDCART has NO livestock slots (too small)
+            contents: []  // Large livestock for trading
+        },
+        // KEPT: Animals slot (pack animals like donkeys)
+        animals: {
+            capacity: 1,
+            contents: []
+        },
+        // KEPT: Crew slot
+        crew: {
+            capacity: 1,
+            contents: []
+        },
+        // KEPT: Passengers slot
+        passengers: {
+            capacity: 0,
+            contents: []
+        },
+        // KEPT: Magic slot (for future use)
+        magic: {
+            capacity: 0,
+            contents: []
+        },
+        // NEW: Equipment slot for water barrels (separate from trade cargo)
+        equipment: {
+            capacity: 1,
+            contents: []
+        }
+    },
+    
+    speed_modifier: 1.0,
+    defense_modifier: 0.5,
+    breakdown_chance: 0.05
+};
+
+// Add the wagon to our caravan
+array_push(caravan.wagons, starting_wagon);
+
+// === CREATE STARTING ANIMAL (DONKEY WITH SADDLEBAGS) ===
+var starting_animal = {
+    type: "DONKEY",
+    hp: 100,
+    speed: 0.8,
+    capacity: 50,
+    feed_cost: 2,
+    has_saddlebags: true,  // NEW: Donkey has saddlebags
+    saddlebag_slots: 2     // NEW: Adds 2 BULK slots to cargo capacity
+};
+
+// Add animal to the wagon's animal slot
+array_push(caravan.wagons[0].slots.animals.contents, starting_animal);
+
+// === CREATE STARTING WATER BARREL ===
+var starting_barrel = {
+    type: "BARREL",
+    subtype: "WATER",  // NEW: Distinguish from trade barrels
+    water: 50,
+    max_water: 50,
+    weight: 1
+};
+
+// Add barrel to EQUIPMENT slot (not cargo - keeps it separate from trade goods)
+array_push(caravan.wagons[0].slots.equipment.contents, starting_barrel);
+
+// === ADD PLAYER TO CREW ===
+var player_crew = {
+    name: "Player",
+    type: "MERCHANT",
+    hp: 100,
+    skills: []
+};
+
+array_push(caravan.wagons[0].slots.crew.contents, player_crew);
+
+
+// === INITIALIZE CARGO SLOTS (4 empty + 2 saddlebag = 6 total) ===
+// Main wagon slots
+for (var i = 0; i < 4; i++) {
+    array_push(caravan.wagons[0].slots.cargo.contents, undefined);
+}
+
+// Saddlebag slots (BULK only)
+for (var i = 0; i < 2; i++) {
+    array_push(caravan.wagons[0].slots.cargo.contents, {
+        slot_type: "SADDLEBAG_BULK",  // Special: can only hold BULK goods
+        allowed_types: ["BULK"],
+        contents: undefined  // null = empty, or commodity struct
+    });
+}
+
+// === INITIALIZE LIVESTOCK TRADE SLOTS ===
+// Handcart has 0 capacity, so no slots to initialize
+// (Future wagons will have livestock_trade.capacity > 0 and will need initialization)
+
+
+// === MAKE PERSISTENT ===
+persistent = true; 
+ 
+[SCRIPTS] 
+========= 
+ 
+--- Script: cmd_parse.gml --- 
+// Script assets have changed for v2.3.0 see
+// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
+/// @func cmd_parse(input)
+/// @desc Parse and execute a command
+/// @param {string} input The command string from the user
+
+function cmd_parse(input) {
+    // Convert to uppercase for case-insensitive matching
+    var cmd = string_upper(string_trim(input));
+    
+    // Split into command and arguments (basic version)
+    var space_pos = string_pos(" ", cmd);
+    var command = (space_pos > 0) ? string_copy(cmd, 1, space_pos - 1) : cmd;
+    var args = (space_pos > 0) ? string_delete(cmd, 1, space_pos) : "";
+    
+    // Command dispatcher
+    switch(command) {
+        case "HELP":
+		case "H":
+            console_print("");
+            console_print("AVAILABLE COMMANDS:");
+            console_print("  HELP   - Show this help");
+            console_print("  STATUS - Show caravan status");
+			console_print("  INVENTORY - Show detailed cargo and values (I, INV)");
+            console_print("  TRAVEL - Show available destinations");
+            console_print("  GO     - Travel to destination (GO <name> or GO <number>)");
+			console_print("  MARKET - Show local market prices");
+			console_print("  BUY    - Buy goods (BUY <good> <quantity>)");
+			console_print("  SELL   - Sell goods (SELL <good> <quantity>)");
+			console_print("  WORK   - Earn gold through day labor (WORK <days>)");
+            console_print("  QUIT   - Exit game");
+            console_print("");
+            break;
+            
+        case "TRAVEL":
+        case "T":
+            scr_cmd_travel();
+            break;
+            
+        case "GO":
+        case "G":
+            if (args != "") {
+                scr_cmd_go(args);
+            } else {
+                console_print("Usage: GO <destination name or number>");
+                console_print("Type 'TRAVEL' to see available destinations.");
+            }
+            break;
+    
+        case "STATUS":
+		case "ST":
+            console_print("");
+            console_print("=== PLAYER STATUS ===");
+            
+            // Show current location
+            var loc_name = "Unknown";
+            var loc_type = "";
+            for (var i = 0; i < array_length(obj_heartbeat.world.locations); i++) {
+                if (obj_heartbeat.world.locations[i].id == obj_player.current_location) {
+                    loc_name = obj_heartbeat.world.locations[i].name;
+                    loc_type = obj_heartbeat.world.locations[i].type;
+                    break;
+                }
+            }
+            console_print("Location: " + loc_name + " (" + loc_type + ")");
+            console_print("");
+            
+            console_print("Gold: " + string(obj_player.gold));
+            console_print("Health: " + string(obj_player.hp) + "/" + string(obj_player.max_hp));
+            console_print("Reputation: " + string(obj_player.reputation));
+            console_print("Provisions: " + string(obj_player.provisions));
+            console_print("Water: " + string(scr_get_total_water()) + "/" + string(scr_get_max_water_capacity()));
+            console_print("Day: " + string(obj_heartbeat.day));
+            console_print("");
+            
+            console_print("=== CARAVAN ===");
+            var wagon_count = array_length(obj_player.caravan.wagons);
+            console_print("Wagons: " + string(wagon_count));
+            console_print("");
+            
+            // Show each wagon
+            for (var i = 0; i < wagon_count; i++) {
+                var wagon = obj_player.caravan.wagons[i];
+                console_print("WAGON " + string(i + 1) + ": " + wagon.type);
+                console_print("  Condition: " + string(wagon.condition) + "%");
+                
+// Show animals
+var animal_count = array_length(wagon.slots.animals.contents);
+if (animal_count > 0) {
+    console_print("  Animals:");
+    for (var a = 0; a < animal_count; a++) {
+        var animal = wagon.slots.animals.contents[a];
+        var animal_info = "    - " + animal.type + " (health: " + string(animal.hp) + "%)";
+        
+        // Show if it has saddlebags
+        if (variable_struct_exists(animal, "has_saddlebags") && animal.has_saddlebags) {
+            animal_info += " [+" + string(animal.saddlebag_slots) + " BULK slots]";
+        }
+        
+        console_print(animal_info);
+    }
+}
+                
+                // Show crew
+                var crew_count = array_length(wagon.slots.crew.contents);
+                if (crew_count > 0) {
+                    console_print("  Crew:");
+                    for (var c = 0; c < crew_count; c++) {
+                        var crew = wagon.slots.crew.contents[c];
+                        console_print("    - " + crew.name + " (" + crew.type + ")");
+                    }
+                }
+                
+                // Show equipment (water barrels, etc.)
+                if (variable_struct_exists(wagon.slots, "equipment")) {
+                    var equipment_count = array_length(wagon.slots.equipment.contents);
+                    if (equipment_count > 0) {
+                        console_print("  Equipment:");
+                        for (var e = 0; e < equipment_count; e++) {
+                            var item = wagon.slots.equipment.contents[e];
+                            if (item.type == "BARREL" && item.subtype == "WATER") {
+                                console_print("    - WATER BARREL (" + string(item.water) + "/" + string(item.max_water) + ")");
+                            } else {
+                                console_print("    - " + item.type);
+                            }
+                        }
+                    }
+                }
+                
+// Show cargo slots
+var cargo_slots = wagon.slots.cargo.contents;
+var standard_slots = 0;
+var standard_used = 0;
+var saddlebag_slots = 0;
+var saddlebag_used = 0;
+var cargo_list = [];
+
+// Analyze slots
+for (var g = 0; g < array_length(cargo_slots); g++) {
+    var slot = cargo_slots[g];
+    
+    if (slot == undefined) {
+        // Empty standard slot
+        standard_slots++;
+        continue;
+    } else if (variable_struct_exists(slot, "slot_type")) {
+        // It's a special slot (saddlebag, etc.)
+        if (slot.slot_type == "SADDLEBAG_BULK") {
+            saddlebag_slots++;
+            if (slot.contents != undefined) {
+                saddlebag_used++;
+                array_push(cargo_list, {
+                    slot_num: g + 1,
+                    slot_type: "SADDLEBAG",
+                    data: slot.contents
+                });
+            }
+        }
+    } else {
+        // Has actual cargo in standard slot
+        standard_slots++;
+        standard_used++;
+        array_push(cargo_list, {
+            slot_num: g + 1,
+            slot_type: "STANDARD",
+            data: slot
+        });
+    }
+}
+
+// Display cargo summary
+console_print("  Cargo Slots:");
+console_print("    Wagon: " + string(standard_used) + "/" + string(standard_slots) + " used");
+if (saddlebag_slots > 0) {
+    console_print("    Saddlebags: " + string(saddlebag_used) + "/" + string(saddlebag_slots) + " used");
+}
+
+if (array_length(cargo_list) > 0) {
+    console_print("  Cargo contents:");
+    for (var c = 0; c < array_length(cargo_list); c++) {
+        var item = cargo_list[c];
+        var slot_label = (item.slot_type == "SADDLEBAG") ? "Saddlebag" : "Slot";
+        console_print("    " + slot_label + " " + string(item.slot_num) + ": [trade goods]");
+    }
+} else {
+    console_print("    (empty)");
+}
+                
+                console_print("");
+            }
+            break;
+
+case "MARKET":
+case "M":
+    scr_cmd_market();
+    break;
+
+case "BUY":
+case "B":
+    if (args != "") {
+        // Find the last space to separate arguments
+        var last_space = 0;
+        for (var i = string_length(args); i >= 1; i--) {
+            if (string_char_at(args, i) == " ") {
+                last_space = i;
+                break;
+            }
+        }
+        
+        if (last_space > 0) {
+            var part1 = string_copy(args, 1, last_space - 1);
+            var part2 = string_copy(args, last_space + 1, string_length(args));
+            
+            // Determine which is the number
+            var good = "";
+            var qty = 0;
+            
+            // Check for MAX/ALL keywords
+            var is_max_order = false;
+            
+            // Check if part1 is a number or MAX/ALL
+            if (string_digits(part1) == part1 && part1 != "") {
+                // part1 is quantity, part2 is good name
+                qty = real(part1);
+                good = part2;
+            } else if (string_upper(part1) == "MAX" || string_upper(part1) == "ALL") {
+                // part1 is MAX/ALL, part2 is good name
+                is_max_order = true;
+                good = part2;
+            } else if (string_digits(part2) == part2 && part2 != "") {
+                // part2 is quantity, part1 is good name
+                qty = real(part2);
+                good = part1;
+            } else if (string_upper(part2) == "MAX" || string_upper(part2) == "ALL") {
+                // part2 is MAX/ALL, part1 is good name
+                is_max_order = true;
+                good = part1;
+            } else {
+                console_print("Usage: BUY <good name> <quantity>");
+                console_print("Example: BUY wheat 25 or BUY 25 wheat");
+                console_print("Use MAX or ALL to buy maximum: BUY wheat MAX");
+                break;
+            }
+            
+            // If MAX/ALL, calculate maximum quantity player can buy
+            if (is_max_order) {
+                // Get current location for stock check
+                var current_loc = undefined;
+                for (var i = 0; i < array_length(obj_heartbeat.world.locations); i++) {
+                    if (obj_heartbeat.world.locations[i].id == obj_player.current_location) {
+                        current_loc = obj_heartbeat.world.locations[i];
+                        break;
+                    }
+                }
+                
+                if (current_loc == undefined) {
+                    console_print("ERROR: Current location not found.");
+                    break;
+                }
+                
+                // Find the commodity
+                var commodity = scr_find_commodity_by_name(good);
+                
+                if (commodity == undefined) {
+                    console_print("Unknown commodity: " + good);
+                    break;
+                }
+                
+                // Get available stock
+                var economy = current_loc.economy;
+                var available_stock = 0;
+                
+                if (variable_struct_exists(economy.stock_levels, commodity.id)) {
+                    available_stock = economy.stock_levels[$ commodity.id];
+                }
+                
+                if (available_stock <= 0) {
+                    console_print(current_loc.name + " doesn't have any " + commodity.name + " for sale.");
+                    break;
+                }
+                
+                // Calculate max we can afford (binary search for optimal quantity)
+                var max_affordable = 0;
+                
+                for (var test_qty = 1; test_qty <= available_stock; test_qty++) {
+                    var test_price = scr_calculate_buy_price(current_loc, commodity.id, test_qty);
+                    
+                    if (test_price <= obj_player.gold) {
+                        max_affordable = test_qty;
+                    } else {
+                        break; // Can't afford more
+                    }
+                }
+                
+                if (max_affordable == 0) {
+                    console_print("You can't afford any " + commodity.name + ".");
+                    console_print("Unit price: " + string(scr_calculate_buy_price(current_loc, commodity.id, 1)) + " gold");
+                    console_print("Your gold: " + string(obj_player.gold));
+                    break;
+                }
+                
+                qty = max_affordable;
+                console_print("Buying maximum: " + string(qty) + " " + commodity.name);
+            }
+            
+            scr_cmd_buy(good, qty);
+        } else {
+            console_print("Usage: BUY <good name> <quantity>");
+            console_print("Example: BUY wheat 25");
+        }
+    } else {
+        console_print("Usage: BUY <good name> <quantity>");
+    }
+    break;
+
+case "SELL":
+case "S":
+    if (args != "") {
+        // Find the last space to separate arguments
+        var last_space = 0;
+        for (var i = string_length(args); i >= 1; i--) {
+            if (string_char_at(args, i) == " ") {
+                last_space = i;
+                break;
+            }
+        }
+        
+        if (last_space > 0) {
+            var part1 = string_copy(args, 1, last_space - 1);
+            var part2 = string_copy(args, last_space + 1, string_length(args));
+            
+            // Determine which is the number
+            var good = "";
+            var qty = 0;
+            
+            // Check for MAX/ALL keywords
+            var is_max_order = false;
+            
+            // Check if part1 is a number or MAX/ALL
+            if (string_digits(part1) == part1 && part1 != "") {
+                // part1 is quantity, part2 is good name
+                qty = real(part1);
+                good = part2;
+            } else if (string_upper(part1) == "MAX" || string_upper(part1) == "ALL") {
+                // part1 is MAX/ALL, part2 is good name
+                is_max_order = true;
+                good = part2;
+            } else if (string_digits(part2) == part2 && part2 != "") {
+                // part2 is quantity, part1 is good name
+                qty = real(part2);
+                good = part1;
+            } else if (string_upper(part2) == "MAX" || string_upper(part2) == "ALL") {
+                // part2 is MAX/ALL, part1 is good name
+                is_max_order = true;
+                good = part1;
+            } else {
+                console_print("Usage: SELL <good name> <quantity>");
+                console_print("Example: SELL salt 10 or SELL 10 salt");
+                console_print("Use MAX or ALL to sell all: SELL salt MAX");
+                break;
+            }
+            
+            // If MAX/ALL, find how much player has
+            if (is_max_order) {
+                // Find the commodity
+                var commodity = scr_find_commodity_by_name(good);
+                
+                if (commodity == undefined) {
+                    console_print("Unknown commodity: " + good);
+                    break;
+                }
+                
+                // Find commodity in player cargo
+                var player_has = 0;
+                
+                for (var w = 0; w < array_length(obj_player.caravan.wagons); w++) {
+                    var wagon = obj_player.caravan.wagons[w];
+                    var cargo_slots = wagon.slots.cargo.contents;
+                    
+                    for (var s = 0; s < array_length(cargo_slots); s++) {
+                        var slot = cargo_slots[s];
+                        
+                        if (slot == undefined) continue;
+                        
+                        var slot_good_id = undefined;
+                        var slot_quantity = 0;
+                        
+                        // Check standard slot
+                        if (variable_struct_exists(slot, "good_id")) {
+                            slot_good_id = slot.good_id;
+                            slot_quantity = slot.quantity;
+                        }
+                        // Check special slot
+                        else if (variable_struct_exists(slot, "contents") && slot.contents != undefined) {
+                            slot_good_id = slot.contents.good_id;
+                            slot_quantity = slot.contents.quantity;
+                        }
+                        
+                        if (slot_good_id == commodity.id) {
+                            player_has += slot_quantity;
+                        }
+                    }
+                }
+                
+                if (player_has == 0) {
+                    console_print("You don't have any " + commodity.name + " to sell.");
+                    break;
+                }
+                
+                qty = player_has;
+                console_print("Selling all: " + string(qty) + " " + commodity.name);
+            }
+            
+            scr_cmd_sell(good, qty);
+        } else {
+            console_print("Usage: SELL <good name> <quantity>");
+            console_print("Example: SELL salt 10");
+        }
+    } else {
+        console_print("Usage: SELL <good name> <quantity>");
+    }
+    break;
+	
+		case "WORK":
+		case "W":
+	    var work_days = 1; // Default to 1 day
+    
+	    if (args != "") {
+	        work_days = real(args);
+	    }
+    
+	    scr_cmd_work(work_days);
+	    break;
+	
+
+case "~":
+    // Hidden debug command - dump console to output window
+    var dump_count = -1; // -1 = all lines
+    
+    if (args != "") {
+        dump_count = real(args);
+    }
+    
+    var lines = obj_console.lines;
+    var total_lines = array_length(lines);
+    
+    if (dump_count == -1 || dump_count >= total_lines) {
+        // Dump all lines
+        show_debug_message("=== CONSOLE DUMP (ALL " + string(total_lines) + " LINES) ===");
+        for (var i = 0; i < total_lines; i++) {
+            show_debug_message(lines[i]);
+        }
+    } else {
+        // Dump most recent X lines
+        var start_index = max(0, total_lines - dump_count);
+        show_debug_message("=== CONSOLE DUMP (LAST " + string(dump_count) + " LINES) ===");
+        for (var i = start_index; i < total_lines; i++) {
+            show_debug_message(lines[i]);
+        }
+    }
+    
+    show_debug_message("=== END DUMP ===");
+    console_print("Console dumped to output window.");
+    break;
+	
+
+		case "INVENTORY":
+		case "INV":
+		case "I":
+		    scr_cmd_inventory();
+		    break;
+			
+        case "QUIT":
+		case "Q":
+            console_print("Farewell, traveler.");
+            game_end();
+            break;
+            
+        default:
+            console_print("Unknown command: " + input);
+            console_print("Type HELP for available commands.");
+            break;
+    }
+} 
+ 
+--- Script: console_print.gml --- 
+// Script assets have changed for v2.3.0 see
+// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
+/// @func console_print(text)
+/// @desc Add a line of text to the console with automatic wrapping
+/// @param {string} text The text to add
+
+function console_print(text) {
+    if (!instance_exists(obj_console)) return;
+    
+    // Calculate maximum characters per line based on window width and font
+    draw_set_font(fnt_console); // Use the font resource directly, not obj_console.fnt_console
+    var max_width = 630; // Leave 10px margin on 640px window
+    var max_chars = floor(max_width / string_width("X")); // Estimate using 'X' as average char width
+    
+    // If text fits on one line, just add it
+    if (string_width(text) <= max_width) {
+        array_push(obj_console.lines, text);
+    } else {
+        // Need to wrap - break by actual pixel width, not character count
+        var remaining = text;
+        
+        while (string_length(remaining) > 0) {
+            var test_len = string_length(remaining);
+            var chunk = remaining;
+            
+            // Find the longest substring that fits
+            while (string_width(chunk) > max_width && test_len > 1) {
+                test_len--;
+                chunk = string_copy(remaining, 1, test_len);
+                
+                // Try to break at a space for cleaner wrapping
+                if (string_char_at(chunk, test_len) != " ") {
+                    for (var i = test_len; i > max(1, test_len - 20); i--) {
+                        if (string_char_at(remaining, i) == " ") {
+                            test_len = i;
+                            chunk = string_copy(remaining, 1, test_len);
+                            break;
+                        }
+                    }
+                }
+            }
+            
+            // Add this chunk
+            array_push(obj_console.lines, chunk);
+            
+            // Continue with remainder
+            remaining = string_copy(remaining, test_len + 1, string_length(remaining));
+            
+            // Add leading spaces to continuation lines for indentation
+            if (string_char_at(text, 1) == " ") {
+                // Count leading spaces in original
+                var spaces = 0;
+                for (var i = 1; i <= string_length(text); i++) {
+                    if (string_char_at(text, i) == " ") {
+                        spaces++;
+                    } else {
+                        break;
+                    }
+                }
+                
+                // Add same indent to wrapped lines
+                var indent = string_repeat(" ", spaces);
+                if (string_length(remaining) > 0 && string_char_at(remaining, 1) != " ") {
+                    remaining = indent + remaining;
+                }
+            }
+        }
+    }
+    
+    // Trim if over max
+    while (array_length(obj_console.lines) > obj_console.max_lines) {
+        array_delete(obj_console.lines, 0, 1);
+    }
+    
+    // Auto-scroll to bottom
+    obj_console.scroll_offset = 0;
+} 
+ 
+--- Script: scr_add_ghost_commodity.gml --- 
+// Script assets have changed for v2.3.0 see
+// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
+/// @desc Add commodity stock from ghost caravan trade
+/// @param {Struct} location The location where trade occurred
+/// @param {String} good_id The commodity ID
+/// @param {Real} quantity Amount to add
+
+function scr_add_ghost_commodity(location, good_id, quantity) {
+    var economy = location.economy;
+    
+    // Add to stock levels
+    if (variable_struct_exists(economy.stock_levels, good_id)) {
+        economy.stock_levels[$ good_id] += quantity;
+    } else {
+        economy.stock_levels[$ good_id] = quantity;
+        
+        // Initialize price modifier if new commodity
+        if (!variable_struct_exists(economy.price_modifiers, good_id)) {
+            economy.price_modifiers[$ good_id] = 1.0; // Neutral price
+        }
+    }
+    
+    // Record in ghost trade history
+    array_push(economy.ghost_trade_history, {
+        day: obj_heartbeat.day,
+        action: "SELL_TO_CITY",
+        good_id: good_id,
+        quantity: quantity
+    });
+} 
+ 
+--- Script: scr_begin_journey.gml --- 
+// Script assets have changed for v2.3.0 see
+// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
+/// @desc Execute a journey - deduct resources and move player
+/// @param {String} destination_id The destination location ID
+/// @param {Struct} costs The cost struct from scr_calculate_travel_cost
+
+function scr_begin_journey(destination_id, costs) {
+    // === DEDUCT RESOURCES ===
+    obj_player.provisions -= costs.provisions;
+    scr_consume_water(costs.water);  // CHANGED: Use barrel system
+    obj_player.gold -= costs.gold;
+    
+    // === ADVANCE TIME ===
+    obj_heartbeat.day += costs.days;
+    
+	// === MOVE PLAYER ===
+	obj_player.current_location = destination_id;
+
+	// === GET DESTINATION NAME ===
+	var dest_name = "Unknown";
+	var dest_location = undefined;
+	for (var i = 0; i < array_length(obj_heartbeat.world.locations); i++) {
+	    if (obj_heartbeat.world.locations[i].id == destination_id) {
+	        dest_name = obj_heartbeat.world.locations[i].name;
+	        dest_location = obj_heartbeat.world.locations[i];
+	        break;
+	    }
+	}
+
+	// === SIMULATE GHOST TRADES ===
+	if (dest_location != undefined) {
+	    scr_simulate_ghost_trades(dest_location);
+	}
+    
+    // === APPLY WEAR AND TEAR ===
+    for (var i = 0; i < array_length(obj_player.caravan.wagons); i++) {
+        var wagon = obj_player.caravan.wagons[i];
+        
+        var wear_per_day = 0.5;
+        
+        switch(costs.terrain) {
+            case "ROAD":
+                wear_per_day = 0.3;
+                break;
+            case "PLAINS":
+                wear_per_day = 0.5;
+                break;
+            case "FOREST":
+                wear_per_day = 0.7;
+                break;
+            case "HILLS":
+                wear_per_day = 1.0;
+                break;
+            case "MOUNTAIN":
+                wear_per_day = 1.5;
+                break;
+            case "DESERT":
+                wear_per_day = 1.2;
+                break;
+        }
+        
+        var total_wear = wear_per_day * costs.days;
+        wagon.condition = max(0, wagon.condition - total_wear);
+    }
+    
+    // === REFILL WATER AT DESTINATION ===
+    var refill_info = scr_refill_water();
+    
+    // === REPORT JOURNEY OUTCOME ===
+    console_print("");
+    console_print("=== JOURNEY COMPLETE ===");
+    console_print("You have arrived in " + dest_name + "!");
+    console_print("");
+    console_print("Journey summary:");
+    console_print("  Distance traveled: " + string(round(costs.distance)) + " km");
+    console_print("  Time elapsed: " + string(costs.days) + " days");
+    console_print("  Terrain: " + string_upper(costs.terrain));
+    console_print("");
+    console_print("Resources consumed:");
+    console_print("  Provisions: " + string(costs.provisions));
+    console_print("  Water: " + string(costs.water));
+    console_print("  Gold: " + string(costs.gold));
+    console_print("");
+    
+    // Report water refill
+    if (refill_info.water > 0) {
+        console_print("Water refilled:");
+        console_print("  " + string(refill_info.barrels) + " barrel(s) topped off (+"+string(refill_info.water)+" water)");
+        console_print("");
+    }
+    
+    console_print("Current resources:");
+    console_print("  Provisions: " + string(obj_player.provisions));
+    console_print("  Water: " + string(scr_get_total_water()) + "/" + string(scr_get_max_water_capacity()));
+    console_print("  Gold: " + string(obj_player.gold));
+    console_print("");
+    
+    // Warn if resources are low
+    if (obj_player.provisions < 10) {
+        console_print("WARNING: Provisions are running low!");
+    }
+    if (scr_get_total_water() < 10) {
+        console_print("WARNING: Water is running low!");
+    }
+    if (obj_player.gold < 20) {
+        console_print("WARNING: Gold reserves are low!");
+    }
+    
+    console_print("");
+    console_print("Type 'TRAVEL' to see destinations from here.");
+} 
+ 
+--- Script: scr_buy_provisions.gml --- 
+/// @desc Special handler for buying provisions (goes to player stat, not cargo)
+/// @param {Struct} location Current location
+/// @param {Real} quantity How many provisions to buy
+
+function scr_buy_provisions(location, quantity) {
+    var economy = location.economy;
+    
+    // Check stock
+    var available_stock = 0;
+    if (variable_struct_exists(economy.stock_levels, "provisions")) {
+        available_stock = economy.stock_levels[$ "provisions"];
+    }
+    
+    if (available_stock <= 0) {
+        console_print(location.name + " is out of provisions!");
+        return;
+    }
+    
+    // Adjust quantity if needed
+    var actual_quantity = min(quantity, available_stock);
+    
+    if (actual_quantity < quantity) {
+        console_print("Only " + string(actual_quantity) + " available (you requested " + string(quantity) + ")");
+    }
+    
+    // Calculate price
+    var total_price = scr_calculate_buy_price(location, "provisions", actual_quantity);
+    
+    if (total_price < 0) {
+        console_print("Cannot buy provisions here.");
+        return;
+    }
+    
+    // Check if player has enough gold
+    if (obj_player.gold < total_price) {
+        console_print("Insufficient gold!");
+        console_print("Need: " + string(total_price) + " gold");
+        console_print("Have: " + string(obj_player.gold) + " gold");
+        return;
+    }
+    
+    // === EXECUTE PURCHASE ===
+    
+    // Deduct gold
+    obj_player.gold -= total_price;
+    
+    // Reduce city stock
+    economy.stock_levels[$ "provisions"] -= actual_quantity;
+    
+    // Add directly to player provisions stat
+    obj_player.provisions += actual_quantity;
+    
+    // === SUCCESS MESSAGE ===
+    console_print("");
+    console_print("PURCHASE COMPLETE");
+    console_print("Bought: " + string(actual_quantity) + " provisions");
+    console_print("Cost: " + string(total_price) + " gold (" + string(total_price / actual_quantity) + "g each)");
+    console_print("Gold remaining: " + string(obj_player.gold));
+    console_print("Provisions: " + string(obj_player.provisions));
+    console_print("");
+} 
+ 
+--- Script: scr_calculate_buy_price.gml --- 
+// Script assets have changed for v2.3.0 see
+// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
+/// @desc Calculate price for player buying FROM a city
+/// @param {Struct} location The location selling goods
+/// @param {String} good_id The commodity ID
+/// @param {Real} quantity How many units player wants to buy
+/// @returns {Real} Total price, or -1 if not available
+
+function scr_calculate_buy_price(location, good_id, quantity) {
+    var economy = location.economy;
+    
+    // Check if they even have this good
+    var available_stock = 0;
+    if (variable_struct_exists(economy.stock_levels, good_id)) {
+        available_stock = economy.stock_levels[$ good_id];
+    }
+    
+    if (available_stock <= 0) {
+        return -1; // Not available
+    }
+    
+    // Get commodity base value
+    var commodity = undefined;
+    for (var i = 0; i < array_length(global.commodities); i++) {
+        if (global.commodities[i].id == good_id) {
+            commodity = global.commodities[i];
+            break;
+        }
+    }
+    
+    if (commodity == undefined) {
+        return -1; // Invalid commodity
+    }
+    
+    var base_value = commodity.base_value;
+    var final_modifier = 1.0;
+    
+    // === PRODUCTION BONUS ===
+    // If they produce it, they sell it cheaper
+    var is_producer = false;
+    for (var i = 0; i < array_length(economy.produces); i++) {
+        if (economy.produces[i].good_id == good_id) {
+            is_producer = true;
+            final_modifier *= 0.7; // 30% discount
+            break;
+        }
+    }
+    
+    // === SUPPLY MODIFIER ===
+    // Price increases as stock depletes
+    if (available_stock < 50) {
+        // Low stock = higher prices
+        var scarcity = 1.0 - (available_stock / 50); // 0 to 1
+        final_modifier *= (1.0 + (scarcity * 0.5)); // Up to 50% markup
+    } else if (available_stock > 300) {
+        // Oversupply = lower prices
+        final_modifier *= 0.9; // 10% discount
+    }
+    
+    // === DISCOVERED WANTS MODIFIER ===
+    // If they've "discovered" they want this, price is higher
+    for (var i = 0; i < array_length(economy.discovered_wants); i++) {
+        if (economy.discovered_wants[i] == good_id) {
+            final_modifier *= 1.3; // 30% markup
+            break;
+        }
+    }
+    
+    // === QUANTITY MODIFIER ===
+    // Buying in bulk? Small discount
+    if (quantity >= 20) {
+        final_modifier *= 0.95; // 5% discount for bulk
+    }
+    if (quantity >= 50) {
+        final_modifier *= 0.93; // Additional 7% (total ~12% off)
+    }
+    
+    // Can't buy more than they have
+    var actual_quantity = min(quantity, available_stock);
+    
+    // Calculate final price
+    var unit_price = base_value * final_modifier;
+    var total_price = unit_price * actual_quantity;
+    
+    return ceil(total_price); // Round up
+} 
+ 
+--- Script: scr_calculate_daily_consumption.gml --- 
+// Script assets have changed for v2.3.0 see
+// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
+/// @desc Calculate daily resource consumption for the caravan
+/// @returns {Struct} Daily costs for provisions, water, and gold
+
+function scr_calculate_daily_consumption() {
+    var daily_cost = {
+        provisions: 0,
+        water: 0,
+        gold: 0
+    };
+    
+    // === COUNT PEOPLE ===
+    var people_count = 1; // Player always counts
+    
+    // TODO: Later add crew members
+    // for (var i = 0; i < array_length(obj_player.caravan.wagons); i++) {
+    //     people_count += array_length(obj_player.caravan.wagons[i].slots.crew.contents);
+    // }
+    
+    // === COUNT ANIMALS ===
+    var animal_count = 0;
+    var animal_feed_total = 0;
+    var animal_water_total = 0;
+    
+    for (var i = 0; i < array_length(obj_player.caravan.wagons); i++) {
+        var wagon = obj_player.caravan.wagons[i];
+        var animals = wagon.slots.animals.contents;
+        
+        for (var j = 0; j < array_length(animals); j++) {
+            animal_count++;
+            animal_feed_total += animals[j].feed_cost; // DONKEY = 2 per day
+            animal_water_total += 1; // All animals need 1 water per day
+        }
+    }
+    
+    // === PROVISIONS ===
+    // 1 provision per person per day
+    daily_cost.provisions = people_count;
+    // Add animal feed
+    daily_cost.provisions += animal_feed_total;
+    
+    // === WATER ===
+    // 1 water per person per day
+    daily_cost.water = people_count;
+    // Add animal water
+    daily_cost.water += animal_water_total;
+    
+    // === GOLD (Operating Costs) ===
+    var gold_cost = 0;
+    
+    // Wagon wear and tear
+    for (var i = 0; i < array_length(obj_player.caravan.wagons); i++) {
+        var wagon = obj_player.caravan.wagons[i];
+        
+        // Base maintenance cost per wagon type
+        switch(wagon.type) {
+            case "HANDCART":
+                gold_cost += 2; // Cheap to maintain
+                break;
+            case "WAGON":
+                gold_cost += 5; // Medium cost
+                break;
+            case "CARRIAGE":
+                gold_cost += 10; // Expensive
+                break;
+            default:
+                gold_cost += 3;
+                break;
+        }
+        
+        // Higher cost if wagon is damaged (repair wear)
+        if (wagon.condition < 75) {
+            gold_cost += 2;
+        }
+    }
+    
+    // TODO: Later add crew wages
+    // for each crew member, add their daily wage
+    
+    daily_cost.gold = gold_cost;
+    
+    return daily_cost;
+} 
+ 
+--- Script: scr_calculate_journey_time.gml --- 
+// Script assets have changed for v2.3.0 see
+// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
+/// @desc Calculate journey time in days based on distance and terrain
+/// @param {Real} distance Distance in km
+/// @param {String} terrain Terrain type (ROAD, PLAINS, FOREST, HILLS, MOUNTAIN, DESERT)
+/// @returns {Real} Number of days for journey (rounded up)
+
+function scr_calculate_journey_time(distance, terrain) {
+    // === BASE SPEED ===
+    // Start with wagon type base speed
+    var base_speed = 50; // km per day for HANDCART
+    
+    // TODO: Later we'll read this from wagon data:
+    // var base_speed = obj_player.caravan.wagons[0].base_speed;
+    
+    // === TERRAIN MODIFIERS ===
+    var terrain_modifier = 1.0;
+    
+    switch(terrain) {
+        case "ROAD":
+            terrain_modifier = 1.0;  // Full speed on roads
+            break;
+        case "PLAINS":
+            terrain_modifier = 0.9;  // Slightly slower
+            break;
+        case "FOREST":
+            terrain_modifier = 0.7;  // Dense trees slow you down
+            break;
+        case "HILLS":
+            terrain_modifier = 0.6;  // Uphill travel
+            break;
+        case "MOUNTAIN":
+            terrain_modifier = 0.5;  // Treacherous paths
+            break;
+        case "DESERT":
+            terrain_modifier = 0.6;  // Heat and sand
+            break;
+        default:
+            terrain_modifier = 0.8;  // Unknown terrain
+            break;
+    }
+    
+    // === ANIMAL MODIFIERS ===
+    // Check if player has animals in their wagon
+    var animal_modifier = 1.0;
+    
+    if (array_length(obj_player.caravan.wagons) > 0) {
+        var wagon = obj_player.caravan.wagons[0];
+        if (array_length(wagon.slots.animals.contents) > 0) {
+            var animal = wagon.slots.animals.contents[0];
+            animal_modifier = animal.speed; // DONKEY = 0.8
+        }
+    }
+    
+    // === CONDITION PENALTY ===
+    // Damaged wagons travel slower
+    var condition_modifier = 1.0;
+    
+    if (array_length(obj_player.caravan.wagons) > 0) {
+        var wagon = obj_player.caravan.wagons[0];
+        var condition_percent = wagon.condition / 100;
+        
+        // Below 75% condition, speed starts to suffer
+        if (condition_percent < 0.75) {
+            condition_modifier = 0.5 + (condition_percent * 0.5);
+        }
+    }
+    
+    // === CALCULATE FINAL SPEED ===
+    var final_speed = base_speed * terrain_modifier * animal_modifier * condition_modifier;
+    
+    // === CALCULATE DAYS ===
+    var days = distance / final_speed;
+    
+    // Always round UP - partial days count as full days
+    days = ceil(days);
+    
+    // Minimum 1 day for any journey
+    if (days < 1) days = 1;
+    
+    return days;
+} 
+ 
+--- Script: scr_calculate_sell_price.gml --- 
+// Script assets have changed for v2.3.0 see
+// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
+/// @desc Calculate price for player selling TO a city
+/// @param {Struct} location The location buying goods
+/// @param {String} good_id The commodity ID
+/// @param {Real} quantity How many units player wants to sell
+/// @returns {Real} Total price player receives
+
+function scr_calculate_sell_price(location, good_id, quantity) {
+    var economy = location.economy;
+    
+    // Get commodity base value
+    var commodity = undefined;
+    for (var i = 0; i < array_length(global.commodities); i++) {
+        if (global.commodities[i].id == good_id) {
+            commodity = global.commodities[i];
+            break;
+        }
+    }
+    
+    if (commodity == undefined) {
+        return 0; // Invalid commodity
+    }
+    
+    var base_value = commodity.base_value;
+    var final_modifier = 1.0;
+    
+    // === DEMAND MODIFIER ===
+    // If they demand it, they pay more
+    var is_demanded = false;
+    for (var i = 0; i < array_length(economy.demands); i++) {
+        if (economy.demands[i].good_id == good_id) {
+            is_demanded = true;
+            final_modifier *= 1.5; // 50% bonus
+            break;
+        }
+    }
+    
+    // === SATURATION PENALTY ===
+    // If they already have a lot, they pay less
+    var current_stock = 0;
+    if (variable_struct_exists(economy.stock_levels, good_id)) {
+        current_stock = economy.stock_levels[$ good_id];
+    }
+    
+    if (current_stock > 100) {
+        // Already saturated
+        var saturation = min((current_stock - 100) / 200, 0.5); // 0 to 0.5
+        final_modifier *= (1.0 - saturation); // Up to 50% penalty
+    }
+    
+    // === DISCOVERED WANTS BONUS ===
+    // If they've discovered they want this, they pay more
+    for (var i = 0; i < array_length(economy.discovered_wants); i++) {
+        if (economy.discovered_wants[i] == good_id) {
+            final_modifier *= 1.4; // 40% bonus
+            break;
+        }
+    }
+    
+    // === PRODUCTION PENALTY ===
+    // If they produce it themselves, they pay less for yours
+    for (var i = 0; i < array_length(economy.produces); i++) {
+        if (economy.produces[i].good_id == good_id) {
+            final_modifier *= 0.6; // 40% penalty (they have their own)
+            break;
+        }
+    }
+    
+    // === BULK SELLING PENALTY ===
+    // Selling huge amounts? They negotiate down
+    if (quantity >= 50) {
+        final_modifier *= 0.95; // 5% penalty for flooding market
+    }
+    if (quantity >= 100) {
+        final_modifier *= 0.90; // Additional 10% penalty (total ~15% off)
+    }
+    
+    // Calculate final price
+    var unit_price = base_value * final_modifier;
+    var total_price = unit_price * quantity;
+    
+    return floor(total_price); // Round down (player gets slightly less)
+} 
+ 
+--- Script: scr_calculate_travel_cost.gml --- 
+// Script assets have changed for v2.3.0 see
+// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
+/// @desc Calculate total cost for traveling between two locations
+/// @param {String} from_id Starting location ID
+/// @param {String} to_id Destination location ID
+/// @returns {Struct} Total cost (provisions, water, gold, days, distance, terrain) or noone if route not found
+
+function scr_calculate_travel_cost(from_id, to_id) {
+    // === FIND THE ROUTE ===
+    var route = noone;
+    
+    for (var i = 0; i < array_length(obj_heartbeat.world.routes); i++) {
+        var r = obj_heartbeat.world.routes[i];
+        
+        // Routes are bidirectional
+        if ((r.from_id == from_id && r.to_id == to_id) ||
+            (r.from_id == to_id && r.to_id == from_id)) {
+            route = r;
+            break;
+        }
+    }
+    
+    // Route doesn't exist
+    if (route == noone) {
+        return noone;
+    }
+    
+    // === CALCULATE JOURNEY TIME ===
+    var days = scr_calculate_journey_time(route.distance, route.terrain);
+    
+    // === GET DAILY CONSUMPTION ===
+    var daily = scr_calculate_daily_consumption();
+    
+    // === CALCULATE TOTAL COST ===
+    var total_cost = {
+        provisions: daily.provisions * days,
+        water: daily.water * days,
+        gold: daily.gold * days,
+        days: days,
+        distance: route.distance,
+        terrain: route.terrain
+    };
+    
+    return total_cost;
+} 
+ 
+--- Script: scr_can_afford_journey.gml --- 
+// Script assets have changed for v2.3.0 see
+// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
+/// @desc Check if player has enough resources for a journey
+/// @param {Struct} costs The cost struct from scr_calculate_travel_cost
+/// @returns {Struct} {can_afford: bool, missing: struct}
+/// @desc Check if player has enough resources for a journey
+/// @param {Struct} costs The cost struct from scr_calculate_travel_cost
+/// @returns {Struct} {can_afford: bool, missing: struct}
+
+function scr_can_afford_journey(costs) {
+    var result = {
+        can_afford: true,
+        missing: {
+            provisions: 0,
+            water: 0,
+            gold: 0
+        }
+    };
+    
+    // Check provisions
+    if (obj_player.provisions < costs.provisions) {
+        result.can_afford = false;
+        result.missing.provisions = costs.provisions - obj_player.provisions;
+    }
+    
+    // Check water (now from barrels)
+    var available_water = scr_get_total_water();
+    if (available_water < costs.water) {
+        result.can_afford = false;
+        result.missing.water = costs.water - available_water;
+    }
+    
+    // Check gold
+    if (obj_player.gold < costs.gold) {
+        result.can_afford = false;
+        result.missing.gold = costs.gold - obj_player.gold;
+    }
+    
+    return result;
+} 
+ 
+--- Script: scr_cmd_buy.gml --- 
+// Script assets have changed for v2.3.0 see
+// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
+/// @desc Handle BUY command - purchase goods from city
+/// @param {String} good_name The commodity name
+/// @param {Real} quantity How many to buy
+
+function scr_cmd_buy(good_name, quantity) {
+    // Get current location
+    var current_loc = undefined;
+    for (var i = 0; i < array_length(obj_heartbeat.world.locations); i++) {
+        if (obj_heartbeat.world.locations[i].id == obj_player.current_location) {
+            current_loc = obj_heartbeat.world.locations[i];
+            break;
+        }
+    }
+    
+    if (current_loc == undefined) {
+        console_print("ERROR: Current location not found.");
+        return;
+    }
+    
+  	// Find commodity by name or alias
+	var commodity = scr_find_commodity_by_name(good_name);
+    
+    if (commodity == undefined) {
+        console_print("Unknown commodity: " + good_name);
+        console_print("Type 'MARKET' to see available goods.");
+        return;
+    }
+    
+	    // === SPECIAL HANDLING: PROVISIONS ===
+	    // Provisions go directly to player stat, not cargo
+	    if (commodity.id == "provisions") {
+	        scr_buy_provisions(current_loc, quantity);
+	        return;
+	    }
+	
+	
+    // Check if city has stock
+    var economy = current_loc.economy;
+    var available_stock = 0;
+    
+    if (variable_struct_exists(economy.stock_levels, commodity.id)) {
+        available_stock = economy.stock_levels[$ commodity.id];
+    }
+    
+    if (available_stock <= 0) {
+        console_print(current_loc.name + " doesn't have any " + commodity.name + " for sale.");
+        return;
+    }
+    
+    // Adjust quantity if trying to buy more than available
+    var actual_quantity = min(quantity, available_stock);
+    
+    if (actual_quantity < quantity) {
+        console_print("Only " + string(actual_quantity) + " available (you requested " + string(quantity) + ")");
+    }
+    
+    // Calculate price
+    var total_price = scr_calculate_buy_price(current_loc, commodity.id, actual_quantity);
+    
+    if (total_price < 0) {
+        console_print("Cannot buy " + commodity.name + " here.");
+        return;
+    }
+    
+    // Check if player has enough gold
+    if (obj_player.gold < total_price) {
+        console_print("Insufficient gold!");
+        console_print("Need: " + string(total_price) + " gold");
+        console_print("Have: " + string(obj_player.gold) + " gold");
+        return;
+    }
+    
+    // Check if player has cargo space
+    var slot_info = scr_find_empty_cargo_slot(commodity.storage_type);
+    
+    if (slot_info == undefined) {
+        console_print("No cargo space available!");
+        console_print("You need an empty " + commodity.storage_type + " slot.");
+        return;
+    }
+    
+// === EXECUTE PURCHASE ===
+
+// Deduct gold
+obj_player.gold -= total_price;
+
+// Reduce city stock
+economy.stock_levels[$ commodity.id] -= actual_quantity;
+
+// Add to player cargo
+var wagon = obj_player.caravan.wagons[slot_info.wagon_index];
+
+if (slot_info.slot_type == "livestock_trade") {
+    // Adding to livestock_trade slot
+    wagon.slots.livestock_trade.contents[slot_info.slot_index] = {
+        good_id: commodity.id,
+        quantity: actual_quantity,
+        max_quantity: commodity.units_per_slot,
+        storage_type: commodity.storage_type
+    };
+} else if (variable_struct_exists(slot_info, "is_special") && slot_info.is_special) {
+    // Adding to special slot (saddlebag)
+    var slot = wagon.slots.cargo.contents[slot_info.slot_index];
+    slot.contents = {
+        good_id: commodity.id,
+        quantity: actual_quantity,
+        max_quantity: commodity.units_per_slot
+    };
+} else {
+    // Adding to standard cargo slot
+    wagon.slots.cargo.contents[slot_info.slot_index] = {
+        good_id: commodity.id,
+        quantity: actual_quantity,
+        max_quantity: commodity.units_per_slot,
+        storage_type: commodity.storage_type
+    };
+}
+    
+    // === SUCCESS MESSAGE ===
+    console_print("");
+    console_print("PURCHASE COMPLETE");
+    console_print("Bought: " + string(actual_quantity) + " " + commodity.name);
+    console_print("Cost: " + string(total_price) + " gold");
+    console_print("Gold remaining: " + string(obj_player.gold));
+    console_print("");
+} 
+ 
+--- Script: scr_cmd_go.gml --- 
+// Script assets have changed for v2.3.0 see
+// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
+/// @desc Handle GO command - travel to a destination
+/// @param {String} argument Destination name or number
+
+function scr_cmd_go(argument) {
+    // Get available destinations
+    var options = scr_get_travel_options();
+    
+    if (array_length(options) == 0) {
+        console_print("No travel routes available from this location.");
+        return;
+    }
+    
+    // === PARSE ARGUMENT ===
+    var destination = noone;
+    var dest_name = "";
+    
+    // Check if argument is a number
+    if (string_digits(argument) == argument && argument != "") {
+        // It's a number - use as index
+        var index = real(argument) - 1; // Convert to 0-based index
+        
+        if (index >= 0 && index < array_length(options)) {
+            destination = options[index];
+            dest_name = destination.name;
+        } else {
+            console_print("Invalid destination number. Type 'TRAVEL' to see options.");
+            return;
+        }
+    } else {
+        // It's a name - search for it (case-insensitive)
+        var search_name = string_lower(argument);
+        
+        for (var i = 0; i < array_length(options); i++) {
+            if (string_lower(options[i].name) == search_name) {
+                destination = options[i];
+                dest_name = destination.name;
+                break;
+            }
+        }
+        
+        if (destination == noone) {
+            console_print("Destination '" + argument + "' not found. Type 'TRAVEL' to see options.");
+            return;
+        }
+    }
+    
+    // === CALCULATE COST ===
+    var cost = scr_calculate_travel_cost(obj_player.current_location, destination.id);
+    
+    if (cost == noone) {
+        console_print("ERROR: Cannot calculate travel cost to " + dest_name + ".");
+        return;
+    }
+    
+    // === DISPLAY JOURNEY PLAN ===
+    console_print("=== JOURNEY TO " + string_upper(dest_name) + " ===");
+    console_print("Distance: " + string(round(cost.distance)) + " km");
+    console_print("Terrain: " + string_upper(cost.terrain));
+    console_print("Duration: " + string(cost.days) + " days");
+    console_print("");
+    console_print("Required resources:");
+    console_print("  Provisions: " + string(cost.provisions));
+    console_print("  Water: " + string(cost.water));
+    console_print("  Gold: " + string(cost.gold));
+    console_print("");
+    
+    // TODO: Phase 2 - Check if player can afford this journey
+// === CHECK IF PLAYER CAN AFFORD ===
+var check = scr_can_afford_journey(cost);
+
+if (!check.can_afford) {
+    console_print("INSUFFICIENT RESOURCES!");
+    console_print("");
+    console_print("You need:");
+    
+    if (check.missing.provisions > 0) {
+        console_print("  " + string(check.missing.provisions) + " more provisions");
+    }
+    if (check.missing.water > 0) {
+        console_print("  " + string(check.missing.water) + " more water");
+    }
+    if (check.missing.gold > 0) {
+        console_print("  " + string(check.missing.gold) + " more gold");
+    }
+    
+    console_print("");
+    console_print("Type 'STATUS' to see your current resources.");
+    return;
+}
+
+// TODO: Phase 3 - Actually execute the journey
+//console_print("[Travel execution not yet implemented]");
+console_print("You have enough resources to make this journey!");
+console_print("When complete, this will deduct resources and move you to " + dest_name + ".");
+// === EXECUTE JOURNEY ===
+scr_begin_journey(destination.id, cost);
+} 
+ 
+--- Script: scr_cmd_inventory.gml --- 
+/// @desc Show detailed inventory focused on trade goods and their values
+
+function scr_cmd_inventory() {
+    // Get current location for pricing
+    var current_loc = undefined;
+    for (var i = 0; i < array_length(obj_heartbeat.world.locations); i++) {
+        if (obj_heartbeat.world.locations[i].id == obj_player.current_location) {
+            current_loc = obj_heartbeat.world.locations[i];
+            break;
+        }
+    }
+    
+    console_print("");
+    console_print("=== INVENTORY ===");
+    console_print("");
+    
+    // === GOLD ===
+    console_print("Gold: " + string(obj_player.gold));
+    console_print("");
+    
+    // === CREW/PEOPLE SLOTS ===
+    console_print("CREW:");
+    var total_crew_slots = 0;
+    var used_crew_slots = 0;
+    
+    for (var w = 0; w < array_length(obj_player.caravan.wagons); w++) {
+        var wagon = obj_player.caravan.wagons[w];
+        total_crew_slots += wagon.slots.crew.capacity;
+        
+        for (var c = 0; c < array_length(wagon.slots.crew.contents); c++) {
+            var crew = wagon.slots.crew.contents[c];
+            used_crew_slots++;
+            console_print("  Slot " + string(c + 1) + ": " + crew.name + " (" + crew.type + ")");
+        }
+    }
+    
+    console_print("  Total: " + string(used_crew_slots) + "/" + string(total_crew_slots) + " crew slots");
+    console_print("");
+    
+    // === CARGO SLOTS (WAGON/CART) ===
+    console_print("WAGON CARGO:");
+    var standard_slots_total = 0;
+    var standard_slots_used = 0;
+    var total_cargo_value = 0;
+    
+    for (var w = 0; w < array_length(obj_player.caravan.wagons); w++) {
+        var wagon = obj_player.caravan.wagons[w];
+        var cargo_slots = wagon.slots.cargo.contents;
+        
+        for (var s = 0; s < array_length(cargo_slots); s++) {
+            var slot = cargo_slots[s];
+            
+            // Skip saddlebag slots (we'll show those separately)
+            if (slot != undefined && variable_struct_exists(slot, "slot_type")) {
+                if (slot.slot_type == "SADDLEBAG_BULK") {
+                    continue;
+                }
+            }
+            
+            standard_slots_total++;
+            
+            if (slot == undefined) {
+                console_print("  Slot " + string(s + 1) + ": (empty)");
+            } else {
+                standard_slots_used++;
+                
+                // Get commodity info
+                var commodity = scr_get_commodity_by_id(slot.good_id);
+                
+                if (commodity != undefined) {
+                    var quantity = slot.quantity;
+                    var value = 0;
+                    
+                    // Calculate sell value at current location
+                    if (current_loc != undefined) {
+                        value = scr_calculate_sell_price(current_loc, slot.good_id, quantity);
+                    }
+                    
+                    var line = "  Slot " + string(s + 1) + ": ";
+                    line += commodity.name + " x" + string(quantity);
+                    line += "/" + string(commodity.units_per_slot);
+                    line += " (" + slot.storage_type + ")";
+                    
+                    if (value > 0) {
+                        line += " - Worth: " + string(value) + "g";
+                        total_cargo_value += value;
+                    }
+                    
+                    console_print(line);
+                } else {
+                    console_print("  Slot " + string(s + 1) + ": Unknown item");
+                }
+            }
+        }
+    }
+    
+    console_print("  Total: " + string(standard_slots_used) + "/" + string(standard_slots_total) + " wagon slots used");
+    console_print("");
+    
+    // === PACK ANIMAL SLOTS (SADDLEBAGS) ===
+    var has_saddlebags = false;
+    var saddlebag_slots_total = 0;
+    var saddlebag_slots_used = 0;
+    
+    // Check if player has pack animals with saddlebags
+    for (var w = 0; w < array_length(obj_player.caravan.wagons); w++) {
+        var wagon = obj_player.caravan.wagons[w];
+        
+        for (var a = 0; a < array_length(wagon.slots.animals.contents); a++) {
+            var animal = wagon.slots.animals.contents[a];
+            if (variable_struct_exists(animal, "has_saddlebags") && animal.has_saddlebags) {
+                has_saddlebags = true;
+                break;
+            }
+        }
+    }
+    
+    if (has_saddlebags) {
+        console_print("PACK ANIMAL CARGO (BULK only):");
+        
+        for (var w = 0; w < array_length(obj_player.caravan.wagons); w++) {
+            var wagon = obj_player.caravan.wagons[w];
+            var cargo_slots = wagon.slots.cargo.contents;
+            
+            for (var s = 0; s < array_length(cargo_slots); s++) {
+                var slot = cargo_slots[s];
+                
+                // Only show saddlebag slots
+                if (slot != undefined && variable_struct_exists(slot, "slot_type")) {
+                    if (slot.slot_type == "SADDLEBAG_BULK") {
+                        saddlebag_slots_total++;
+                        
+                        if (slot.contents == undefined) {
+                            console_print("  Saddlebag " + string(s + 1) + ": (empty)");
+                        } else {
+                            saddlebag_slots_used++;
+                            
+                            var commodity = scr_get_commodity_by_id(slot.contents.good_id);
+                            
+                            if (commodity != undefined) {
+                                var quantity = slot.contents.quantity;
+                                var value = 0;
+                                
+                                if (current_loc != undefined) {
+                                    value = scr_calculate_sell_price(current_loc, slot.contents.good_id, quantity);
+                                }
+                                
+                                var line = "  Saddlebag " + string(s + 1) + ": ";
+                                line += commodity.name + " x" + string(quantity);
+                                line += "/" + string(commodity.units_per_slot);
+                                
+                                if (value > 0) {
+                                    line += " - Worth: " + string(value) + "g";
+                                    total_cargo_value += value;
+                                }
+                                
+                                console_print(line);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        console_print("  Total: " + string(saddlebag_slots_used) + "/" + string(saddlebag_slots_total) + " saddlebag slots used");
+        console_print("");
+    }
+    
+    // === EQUIPMENT SLOTS ===
+    console_print("EQUIPMENT:");
+    var equipment_count = 0;
+    
+    for (var w = 0; w < array_length(obj_player.caravan.wagons); w++) {
+        var wagon = obj_player.caravan.wagons[w];
+        
+        if (variable_struct_exists(wagon.slots, "equipment")) {
+            for (var e = 0; e < array_length(wagon.slots.equipment.contents); e++) {
+                var item = wagon.slots.equipment.contents[e];
+                equipment_count++;
+                
+                if (item.type == "BARREL" && item.subtype == "WATER") {
+                    console_print("  Equipment " + string(e + 1) + ": Water Barrel (" + string(item.water) + "/" + string(item.max_water) + ")");
+                } else {
+                    console_print("  Equipment " + string(e + 1) + ": " + item.type);
+                }
+            }
+        }
+    }
+    
+    if (equipment_count == 0) {
+        console_print("  (no equipment)");
+    }
+    
+    console_print("");
+    
+    // === SUMMARY ===
+    console_print("--- SUMMARY ---");
+    console_print("Total cargo value: " + string(total_cargo_value) + " gold");
+    console_print("Total wealth: " + string(obj_player.gold + total_cargo_value) + " gold");
+    console_print("");
+    console_print("Provisions: " + string(obj_player.provisions));
+    console_print("Water: " + string(scr_get_total_water()) + "/" + string(scr_get_max_water_capacity()));
+    console_print("");
+} 
+ 
+--- Script: scr_cmd_market.gml --- 
+// Script assets have changed for v2.3.0 see
+// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
+/// @desc Display current location's market (what they buy/sell)
+
+function scr_cmd_market() {
+    // Get current location
+    var current_loc = undefined;
+    for (var i = 0; i < array_length(obj_heartbeat.world.locations); i++) {
+        if (obj_heartbeat.world.locations[i].id == obj_player.current_location) {
+            current_loc = obj_heartbeat.world.locations[i];
+            break;
+        }
+    }
+    
+    if (current_loc == undefined) {
+        console_print("ERROR: Current location not found.");
+        return;
+    }
+    
+    var economy = current_loc.economy;
+    
+    console_print("");
+    console_print("=== MARKET: " + string_upper(current_loc.name) + " ===");
+    console_print("");
+    
+    // === GOODS FOR SALE ===
+    console_print("GOODS FOR SALE:");
+    
+    var has_goods = false;
+    var stock_keys = variable_struct_get_names(economy.stock_levels);
+    
+    for (var i = 0; i < array_length(stock_keys); i++) {
+        var good_id = stock_keys[i];
+        var stock = economy.stock_levels[$ good_id];
+        
+        if (stock > 0) {
+            has_goods = true;
+            var commodity = scr_get_commodity_by_id(good_id);
+            
+            if (commodity != undefined) {
+                // Calculate price for buying 1 unit
+                var unit_price = scr_calculate_buy_price(current_loc, good_id, 1);
+                
+                var line = "  " + commodity.name;
+                line += " - " + string(stock) + " available";
+                line += " @ " + string(unit_price) + " gold/unit";
+                
+                console_print(line);
+            }
+        }
+    }
+    
+    if (!has_goods) {
+        console_print("  (nothing for sale)");
+    }
+    
+    console_print("");
+    
+    // === GOODS THEY'RE BUYING ===
+    console_print("GOODS THEY'RE BUYING:");
+    
+    if (array_length(economy.demands) > 0) {
+        for (var i = 0; i < array_length(economy.demands); i++) {
+            var demand = economy.demands[i];
+            var commodity = scr_get_commodity_by_id(demand.good_id);
+            
+            if (commodity != undefined) {
+                // Calculate price for selling 1 unit
+                var unit_price = scr_calculate_sell_price(current_loc, demand.good_id, 1);
+                
+                var line = "  " + commodity.name;
+                line += " @ " + string(unit_price) + " gold/unit";
+                
+                console_print(line);
+            }
+        }
+    }
+    
+    // Show discovered wants (goods they've learned to value)
+    if (array_length(economy.discovered_wants) > 0) {
+        console_print("");
+        console_print("SPECIAL INTEREST (discovered goods):");
+        for (var i = 0; i < array_length(economy.discovered_wants); i++) {
+            var good_id = economy.discovered_wants[i];
+            var commodity = scr_get_commodity_by_id(good_id);
+            
+            if (commodity != undefined) {
+                var unit_price = scr_calculate_sell_price(current_loc, good_id, 1);
+                console_print("  " + commodity.name + " @ " + string(unit_price) + " gold/unit");
+            }
+        }
+    }
+    
+    if (array_length(economy.demands) == 0 && array_length(economy.discovered_wants) == 0) {
+        console_print("  (not buying anything)");
+    }
+    
+    console_print("");
+    console_print("Your gold: " + string(obj_player.gold));
+    console_print("");
+    console_print("Use 'BUY <good> <quantity>' or 'SELL <good> <quantity>'");
+} 
+ 
+--- Script: scr_cmd_sell.gml --- 
+// Script assets have changed for v2.3.0 see
+// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
+/// @desc Handle SELL command - sell goods to city
+/// @param {String} good_name The commodity name
+/// @param {Real} quantity How many to sell
+
+function scr_cmd_sell(good_name, quantity) {
+    // Get current location
+    var current_loc = undefined;
+    for (var i = 0; i < array_length(obj_heartbeat.world.locations); i++) {
+        if (obj_heartbeat.world.locations[i].id == obj_player.current_location) {
+            current_loc = obj_heartbeat.world.locations[i];
+            break;
+        }
+    }
+    
+    if (current_loc == undefined) {
+        console_print("ERROR: Current location not found.");
+        return;
+    }
+    
+	// Find commodity by name or alias
+	var commodity = scr_find_commodity_by_name(good_name);
+    
+    if (commodity == undefined) {
+        console_print("Unknown commodity: " + good_name);
+        return;
+    }
+	
+	    // === SPECIAL HANDLING: PROVISIONS ===
+	    // Can't sell provisions back (they're consumables in your stat)
+	    if (commodity.id == "provisions") {
+	        console_print("You can't sell provisions.");
+	        console_print("Provisions are consumed during travel and can't be traded.");
+	        return;
+	    }
+	
+	
+    
+    // Find commodity in player cargo
+    var found_slot = undefined;
+    var found_wagon = undefined;
+    var player_has = 0;
+    
+    for (var w = 0; w < array_length(obj_player.caravan.wagons); w++) {
+        var wagon = obj_player.caravan.wagons[w];
+        var cargo_slots = wagon.slots.cargo.contents;
+        
+        for (var s = 0; s < array_length(cargo_slots); s++) {
+            var slot = cargo_slots[s];
+            
+            if (slot == undefined) continue;
+            
+            var slot_good_id = undefined;
+            var slot_quantity = 0;
+            
+            // Check standard slot
+            if (variable_struct_exists(slot, "good_id")) {
+                slot_good_id = slot.good_id;
+                slot_quantity = slot.quantity;
+            }
+            // Check special slot
+            else if (variable_struct_exists(slot, "contents") && slot.contents != undefined) {
+                slot_good_id = slot.contents.good_id;
+                slot_quantity = slot.contents.quantity;
+            }
+            
+            if (slot_good_id == commodity.id) {
+                found_slot = s;
+                found_wagon = w;
+                player_has = slot_quantity;
+                break;
+            }
+        }
+        
+        if (found_slot != undefined) break;
+    }
+    
+    if (found_slot == undefined) {
+        console_print("You don't have any " + commodity.name + " to sell.");
+        return;
+    }
+    
+    // Adjust quantity if trying to sell more than we have
+    var actual_quantity = min(quantity, player_has);
+    
+    if (actual_quantity < quantity) {
+        console_print("You only have " + string(actual_quantity) + " (you tried to sell " + string(quantity) + ")");
+    }
+    
+    // Calculate price
+    var total_price = scr_calculate_sell_price(current_loc, commodity.id, actual_quantity);
+    
+    // Check for discovery event (10% chance for new commodity)
+    var economy = current_loc.economy;
+    var is_new_commodity = true;
+    
+    // Check if they already produce or demand it
+    for (var i = 0; i < array_length(economy.produces); i++) {
+        if (economy.produces[i].good_id == commodity.id) {
+            is_new_commodity = false;
+            break;
+        }
+    }
+    
+    for (var i = 0; i < array_length(economy.demands); i++) {
+        if (economy.demands[i].good_id == commodity.id) {
+            is_new_commodity = false;
+            break;
+        }
+    }
+    
+    // Check if already discovered
+    for (var i = 0; i < array_length(economy.discovered_wants); i++) {
+        if (economy.discovered_wants[i] == commodity.id) {
+            is_new_commodity = false;
+            break;
+        }
+    }
+    
+    var discovered = false;
+    if (is_new_commodity && random(1) < 0.1) {
+        // Discovery!
+        discovered = true;
+        array_push(economy.discovered_wants, commodity.id);
+        
+        // Recalculate price with discovery bonus
+        total_price = scr_calculate_sell_price(current_loc, commodity.id, actual_quantity);
+    }
+    
+    // === EXECUTE SALE ===
+    
+    // Add gold
+    obj_player.gold += total_price;
+    
+    // Add to city stock
+    if (variable_struct_exists(economy.stock_levels, commodity.id)) {
+        economy.stock_levels[$ commodity.id] += actual_quantity;
+    } else {
+        economy.stock_levels[$ commodity.id] = actual_quantity;
+    }
+    
+    // Remove from player cargo
+    var wagon = obj_player.caravan.wagons[found_wagon];
+    var slot = wagon.slots.cargo.contents[found_slot];
+    
+    if (variable_struct_exists(slot, "contents")) {
+        // Special slot
+        slot.contents.quantity -= actual_quantity;
+        if (slot.contents.quantity <= 0) {
+            slot.contents = undefined; // Empty the slot
+        }
+    } else {
+        // Standard slot
+        slot.quantity -= actual_quantity;
+        if (slot.quantity <= 0) {
+            wagon.slots.cargo.contents[found_slot] = undefined; // Empty the slot
+        }
+    }
+    
+    // === SUCCESS MESSAGE ===
+    console_print("");
+    console_print("SALE COMPLETE");
+    console_print("Sold: " + string(actual_quantity) + " " + commodity.name);
+    console_print("Earned: " + string(total_price) + " gold");
+    console_print("Gold total: " + string(obj_player.gold));
+    
+    if (discovered) {
+        console_print("");
+        console_print("*** DISCOVERY! ***");
+        console_print(current_loc.name + " has discovered they love " + commodity.name + "!");
+        console_print("They'll pay premium prices for it from now on.");
+    }
+    
+    console_print("");
+} 
+ 
+--- Script: scr_cmd_travel.gml --- 
+// Script assets have changed for v2.3.0 see
+// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
+/// @desc Handle TRAVEL command - shows available destinations with costs
+
+function scr_cmd_travel() {
+    console_print("=== AVAILABLE DESTINATIONS ===");
+    console_print("");
+    
+    var options = scr_get_travel_options();
+    
+    if (array_length(options) == 0) {
+        console_print("No travel routes available from this location.");
+        return;
+    }
+    
+    var current_loc_id = obj_player.current_location;
+    
+    // Display each destination with number and costs
+    for (var i = 0; i < array_length(options); i++) {
+        var dest = options[i];
+        
+        // Format the distance (round to nearest km)
+        var dist_str = string(round(dest.distance));
+        
+        // Create formatted header line with number
+        var line = string(i + 1) + ". ";
+        line += string_upper(dest.name) + " (" + string_upper(dest.type) + ")";
+        line += " - " + dist_str + " km - " + string_upper(dest.terrain);
+        
+        console_print(line);
+        
+        // Calculate travel costs for this route
+        var cost = scr_calculate_travel_cost(current_loc_id, dest.id);
+        
+        if (cost != noone) {
+            // Display journey requirements
+            var cost_line = "   Journey: " + string(cost.days) + " days";
+            cost_line += " | Requires: " + string(cost.provisions) + " provisions";
+            cost_line += ", " + string(cost.water) + " water";
+            cost_line += ", " + string(cost.gold) + " gold";
+            
+            console_print(cost_line);
+        } else {
+            console_print("   ERROR: Cannot calculate cost for this route");
+        }
+        
+        console_print(""); // Blank line between destinations
+    }
+    
+    console_print("Use 'GO <name>' or 'GO <number>' to travel");
+} 
+ 
+--- Script: scr_cmd_work.gml --- 
+// Script assets have changed for v2.3.0 see
+// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
+/// @desc Handle WORK command - earn gold by doing day labor
+/// @param {Real} days Number of days to work (default 1)
+
+function scr_cmd_work(days) {
+    // TODO: ADVANCED WORK SYSTEM
+    // Future enhancements to make earning gold more interesting:
+    // - Contracts/Quests: Special jobs that pay better but have requirements
+    // - Skill-based work: Better pay for merchants vs laborers
+    // - Reputation bonus: High reputation = better wages
+    // - Random events: Chance to find valuable items, make connections, etc.
+    
+    // TODO: MARKET STALL MINI-GAME
+    // Allow player to run a market stall on market days:
+    // - Buy goods at reduced prices from other vendors
+    // - Sell to NPCs with bargaining mini-game
+    // - Risk: Could lose money if you bargain poorly
+    // - Reward: Could earn more than simple day labor
+    // - Requires initial capital to buy stock
+    
+    // TODO: EMERGENCY EQUIPMENT SELLING
+    // When desperate, allow selling caravan equipment:
+    // - Sell pack animals (lose saddlebag capacity)
+    // - Sell water barrels (risk dehydration)
+    // - Sell wagon upgrades/improvements
+    // - Creates tough decisions and potential downward spiral
+    
+    // Get current location
+    var current_loc = undefined;
+    for (var i = 0; i < array_length(obj_heartbeat.world.locations); i++) {
+        if (obj_heartbeat.world.locations[i].id == obj_player.current_location) {
+            current_loc = obj_heartbeat.world.locations[i];
+            break;
+        }
+    }
+    
+    if (current_loc == undefined) {
+        console_print("ERROR: Current location not found.");
+        return;
+    }
+    
+    // Validate days
+    if (days < 1) {
+        console_print("You must work at least 1 day.");
+        return;
+    }
+    
+    if (days > 30) {
+        console_print("You can't work more than 30 days at once.");
+        return;
+    }
+    
+    // Calculate daily costs
+    var daily = scr_calculate_daily_consumption();
+    var total_provisions = daily.provisions * days;
+    var total_water = daily.water * days;
+    
+    // Check if player has enough resources to work
+    if (obj_player.provisions < total_provisions) {
+        console_print("INSUFFICIENT PROVISIONS!");
+        console_print("You need " + string(total_provisions) + " provisions to work for " + string(days) + " days.");
+        console_print("You only have " + string(obj_player.provisions) + " provisions.");
+        console_print("");
+        console_print("Try working fewer days, or buy provisions first.");
+        return;
+    }
+    
+    var available_water = scr_get_total_water();
+    if (available_water < total_water) {
+        console_print("INSUFFICIENT WATER!");
+        console_print("You need " + string(total_water) + " water to work for " + string(days) + " days.");
+        console_print("You only have " + string(available_water) + " water.");
+        return;
+    }
+    
+    // Determine wage based on location type
+    var daily_wage = 8; // Base wage
+    
+    switch(current_loc.type) {
+        case "CITY":
+            daily_wage = irandom_range(10, 15); // Cities pay best
+            break;
+        case "TOWN":
+            daily_wage = irandom_range(7, 10); // Towns pay average
+            break;
+        case "VILLAGE":
+            daily_wage = irandom_range(5, 8); // Villages pay least
+            break;
+    }
+    
+    var total_earnings = daily_wage * days;
+    
+    // === EXECUTE WORK ===
+    
+    // Consume resources
+    obj_player.provisions -= total_provisions;
+    scr_consume_water(total_water);
+    
+    // Earn gold
+    obj_player.gold += total_earnings;
+    
+    // Advance time
+    obj_heartbeat.day += days;
+    
+    // Generate flavor text
+    var work_descriptions = [
+        "You spend your days loading wagons at the docks.",
+        "You work in the marketplace, hauling goods for merchants.",
+        "You take odd jobs around town, doing whatever work you can find.",
+        "You help local farmers bring their harvest to market.",
+        "You work at the stables, tending to horses and mules.",
+        "You assist craftsmen in their workshops.",
+        "You take work as a courier, delivering messages around town."
+    ];
+    
+    var flavor = work_descriptions[irandom(array_length(work_descriptions) - 1)];
+    
+    // === REPORT ===
+    console_print("");
+    console_print("=== WORK COMPLETE ===");
+    console_print(flavor);
+    console_print("");
+    console_print("Days worked: " + string(days));
+    console_print("Daily wage: " + string(daily_wage) + " gold/day");
+    console_print("Total earned: " + string(total_earnings) + " gold");
+    console_print("");
+    console_print("Resources consumed:");
+    console_print("  Provisions: " + string(total_provisions));
+    console_print("  Water: " + string(total_water));
+    console_print("");
+    console_print("Current resources:");
+    console_print("  Gold: " + string(obj_player.gold));
+    console_print("  Provisions: " + string(obj_player.provisions));
+    console_print("  Water: " + string(scr_get_total_water()) + "/" + string(scr_get_max_water_capacity()));
+    console_print("");
+    
+    // Warnings
+    if (obj_player.provisions < 10) {
+        console_print("WARNING: Provisions are running low!");
+    }
+    if (scr_get_total_water() < 10) {
+        console_print("WARNING: Water is running low!");
+    }
+    
+    // Refill water (since time passed in same location)
+    var refill_info = scr_refill_water();
+    if (refill_info.water > 0) {
+        console_print("Water refilled: +" + string(refill_info.water));
+    }
+    
+    console_print("");
+} 
+ 
+--- Script: scr_consume_water.gml --- 
+// Script assets have changed for v2.3.0 see
+// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
+/// @desc Consume water from barrels (consumes from first barrel first, then next, etc.)
+/// @param {Real} amount Amount of water to consume
+/// @returns {Bool} True if successful, false if not enough water
+
+function scr_consume_water(amount) {
+    var remaining = amount;
+    
+    for (var i = 0; i < array_length(obj_player.caravan.wagons); i++) {
+        var wagon = obj_player.caravan.wagons[i];
+        
+        // Check equipment slot for water barrels
+        if (variable_struct_exists(wagon.slots, "equipment")) {
+            var equipment = wagon.slots.equipment.contents;
+            
+            for (var j = 0; j < array_length(equipment); j++) {
+                var item = equipment[j];
+                if (item.type == "BARREL" && item.subtype == "WATER" && item.water > 0) {
+                    var take = min(remaining, item.water);
+                    item.water -= take;
+                    remaining -= take;
+                    
+                    if (remaining <= 0) {
+                        return true;
+                    }
+                }
+            }
+        }
+    }
+    
+    // If we get here, we didn't have enough water
+    return (remaining <= 0);
+} 
+ 
+--- Script: scr_create_commodity_database.gml --- 
+/// @desc Create the master database of all tradeable commodities with slot mechanics
+/// @returns {Array} Array of commodity structs
+
+function scr_create_commodity_database() {
+    var commodities = [];
+    
+    // === GRAINS (BULK STORAGE) ===
+    array_push(commodities, {
+        id: "wheat",
+        name: "Wheat",
+        aliases: ["grain"],
+        category: "GRAIN",
+        storage_type: "BULK",
+        units_per_slot: 50,
+        can_mix_with: [],
+        base_value: 10,
+        weight: 1,
+        terrain_affinity: ["PLAINS"],
+        rarity: "COMMON"
+    });
+    
+    array_push(commodities, {
+        id: "barley",
+        name: "Barley",
+        aliases: ["grain"],
+        category: "GRAIN",
+        storage_type: "BULK",
+        units_per_slot: 50,
+        can_mix_with: [],
+        base_value: 8,
+        weight: 1,
+        terrain_affinity: ["PLAINS", "HILLS"],
+        rarity: "COMMON"
+    });
+    
+    array_push(commodities, {
+        id: "rice",
+        name: "Rice",
+        aliases: ["grain"],
+        category: "GRAIN",
+        storage_type: "BULK",
+        units_per_slot: 50,
+        can_mix_with: [],
+        base_value: 12,
+        weight: 1,
+        terrain_affinity: ["PLAINS"],
+        rarity: "COMMON"
+    });
+    
+    array_push(commodities, {
+        id: "corn",
+        name: "Corn",
+        aliases: ["maize", "grain"],
+        category: "GRAIN",
+        storage_type: "BULK",
+        units_per_slot: 50,
+        can_mix_with: [],
+        base_value: 9,
+        weight: 1,
+        terrain_affinity: ["PLAINS"],
+        rarity: "COMMON"
+    });
+    
+    // === SPICES (BULK STORAGE) ===
+    array_push(commodities, {
+        id: "saffron",
+        name: "Saffron",
+        aliases: ["spice"],
+        category: "SPICE",
+        storage_type: "BULK",
+        units_per_slot: 50,
+        can_mix_with: [],
+        base_value: 150,
+        weight: 1,
+        terrain_affinity: ["DESERT", "PLAINS"],
+        rarity: "RARE"
+    });
+    
+    array_push(commodities, {
+        id: "pepper",
+        name: "Black Pepper",
+        aliases: ["pepper", "peppercorn", "peppercorns", "spice"],
+        category: "SPICE",
+        storage_type: "BULK",
+        units_per_slot: 50,
+        can_mix_with: [],
+        base_value: 60,
+        weight: 1,
+        terrain_affinity: ["FOREST"],
+        rarity: "UNCOMMON"
+    });
+    
+    array_push(commodities, {
+        id: "cinnamon",
+        name: "Cinnamon",
+        aliases: ["spice"],
+        category: "SPICE",
+        storage_type: "BULK",
+        units_per_slot: 50,
+        can_mix_with: [],
+        base_value: 80,
+        weight: 1,
+        terrain_affinity: ["FOREST"],
+        rarity: "UNCOMMON"
+    });
+    
+    array_push(commodities, {
+        id: "salt",
+        name: "Salt",
+        aliases: ["sea salt", "seasalt", "spice"],
+        category: "SPICE",
+        storage_type: "BULK",
+        units_per_slot: 50,
+        can_mix_with: [],
+        base_value: 15,
+        weight: 2,
+        terrain_affinity: ["DESERT", "MOUNTAIN"],
+        rarity: "COMMON"
+    });
+    
+    // === TEXTILES (BALE STORAGE) ===
+    array_push(commodities, {
+        id: "wool",
+        name: "Wool",
+        aliases: ["fleece", "yarn"],
+        category: "TEXTILE",
+        storage_type: "BALE",
+        units_per_slot: 20,
+        can_mix_with: ["wool", "silk", "cotton", "linen"],
+        base_value: 25,
+        weight: 1,
+        terrain_affinity: ["PLAINS", "HILLS"],
+        rarity: "COMMON"
+    });
+    
+    array_push(commodities, {
+        id: "silk",
+        name: "Silk",
+        aliases: ["silks", "silk fabric"],
+        category: "TEXTILE",
+        storage_type: "BALE",
+        units_per_slot: 20,
+        can_mix_with: ["wool", "silk", "cotton", "linen"],
+        base_value: 120,
+        weight: 1,
+        terrain_affinity: ["FOREST"],
+        rarity: "RARE"
+    });
+    
+    array_push(commodities, {
+        id: "cotton",
+        name: "Cotton",
+        aliases: ["cotton fabric"],
+        category: "TEXTILE",
+        storage_type: "BALE",
+        units_per_slot: 20,
+        can_mix_with: ["wool", "silk", "cotton", "linen"],
+        base_value: 20,
+        weight: 1,
+        terrain_affinity: ["PLAINS"],
+        rarity: "COMMON"
+    });
+    
+    array_push(commodities, {
+        id: "linen",
+        name: "Linen",
+        aliases: ["flax", "linen fabric"],
+        category: "TEXTILE",
+        storage_type: "BALE",
+        units_per_slot: 20,
+        can_mix_with: ["wool", "silk", "cotton", "linen"],
+        base_value: 30,
+        weight: 1,
+        terrain_affinity: ["PLAINS"],
+        rarity: "COMMON"
+    });
+    
+    // === METALS (HEAVY CRATE) ===
+    array_push(commodities, {
+        id: "iron",
+        name: "Iron Ore",
+        aliases: ["iron", "ore"],
+        category: "METAL",
+        storage_type: "HEAVY",
+        units_per_slot: 10,
+        can_mix_with: [],
+        base_value: 35,
+        weight: 3,
+        terrain_affinity: ["MOUNTAIN", "HILLS"],
+        rarity: "COMMON"
+    });
+    
+    array_push(commodities, {
+        id: "copper",
+        name: "Copper Ore",
+        aliases: ["copper", "ore"],
+        category: "METAL",
+        storage_type: "HEAVY",
+        units_per_slot: 10,
+        can_mix_with: [],
+        base_value: 40,
+        weight: 3,
+        terrain_affinity: ["MOUNTAIN", "HILLS"],
+        rarity: "COMMON"
+    });
+    
+    array_push(commodities, {
+        id: "silver",
+        name: "Silver",
+        aliases: ["silver ore", "ore"],
+        category: "METAL",
+        storage_type: "LUXURY",
+        units_per_slot: 10,
+        can_mix_with: ["silver", "gold_ore", "jewelry", "gems"],
+        base_value: 200,
+        weight: 2,
+        terrain_affinity: ["MOUNTAIN"],
+        rarity: "RARE"
+    });
+    
+    array_push(commodities, {
+        id: "gold_ore",
+        name: "Gold Ore",
+        aliases: ["gold", "ore"],
+        category: "METAL",
+        storage_type: "LUXURY",
+        units_per_slot: 10,
+        can_mix_with: ["silver", "gold_ore", "jewelry", "gems"],
+        base_value: 300,
+        weight: 2,
+        terrain_affinity: ["MOUNTAIN", "DESERT"],
+        rarity: "RARE"
+    });
+    
+    // === LUXURY GOODS (STACKABLE) ===
+    array_push(commodities, {
+        id: "wine",
+        name: "Wine",
+        aliases: ["wines", "vintage"],
+        category: "LUXURY",
+        storage_type: "CASK",
+        units_per_slot: 10,
+        can_mix_with: [],
+        base_value: 50,
+        weight: 2,
+        terrain_affinity: ["PLAINS", "HILLS"],
+        rarity: "UNCOMMON"
+    });
+    
+    array_push(commodities, {
+        id: "jewelry",
+        name: "Jewelry",
+        aliases: ["jewellery", "jewels", "trinkets"],
+        category: "LUXURY",
+        storage_type: "LUXURY",
+        units_per_slot: 10,
+        can_mix_with: ["jewelry", "silver", "gold_ore", "gems", "perfume"],
+        base_value: 250,
+        weight: 1,
+        terrain_affinity: [],
+        rarity: "RARE"
+    });
+    
+    array_push(commodities, {
+        id: "perfume",
+        name: "Perfume",
+        aliases: ["perfumes", "scent", "fragrance"],
+        category: "LUXURY",
+        storage_type: "LUXURY",
+        units_per_slot: 10,
+        can_mix_with: ["jewelry", "perfume", "gems"],
+        base_value: 180,
+        weight: 1,
+        terrain_affinity: ["FOREST"],
+        rarity: "RARE"
+    });
+    
+    array_push(commodities, {
+        id: "dye",
+        name: "Fine Dyes",
+        aliases: ["dyes", "dye", "pigment", "pigments"],
+        category: "LUXURY",
+        storage_type: "CASK",
+        units_per_slot: 10,
+        can_mix_with: [],
+        base_value: 70,
+        weight: 1,
+        terrain_affinity: ["FOREST"],
+        rarity: "UNCOMMON"
+    });
+    
+// === LIVESTOCK ===
+array_push(commodities, {
+    id: "horses",
+    name: "Horses",
+    aliases: ["horse", "steed", "steeds", "mount", "mounts"],
+    category: "LIVESTOCK",
+    storage_type: "LIVESTOCK_LARGE", // CHANGED: Large animals need special slots
+    units_per_slot: 1,
+    can_mix_with: [],
+    base_value: 400,
+    weight: 10,
+    terrain_affinity: ["PLAINS"],
+    rarity: "UNCOMMON"
+});
+
+array_push(commodities, {
+    id: "cattle",
+    name: "Cattle",
+    aliases: ["cow", "cows", "beef", "ox", "oxen"],
+    category: "LIVESTOCK",
+    storage_type: "LIVESTOCK_LARGE", // CHANGED: Large animals need special slots
+    units_per_slot: 1,
+    can_mix_with: [],
+    base_value: 200,
+    weight: 8,
+    terrain_affinity: ["PLAINS"],
+    rarity: "COMMON"
+});
+
+array_push(commodities, {
+    id: "pigs",
+    name: "Pigs",
+    aliases: ["pig", "swine", "hog", "hogs", "pork"],
+    category: "LIVESTOCK",
+    storage_type: "LIVESTOCK_SMALL", // CHANGED: Small animals fit in regular slots
+    units_per_slot: 2,
+    can_mix_with: [],
+    base_value: 80,
+    weight: 5,
+    terrain_affinity: ["PLAINS", "FOREST"],
+    rarity: "COMMON"
+});
+    
+    // === TOOLS & GOODS (CRATE STORAGE) ===
+    array_push(commodities, {
+        id: "weapons",
+        name: "Weapons",
+        aliases: ["weapon", "arms", "armament", "armaments", "sword", "swords"],
+        category: "TOOLS",
+        storage_type: "CRATE",
+        units_per_slot: 10,
+        can_mix_with: ["weapons", "tools"],
+        base_value: 120,
+        weight: 3,
+        terrain_affinity: [],
+        rarity: "UNCOMMON"
+    });
+    
+    array_push(commodities, {
+        id: "tools",
+        name: "Tools",
+        aliases: ["tool", "implement", "implements"],
+        category: "TOOLS",
+        storage_type: "CRATE",
+        units_per_slot: 10,
+        can_mix_with: ["weapons", "tools", "pottery"],
+        base_value: 45,
+        weight: 2,
+        terrain_affinity: [],
+        rarity: "COMMON"
+    });
+    
+    array_push(commodities, {
+        id: "pottery",
+        name: "Pottery",
+        aliases: ["pot", "pots", "ceramic", "ceramics", "clay goods"],
+        category: "TOOLS",
+        storage_type: "CRATE",
+        units_per_slot: 10,
+        can_mix_with: ["tools", "pottery"],
+        base_value: 20,
+        weight: 2,
+        terrain_affinity: [],
+        rarity: "COMMON"
+    });
+    
+    // === SPECIALTY GOODS ===
+    array_push(commodities, {
+        id: "furs",
+        name: "Furs",
+        aliases: ["fur", "pelt", "pelts", "hide", "hides"],
+        category: "LUXURY",
+        storage_type: "BALE",
+        units_per_slot: 15,
+        can_mix_with: ["furs"],
+        base_value: 100,
+        weight: 1,
+        terrain_affinity: ["FOREST"],
+        rarity: "UNCOMMON"
+    });
+    
+    array_push(commodities, {
+        id: "timber",
+        name: "Timber",
+        aliases: ["wood", "lumber", "logs", "planks"],
+        category: "MATERIAL",
+        storage_type: "HEAVY",
+        units_per_slot: 5,
+        can_mix_with: [],
+        base_value: 15,
+        weight: 5,
+        terrain_affinity: ["FOREST"],
+        rarity: "COMMON"
+    });
+    
+    array_push(commodities, {
+        id: "gems",
+        name: "Gemstones",
+        aliases: ["gems", "gem", "gemstone", "jewel", "jewels", "precious stones"],
+        category: "LUXURY",
+        storage_type: "LUXURY",
+        units_per_slot: 10,
+        can_mix_with: ["jewelry", "gems", "silver", "gold_ore"],
+        base_value: 500,
+        weight: 1,
+        terrain_affinity: ["MOUNTAIN"],
+        rarity: "RARE"
+    });
+    
+    array_push(commodities, {
+        id: "honey",
+        name: "Honey",
+        aliases: ["mead"],
+        category: "FOOD",
+        storage_type: "CASK",
+        units_per_slot: 10,
+        can_mix_with: [],
+        base_value: 35,
+        weight: 1,
+        terrain_affinity: ["FOREST", "PLAINS"],
+        rarity: "COMMON"
+    });
+    
+	// === PROVISIONS (ALWAYS AVAILABLE) ===
+	array_push(commodities, {
+	    id: "provisions",
+	    name: "Provisions",
+	    aliases: ["food", "rations", "supplies"],
+	    category: "FOOD",
+	    storage_type: "BULK",
+	    units_per_slot: 50,
+	    can_mix_with: [],
+	    base_value: 2,
+	    weight: 1,
+	    terrain_affinity: [], // Available everywhere
+	    rarity: "COMMON"
+	});
+
+	
+	
+	
+    return commodities;
+} 
+ 
+--- Script: scr_determine_terrain_static.gml --- 
+// Script assets have changed for v2.3.0 see
+// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
+/// @desc Get available travel destinations from current location
+/// @returns Array of destination structs
+
+/// @desc Determine terrain type between two locations (deterministic)
+/// @param {Struct} from_location
+/// @param {Struct} to_location
+/// @param {Real} distance
+/// @returns {String} terrain type
+
+function scr_determine_terrain_static(from_loc, to_loc, distance) {
+    // Use location properties to deterministically choose terrain
+    // This ensures the same route always has the same terrain
+    
+    // Cities tend to have roads between them
+    if (from_loc.type == "CITY" && to_loc.type == "CITY") {
+        return "ROAD";
+    }
+    
+    // At least one city connected = likely road
+    if (from_loc.type == "CITY" || to_loc.type == "CITY") {
+        if (distance < 150) return "ROAD";
+    }
+    
+    // Use position hash to get consistent "random" value
+    // This creates a deterministic pseudo-random based on coordinates
+    var seed_val = (from_loc.x * 73 + from_loc.y * 37 + to_loc.x * 19 + to_loc.y * 11) mod 100;
+    var terrain_roll = seed_val / 100;
+    
+    // Short distances likely have established paths
+    if (distance < 100) {
+        if (terrain_roll < 0.5) return "ROAD";
+        if (terrain_roll < 0.8) return "PLAINS";
+        return "FOREST";
+    }
+    
+    // Medium distances have varied terrain
+    if (distance < 200) {
+        if (terrain_roll < 0.2) return "ROAD";
+        if (terrain_roll < 0.5) return "PLAINS";
+        if (terrain_roll < 0.75) return "FOREST";
+        return "HILLS";
+    }
+    
+    // Long distances are more treacherous
+    if (terrain_roll < 0.15) return "PLAINS";
+    if (terrain_roll < 0.35) return "FOREST";
+    if (terrain_roll < 0.55) return "HILLS";
+    if (terrain_roll < 0.75) return "MOUNTAIN";
+    return "DESERT";
+} 
+ 
+--- Script: scr_filter_commodities_by_terrain.gml --- 
+// Script assets have changed for v2.3.0 see
+// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
+/// @desc Filter commodities that make sense for a location
+/// @param {Struct} location The location to filter for
+/// @returns {Array} Array of suitable commodities
+
+function scr_filter_commodities_by_terrain(location) {
+    var suitable = [];
+    
+    // Determine likely terrain based on location properties
+    // This is a simplified version - you can enhance with actual terrain data
+    var likely_terrains = [];
+    
+    if (location.type == "CITY") {
+        // Cities can produce manufactured goods and trade goods
+        likely_terrains = ["", "PLAINS"]; // Empty string = manufactured/anywhere
+    } else if (location.type == "TOWN") {
+        // Towns have mixed production
+        likely_terrains = ["PLAINS", "FOREST", ""];
+    } else { // VILLAGE
+        // Villages focus on local resources
+        likely_terrains = ["PLAINS", "FOREST", "MOUNTAIN", "HILLS", "DESERT"];
+    }
+    
+    // Filter commodities
+    for (var i = 0; i < array_length(global.commodities); i++) {
+        var commodity = global.commodities[i];
+        
+        // Check if commodity matches location
+        var is_suitable = false;
+        
+        // If commodity has no terrain affinity, cities/towns can make it
+        if (array_length(commodity.terrain_affinity) == 0) {
+            if (location.type == "CITY" || location.type == "TOWN") {
+                is_suitable = true;
+            }
+        } else {
+            // Check if any of the commodity's terrains match likely terrains
+            for (var j = 0; j < array_length(commodity.terrain_affinity); j++) {
+                var terrain = commodity.terrain_affinity[j];
+                
+                for (var k = 0; k < array_length(likely_terrains); k++) {
+                    if (terrain == likely_terrains[k] || likely_terrains[k] == "") {
+                        is_suitable = true;
+                        break;
+                    }
+                }
+                
+                if (is_suitable) break;
+            }
+        }
+        
+        // Apply rarity filter (less likely to produce rare items in villages)
+        if (is_suitable) {
+            if (commodity.rarity == "RARE" && location.type == "VILLAGE") {
+                if (random(1) > 0.2) { // Only 20% chance
+                    is_suitable = false;
+                }
+            }
+        }
+        
+        if (is_suitable) {
+            array_push(suitable, commodity);
+        }
+    }
+    
+    return suitable;
+} 
+ 
+--- Script: scr_find_commodity_by_name.gml --- 
+// Script assets have changed for v2.3.0 see
+// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
+/// @desc Find commodity by name or alias (case-insensitive)
+/// @param {String} search_name Name to search for
+/// @returns {Struct} Commodity or undefined
+
+function scr_find_commodity_by_name(search_name) {
+    var search = string_lower(search_name);
+    
+    for (var i = 0; i < array_length(global.commodities); i++) {
+        var commodity = global.commodities[i];
+        
+        // Check exact ID match
+        if (commodity.id == search) {
+            return commodity;
+        }
+        
+        // Check name match
+        if (string_lower(commodity.name) == search) {
+            return commodity;
+        }
+        
+        // Check aliases
+        if (variable_struct_exists(commodity, "aliases")) {
+            for (var j = 0; j < array_length(commodity.aliases); j++) {
+                if (string_lower(commodity.aliases[j]) == search) {
+                    return commodity;
+                }
+            }
+        }
+    }
+    
+    return undefined;
+} 
+ 
+--- Script: scr_find_empty_cargo_slot.gml --- 
+/// @desc Find first available cargo slot that can hold a commodity
+/// @param {String} storage_type The storage type needed (BULK, LUXURY, LIVESTOCK_SMALL, LIVESTOCK_LARGE, etc.)
+/// @returns {Struct} {wagon_index, slot_index, slot_type} or undefined if no space
+
+function scr_find_empty_cargo_slot(storage_type) {
+    // TODO: ADVANCED ANIMAL SYSTEM
+    // Future enhancement: Separate pack animals (provide capacity), draft animals 
+    // (required for pulling wagons), and trade livestock into distinct slot types.
+    // This will enable features like:
+    // - Draft slots: Required for WAGON/CARRIAGE (oxen, draft horses, drakes, dragons)
+    // - Pack animal slots: Provide saddlebag capacity (donkeys, mules, pack horses)
+    // - Trade livestock slots: For buying/selling large animals
+    // - Small livestock: Can use regular cargo slots (pigs, chickens in cages)
+    
+    // === HANDLE LARGE LIVESTOCK ===
+    // Large livestock (cattle, horses, oxen) need special livestock_trade slots
+    if (storage_type == "LIVESTOCK_LARGE") {
+        for (var w = 0; w < array_length(obj_player.caravan.wagons); w++) {
+            var wagon = obj_player.caravan.wagons[w];
+            
+            // Check if wagon has livestock_trade slots
+            if (!variable_struct_exists(wagon.slots, "livestock_trade")) {
+                continue; // This wagon type doesn't support large livestock
+            }
+            
+            var livestock_slots = wagon.slots.livestock_trade;
+            
+            if (livestock_slots.capacity == 0) {
+                continue; // No livestock capacity (like handcart)
+            }
+            
+            // Find empty livestock slot
+            for (var s = 0; s < array_length(livestock_slots.contents); s++) {
+                if (livestock_slots.contents[s] == undefined) {
+                    return {
+                        wagon_index: w, 
+                        slot_index: s, 
+                        slot_type: "livestock_trade"
+                    };
+                }
+            }
+        }
+        
+        return undefined; // No livestock slots available
+    }
+    
+    // === HANDLE REGULAR CARGO (including LIVESTOCK_SMALL) ===
+    for (var w = 0; w < array_length(obj_player.caravan.wagons); w++) {
+        var wagon = obj_player.caravan.wagons[w];
+        var cargo_slots = wagon.slots.cargo.contents;
+        
+        for (var s = 0; s < array_length(cargo_slots); s++) {
+            var slot = cargo_slots[s];
+            
+            // Check if slot is empty
+            if (slot == undefined) {
+                // Standard empty slot - can hold anything except LIVESTOCK_LARGE
+                return {
+                    wagon_index: w, 
+                    slot_index: s,
+                    slot_type: "cargo"
+                };
+            }
+            
+            // Check if it's a special slot (like saddlebag)
+            if (variable_struct_exists(slot, "slot_type")) {
+                // Check if slot is compatible and empty
+                if (slot.slot_type == "SADDLEBAG_BULK" && storage_type == "BULK") {
+                    if (slot.contents == undefined) {
+                        return {
+                            wagon_index: w, 
+                            slot_index: s, 
+                            slot_type: "saddlebag",
+                            is_special: true
+                        };
+                    }
+                }
+            }
+        }
+    }
+    
+    return undefined; // No space available
+} 
+ 
+--- Script: scr_generate_location_economy.gml --- 
+// Script assets have changed for v2.3.0 see
+// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
+/// @desc Generate economy for a location based on terrain and type
+/// @param {Struct} location The location to generate economy for
+/// @returns {Struct} Economy data structure
+
+function scr_generate_location_economy(location) {
+    var economy = {
+        produces: [],           // What they sell (cheap here)
+        demands: [],            // What they buy (expensive here)
+        discovered_wants: [],   // Goods they've learned to want
+        stock_levels: {},       // How much of each good they have
+        price_modifiers: {},    // Price adjustments per good
+        last_simulated_day: 0,  // For ghost caravan simulation
+        player_visited: false,  // Has player been here yet?
+        ghost_trade_history: [] // Record of ghost trades
+    };
+
+	 // === ALWAYS ADD PROVISIONS ===
+    // Every settlement has basic food/supplies available
+    var provisions_stock = 200; // Base stock
+    var provisions_price = 1.0; // Base price modifier
+    
+    // Adjust by location type
+    if (location.type == "CITY") {
+        provisions_stock = 500; // Cities have more
+        provisions_price = 0.9; // Slightly cheaper (economy of scale)
+    } else if (location.type == "VILLAGE") {
+        provisions_stock = 100; // Villages have less
+        provisions_price = 1.1; // Slightly more expensive
+    }
+    
+    // TODO: Adjust price by terrain (DESERT/MOUNTAIN = more expensive)
+    // This will be implemented later when we add terrain-based modifiers
+    
+    array_push(economy.produces, {
+        good_id: "provisions",
+        stock: provisions_stock,
+        base_price_mod: provisions_price
+    });
+    
+    economy.stock_levels[$ "provisions"] = provisions_stock;
+    economy.price_modifiers[$ "provisions"] = provisions_price;
+
+    // Determine terrain type from nearest location characteristics
+    // For now, we'll use a simple approach based on location type
+    var terrain = "PLAINS"; // Default
+    
+    // You can enhance this later to use actual terrain data if available
+    // For now, we'll infer from location properties or randomize weighted by region
+    
+    // === DETERMINE PRODUCTION (What they SELL cheap) ===
+    var production_count = 0;
+    
+    // Cities produce more variety
+    if (location.type == "CITY") {
+        production_count = irandom_range(2, 3);
+    } else if (location.type == "TOWN") {
+        production_count = irandom_range(1, 2);
+    } else { // VILLAGE
+        production_count = 1;
+    }
+    
+    // Get commodities that match this location's characteristics
+    var available_commodities = scr_filter_commodities_by_terrain(location);
+    
+    // Select random goods to produce
+    for (var i = 0; i < production_count; i++) {
+        if (array_length(available_commodities) == 0) break;
+        
+        var picked_index = irandom(array_length(available_commodities) - 1);
+        var commodity = available_commodities[picked_index];
+        
+        // Add to production
+        array_push(economy.produces, {
+            good_id: commodity.id,
+            stock: irandom_range(100, 500), // Initial stock
+            base_price_mod: 0.7 // They sell 30% cheaper
+        });
+        
+        // Initialize stock level
+        economy.stock_levels[$ commodity.id] = irandom_range(100, 500);
+        
+        // Initialize price modifier
+        economy.price_modifiers[$ commodity.id] = 0.7;
+        
+        // Remove from available pool so we don't pick it again
+        array_delete(available_commodities, picked_index, 1);
+    }
+    
+    // === DETERMINE DEMAND (What they BUY expensive) ===
+    var demand_count = 0;
+    
+    if (location.type == "CITY") {
+        demand_count = irandom_range(2, 4);
+    } else if (location.type == "TOWN") {
+        demand_count = irandom_range(1, 3);
+    } else { // VILLAGE
+        demand_count = irandom_range(1, 2);
+    }
+    
+    // Get all commodities they DON'T produce
+    var demand_pool = [];
+    for (var i = 0; i < array_length(global.commodities); i++) {
+        var commodity = global.commodities[i];
+        var already_producing = false;
+        
+        // Check if already in production
+        for (var j = 0; j < array_length(economy.produces); j++) {
+            if (economy.produces[j].good_id == commodity.id) {
+                already_producing = true;
+                break;
+            }
+        }
+        
+        if (!already_producing) {
+            array_push(demand_pool, commodity);
+        }
+    }
+    
+    // Select random goods to demand
+    for (var i = 0; i < demand_count; i++) {
+        if (array_length(demand_pool) == 0) break;
+        
+        var picked_index = irandom(array_length(demand_pool) - 1);
+        var commodity = demand_pool[picked_index];
+        
+        // Add to demand
+        array_push(economy.demands, {
+            good_id: commodity.id,
+            demand_level: irandom_range(50, 200), // How much they want
+            base_price_mod: 1.5 // They pay 50% more
+        });
+        
+        // Initialize price modifier
+        economy.price_modifiers[$ commodity.id] = 1.5;
+        
+        // Remove from pool
+        array_delete(demand_pool, picked_index, 1);
+    }
+    
+    return economy;
+} 
+ 
+--- Script: scr_get_commodity_by_id.gml --- 
+// Script assets have changed for v2.3.0 see
+// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
+/// @desc Get commodity data by ID
+/// @param {String} good_id The commodity ID
+/// @returns {Struct} Commodity struct, or undefined if not found
+
+function scr_get_commodity_by_id(good_id) {
+    for (var i = 0; i < array_length(global.commodities); i++) {
+        if (global.commodities[i].id == good_id) {
+            return global.commodities[i];
+        }
+    }
+    return undefined;
+} 
+ 
+--- Script: scr_get_max_water_capacity.gml --- 
+// Script assets have changed for v2.3.0 see
+// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
+
+/// @desc Calculate maximum water capacity across all barrels
+/// @returns {Real} Maximum water capacity
+
+function scr_get_max_water_capacity() {
+    var total = 0;
+    
+    for (var i = 0; i < array_length(obj_player.caravan.wagons); i++) {
+        var wagon = obj_player.caravan.wagons[i];
+        
+        // Check equipment slot for water barrels
+        if (variable_struct_exists(wagon.slots, "equipment")) {
+            var equipment = wagon.slots.equipment.contents;
+            for (var j = 0; j < array_length(equipment); j++) {
+                var item = equipment[j];
+                if (item.type == "BARREL" && item.subtype == "WATER") {
+                    total += item.max_water;
+                }
+            }
+        }
+    }
+    
+    return total;
+} 
+ 
+--- Script: scr_get_total_water.gml --- 
+// Script assets have changed for v2.3.0 see
+// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
+/// @desc Calculate total water available across all barrels
+/// @returns {Real} Total water available
+
+function scr_get_total_water() {
+    var total = 0;
+    
+    for (var i = 0; i < array_length(obj_player.caravan.wagons); i++) {
+        var wagon = obj_player.caravan.wagons[i];
+        
+        // Check equipment slot for water barrels
+        if (variable_struct_exists(wagon.slots, "equipment")) {
+            var equipment = wagon.slots.equipment.contents;
+            for (var j = 0; j < array_length(equipment); j++) {
+                var item = equipment[j];
+                if (item.type == "BARREL" && item.subtype == "WATER") {
+                    total += item.water;
+                }
+            }
+        }
+    }
+    
+    return total;
+} 
+ 
+--- Script: scr_get_travel_options.gml --- 
+// Script assets have changed for v2.3.0 see
+// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
+/// @desc Get available travel destinations from current location
+/// @returns Array of destination structs
+
+/// @desc Get available travel destinations from current location
+/// @returns Array of destination structs
+
+function scr_get_travel_options() {
+    var current_loc_id = obj_player.current_location;
+    var options = [];
+    
+    // Find all routes connected to current location
+    for (var i = 0; i < array_length(obj_heartbeat.world.routes); i++) {
+        var route = obj_heartbeat.world.routes[i];
+        var dest_id = "";
+        
+        // Check if this route connects to our current location
+        if (route.from_id == current_loc_id) {
+            dest_id = route.to_id;
+        } else if (route.to_id == current_loc_id) {
+            dest_id = route.from_id;
+        }
+        
+        // If we found a connection, get destination details
+        if (dest_id != "") {
+            // Find the destination location in world.locations
+            for (var j = 0; j < array_length(obj_heartbeat.world.locations); j++) {
+                var loc = obj_heartbeat.world.locations[j];
+                if (loc.id == dest_id) {
+                    array_push(options, {
+                        name: loc.name,
+                        type: loc.type,
+                        distance: route.distance,
+                        terrain: route.terrain,
+                        danger: route.danger,
+                        id: dest_id
+                    });
+                    break;
+                }
+            }
+        }
+    }
+    
+    // Sort by distance (closest first)
+    array_sort(options, function(a, b) {
+        return a.distance - b.distance;
+    });
+    
+    return options;
+} 
+ 
+--- Script: scr_pick_random_commodity.gml --- 
+// Script assets have changed for v2.3.0 see
+// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
+/// @desc Pick a random commodity weighted by rarity
+/// @returns {Struct} A commodity from the database
+
+function scr_pick_random_commodity() {
+    // Weight commodities by rarity
+    // COMMON = 60% chance, UNCOMMON = 30%, RARE = 10%
+    
+    var common_pool = [];
+    var uncommon_pool = [];
+    var rare_pool = [];
+    
+    for (var i = 0; i < array_length(global.commodities); i++) {
+        var commodity = global.commodities[i];
+        
+        switch(commodity.rarity) {
+            case "COMMON":
+                array_push(common_pool, commodity);
+                break;
+            case "UNCOMMON":
+                array_push(uncommon_pool, commodity);
+                break;
+            case "RARE":
+                array_push(rare_pool, commodity);
+                break;
+        }
+    }
+    
+    // Roll for rarity tier
+    var roll = random(1);
+    var selected_pool;
+    
+    if (roll < 0.6) {
+        // 60% - Common
+        selected_pool = common_pool;
+    } else if (roll < 0.9) {
+        // 30% - Uncommon
+        selected_pool = uncommon_pool;
+    } else {
+        // 10% - Rare
+        selected_pool = rare_pool;
+    }
+    
+    // Pick random from selected pool
+    if (array_length(selected_pool) == 0) {
+        // Fallback to common if pool is empty
+        selected_pool = common_pool;
+    }
+    
+    var index = irandom(array_length(selected_pool) - 1);
+    return selected_pool[index];
+} 
+ 
+--- Script: scr_reduce_random_commodity.gml --- 
+// Script assets have changed for v2.3.0 see
+// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
+/// @desc Reduce commodity stock from ghost caravan buying
+/// @param {Struct} location The location where trade occurred
+/// @param {Real} quantity Amount to attempt to buy
+
+function scr_reduce_random_commodity(location, quantity) {
+    var economy = location.economy;
+    
+    // Get list of available commodities with stock
+    var available = [];
+    var stock_keys = variable_struct_get_names(economy.stock_levels);
+    
+    for (var i = 0; i < array_length(stock_keys); i++) {
+        var good_id = stock_keys[i];
+        var stock = economy.stock_levels[$ good_id];
+        
+        if (stock > 0) {
+            array_push(available, good_id);
+        }
+    }
+    
+    // If nothing available, return
+    if (array_length(available) == 0) return;
+    
+    // Pick random commodity
+    var good_id = available[irandom(array_length(available) - 1)];
+    
+    // Reduce stock (but not below 0)
+    var current_stock = economy.stock_levels[$ good_id];
+    var amount_bought = min(quantity, current_stock);
+    economy.stock_levels[$ good_id] = max(0, current_stock - amount_bought);
+    
+    // Record in ghost trade history
+    array_push(economy.ghost_trade_history, {
+        day: obj_heartbeat.day,
+        action: "BUY_FROM_CITY",
+        good_id: good_id,
+        quantity: amount_bought
+    });
+} 
+ 
+--- Script: scr_refill_water.gml --- 
+/// @desc Refill all barrels to maximum capacity (called when arriving at a town)
+
+function scr_refill_water() {
+    var barrels_filled = 0;
+    var water_added = 0;
+    
+    for (var i = 0; i < array_length(obj_player.caravan.wagons); i++) {
+        var wagon = obj_player.caravan.wagons[i];
+        
+        // Check equipment slot for water barrels
+        if (variable_struct_exists(wagon.slots, "equipment")) {
+            var equipment = wagon.slots.equipment.contents;
+            
+            for (var j = 0; j < array_length(equipment); j++) {
+                var item = equipment[j];
+                if (item.type == "BARREL" && item.subtype == "WATER") {
+                    var added = item.max_water - item.water;
+                    item.water = item.max_water;
+                    water_added += added;
+                    barrels_filled++;
+                }
+            }
+        }
+    }
+    
+    return {
+        barrels: barrels_filled,
+        water: water_added
+    };
+} 
+ 
+--- Script: scr_simulate_ghost_trades.gml --- 
+// Script assets have changed for v2.3.0 see
+// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
+/// @desc Simulate ghost caravan trades at a location based on time elapsed
+/// @param {Struct} location The location to simulate
+
+function scr_simulate_ghost_trades(location) {
+    // TODO: INTELLIGENCE SYSTEM INTEGRATION
+    // When intelligence gathering is implemented (spies, informants, trade reports),
+    // this function should also be called for locations where the player has
+    // active intelligence, not just on physical visits. This will provide
+    // real-time market data for locations the player is monitoring remotely.
+    
+    var days_since_last = obj_heartbeat.day - location.economy.last_simulated_day;
+    
+    if (days_since_last <= 0) return; // Visited same day, no simulation
+    
+    var possible_trades = 0;
+    var base_chance = 0;
+    
+    // First visit gets special "catch-up" logic
+    if (!location.economy.player_visited) {
+        // More aggressive simulation - world has been trading without you
+        possible_trades = floor(days_since_last / 10); // 1 per 10 days
+        base_chance = 0.7; // 70% per potential trade
+    } else {
+        // Ongoing visits - lighter touch
+        possible_trades = floor(days_since_last / 20); // 1 per 20 days
+        base_chance = 0.4; // 40% per potential trade
+    }
+    
+    // Execute ghost trades
+    for (var i = 0; i < possible_trades; i++) {
+        if (random(1) < base_chance) {
+            // Random: ghost caravan sells TO city (adds stock)
+            if (random(1) < 0.5) {
+                var ghost_good = scr_pick_random_commodity();
+                var ghost_qty = irandom_range(10, 50);
+                scr_add_ghost_commodity(location, ghost_good.id, ghost_qty);
+            } 
+            // Or: ghost caravan buys FROM city (reduces stock)
+            else {
+                scr_reduce_random_commodity(location, irandom_range(10, 50));
+            }
+        }
+    }
+    
+    location.economy.last_simulated_day = obj_heartbeat.day;
+    location.economy.player_visited = true;
+} 
+ 
+--- Script: world_generate.gml --- 
+// Script assets have changed for v2.3.0 see
+// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
+/// @func world_generate(seed)
+/// @desc Generate a procedural world with locations and routes
+/// @param {real} seed The random seed for generation
+
+function world_generate(seed) {
+    // Set seed for reproducibility
+    random_set_seed(seed);
+    
+    // Create world struct
+    var world = {
+        seed: seed,
+        locations: [],
+        routes: [],
+        start_location_id: ""
+    };
+    
+    // === LOCATION TYPES ===
+    var city_names = [
+        "Millhaven", "Redstone", "Oakshire", "Crossroads", "Silverpeak",
+        "Ironforge", "Shadowvale", "Brightwater", "Stonehaven", "Goldmeadow",
+        "Thornbury", "Riverbend", "Cloudrest", "Emberfall", "Frostwatch"
+    ];
+    
+    var town_names = [
+        "Green Hill", "Pine Creek", "Sunset Ridge", "Crystal Lake", "Maple Grove",
+        "Rocky Point", "Cedar Valley", "Willow Springs", "Copper Mine", "Harvest Glen"
+    ];
+    
+    var village_names = [
+        "Smallbrook", "Dusty Corner", "Quiet Hollow", "Last Stand", "Foggy Bottom",
+        "Hidden Path", "Lucky Strike", "Windy Gap", "Old Mill", "Sheep's Rest"
+    ];
+    
+    // === GENERATE CITIES (Tier 1 - 5 of them) ===
+    for (var i = 0; i < 5; i++) {
+        var loc = {
+            id: "city_" + string(i),
+            name: city_names[i],
+            type: "CITY",
+            tier: 1,
+            danger: 0,  // Cities are safe
+            x: random_range(100, 900),
+            y: random_range(100, 700),
+            tags: ["market", "contracts", "hire"]
+        };
+        array_push(world.locations, loc);
+    }
+    
+    // === GENERATE TOWNS (Tier 2 - 10 of them) ===
+    for (var i = 0; i < 10; i++) {
+        var loc = {
+            id: "town_" + string(i),
+            name: town_names[i],
+            type: "TOWN",
+            tier: 2,
+            danger: 1,
+            x: random_range(100, 900),
+            y: random_range(100, 700),
+            tags: ["market", "contracts"]
+        };
+        array_push(world.locations, loc);
+    }
+    
+    // === GENERATE VILLAGES (Tier 3 - 10 of them) ===
+    for (var i = 0; i < 10; i++) {
+        var loc = {
+            id: "village_" + string(i),
+            name: village_names[i],
+            type: "VILLAGE",
+            tier: 3,
+            danger: 2,
+            x: random_range(100, 900),
+            y: random_range(100, 700),
+            tags: ["rest"]
+        };
+        array_push(world.locations, loc);
+    }
+	
+	// === GENERATE ECONOMIES FOR ALL LOCATIONS ===
+	for (var i = 0; i < array_length(world.locations); i++) {
+	    world.locations[i].economy = scr_generate_location_economy(world.locations[i]);
+	}
+    
+    // === CONNECT LOCATIONS ===
+    // For now, just connect each location to its 2-3 nearest neighbors
+    var location_count = array_length(world.locations);
+    
+    for (var i = 0; i < location_count; i++) {
+        var loc_a = world.locations[i];
+        
+        // Find 2-3 nearest neighbors
+        var distances = [];
+        for (var j = 0; j < location_count; j++) {
+            if (i == j) continue;
+            
+            var loc_b = world.locations[j];
+            var dist = point_distance(loc_a.x, loc_a.y, loc_b.x, loc_b.y);
+            array_push(distances, { index: j, dist: dist });
+        }
+        
+        // Sort by distance
+        array_sort(distances, function(a, b) {
+            return a.dist - b.dist;
+        });
+        
+        // Connect to 2-3 nearest
+        var connections = irandom_range(2, 3);
+        for (var k = 0; k < min(connections, array_length(distances)); k++) {
+            var target_index = distances[k].index;
+            var loc_b = world.locations[target_index];
+            
+            // Check if route already exists
+            var exists = false;
+            for (var r = 0; r < array_length(world.routes); r++) {
+                var route = world.routes[r];
+                if ((route.from_id == loc_a.id && route.to_id == loc_b.id) ||
+                    (route.from_id == loc_b.id && route.to_id == loc_a.id)) {
+                    exists = true;
+                    break;
+                }
+            }
+            
+			if (!exists) {
+			    var route = {
+			        from_id: loc_a.id,
+			        to_id: loc_b.id,
+			        distance: distances[k].dist,
+			        danger: max(loc_a.danger, loc_b.danger),
+			        terrain: scr_determine_terrain_static(loc_a, loc_b, distances[k].dist)
+			    };
+			    array_push(world.routes, route);
+			}
+        }
+    }
+    
+    // === SET STARTING LOCATION (random city) ===
+    world.start_location_id = "city_" + string(irandom(4));
+    
+    return world;
+} 
+ 
+--- Script Definition: cmd_parse.yy --- 
+{
+  "$GMScript":"v1",
+  "%Name":"cmd_parse",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"cmd_parse",
+  "parent":{
+    "name":"Commands",
+    "path":"folders/Scripts/Commands.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+} 
+ 
+--- Script Definition: console_print.yy --- 
+{
+  "$GMScript":"v1",
+  "%Name":"console_print",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"console_print",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+} 
+ 
+--- Script Definition: scr_add_ghost_commodity.yy --- 
+{
+  "$GMScript":"v1",
+  "%Name":"scr_add_ghost_commodity",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_add_ghost_commodity",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+} 
+ 
+--- Script Definition: scr_begin_journey.yy --- 
+{
+  "$GMScript":"v1",
+  "%Name":"scr_begin_journey",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_begin_journey",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+} 
+ 
+--- Script Definition: scr_buy_provisions.yy --- 
+{
+  "$GMScript":"v1",
+  "%Name":"scr_buy_provisions",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_buy_provisions",
+  "parent":{
+    "name":"Commands",
+    "path":"folders/Scripts/Commands.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+} 
+ 
+--- Script Definition: scr_calculate_buy_price.yy --- 
+{
+  "$GMScript":"v1",
+  "%Name":"scr_calculate_buy_price",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_calculate_buy_price",
+  "parent":{
+    "name":"Economy",
+    "path":"folders/Scripts/Economy.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+} 
+ 
+--- Script Definition: scr_calculate_daily_consumption.yy --- 
+{
+  "$GMScript":"v1",
+  "%Name":"scr_calculate_daily_consumption",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_calculate_daily_consumption",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+} 
+ 
+--- Script Definition: scr_calculate_journey_time.yy --- 
+{
+  "$GMScript":"v1",
+  "%Name":"scr_calculate_journey_time",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_calculate_journey_time",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+} 
+ 
+--- Script Definition: scr_calculate_sell_price.yy --- 
+{
+  "$GMScript":"v1",
+  "%Name":"scr_calculate_sell_price",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_calculate_sell_price",
+  "parent":{
+    "name":"Economy",
+    "path":"folders/Scripts/Economy.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+} 
+ 
+--- Script Definition: scr_calculate_travel_cost.yy --- 
+{
+  "$GMScript":"v1",
+  "%Name":"scr_calculate_travel_cost",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_calculate_travel_cost",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+} 
+ 
+--- Script Definition: scr_can_afford_journey.yy --- 
+{
+  "$GMScript":"v1",
+  "%Name":"scr_can_afford_journey",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_can_afford_journey",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+} 
+ 
+--- Script Definition: scr_cmd_buy.yy --- 
+{
+  "$GMScript":"v1",
+  "%Name":"scr_cmd_buy",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_cmd_buy",
+  "parent":{
+    "name":"Economy",
+    "path":"folders/Scripts/Economy.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+} 
+ 
+--- Script Definition: scr_cmd_go.yy --- 
+{
+  "$GMScript":"v1",
+  "%Name":"scr_cmd_go",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_cmd_go",
+  "parent":{
+    "name":"Commands",
+    "path":"folders/Scripts/Commands.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+} 
+ 
+--- Script Definition: scr_cmd_inventory.yy --- 
+{
+  "$GMScript":"v1",
+  "%Name":"scr_cmd_inventory",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_cmd_inventory",
+  "parent":{
+    "name":"Commands",
+    "path":"folders/Scripts/Commands.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+} 
+ 
+--- Script Definition: scr_cmd_market.yy --- 
+{
+  "$GMScript":"v1",
+  "%Name":"scr_cmd_market",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_cmd_market",
+  "parent":{
+    "name":"Economy",
+    "path":"folders/Scripts/Economy.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+} 
+ 
+--- Script Definition: scr_cmd_sell.yy --- 
+{
+  "$GMScript":"v1",
+  "%Name":"scr_cmd_sell",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_cmd_sell",
+  "parent":{
+    "name":"Economy",
+    "path":"folders/Scripts/Economy.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+} 
+ 
+--- Script Definition: scr_cmd_travel.yy --- 
+{
+  "$GMScript":"v1",
+  "%Name":"scr_cmd_travel",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_cmd_travel",
+  "parent":{
+    "name":"Commands",
+    "path":"folders/Scripts/Commands.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+} 
+ 
+--- Script Definition: scr_cmd_work.yy --- 
+{
+  "$GMScript":"v1",
+  "%Name":"scr_cmd_work",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_cmd_work",
+  "parent":{
+    "name":"Commands",
+    "path":"folders/Scripts/Commands.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+} 
+ 
+--- Script Definition: scr_consume_water.yy --- 
+{
+  "$GMScript":"v1",
+  "%Name":"scr_consume_water",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_consume_water",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+} 
+ 
+--- Script Definition: scr_create_commodity_database.yy --- 
+{
+  "$GMScript":"v1",
+  "%Name":"scr_create_commodity_database",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_create_commodity_database",
+  "parent":{
+    "name":"Asset Management",
+    "path":"folders/Scripts/Asset Management.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+} 
+ 
+--- Script Definition: scr_determine_terrain_static.yy --- 
+{
+  "$GMScript":"v1",
+  "%Name":"scr_determine_terrain_static",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_determine_terrain_static",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+} 
+ 
+--- Script Definition: scr_filter_commodities_by_terrain.yy --- 
+{
+  "$GMScript":"v1",
+  "%Name":"scr_filter_commodities_by_terrain",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_filter_commodities_by_terrain",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+} 
+ 
+--- Script Definition: scr_find_commodity_by_name.yy --- 
+{
+  "$GMScript":"v1",
+  "%Name":"scr_find_commodity_by_name",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_find_commodity_by_name",
+  "parent":{
+    "name":"Asset Management",
+    "path":"folders/Scripts/Asset Management.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+} 
+ 
+--- Script Definition: scr_find_empty_cargo_slot.yy --- 
+{
+  "$GMScript":"v1",
+  "%Name":"scr_find_empty_cargo_slot",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_find_empty_cargo_slot",
+  "parent":{
+    "name":"Asset Management",
+    "path":"folders/Scripts/Asset Management.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+} 
+ 
+--- Script Definition: scr_generate_location_economy.yy --- 
+{
+  "$GMScript":"v1",
+  "%Name":"scr_generate_location_economy",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_generate_location_economy",
+  "parent":{
+    "name":"Economy",
+    "path":"folders/Scripts/Economy.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+} 
+ 
+--- Script Definition: scr_get_commodity_by_id.yy --- 
+{
+  "$GMScript":"v1",
+  "%Name":"scr_get_commodity_by_id",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_get_commodity_by_id",
+  "parent":{
+    "name":"Asset Management",
+    "path":"folders/Scripts/Asset Management.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+} 
+ 
+--- Script Definition: scr_get_max_water_capacity.yy --- 
+{
+  "$GMScript":"v1",
+  "%Name":"scr_get_max_water_capacity",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_get_max_water_capacity",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+} 
+ 
+--- Script Definition: scr_get_total_water.yy --- 
+{
+  "$GMScript":"v1",
+  "%Name":"scr_get_total_water",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_get_total_water",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+} 
+ 
+--- Script Definition: scr_get_travel_options.yy --- 
+{
+  "$GMScript":"v1",
+  "%Name":"scr_get_travel_options",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_get_travel_options",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+} 
+ 
+--- Script Definition: scr_pick_random_commodity.yy --- 
+{
+  "$GMScript":"v1",
+  "%Name":"scr_pick_random_commodity",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_pick_random_commodity",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+} 
+ 
+--- Script Definition: scr_reduce_random_commodity.yy --- 
+{
+  "$GMScript":"v1",
+  "%Name":"scr_reduce_random_commodity",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_reduce_random_commodity",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+} 
+ 
+--- Script Definition: scr_refill_water.yy --- 
+{
+  "$GMScript":"v1",
+  "%Name":"scr_refill_water",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_refill_water",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+} 
+ 
+--- Script Definition: scr_simulate_ghost_trades.yy --- 
+{
+  "$GMScript":"v1",
+  "%Name":"scr_simulate_ghost_trades",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_simulate_ghost_trades",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+} 
+ 
+--- Script Definition: world_generate.yy --- 
+{
+  "$GMScript":"v1",
+  "%Name":"world_generate",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"world_generate",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+} 
+ 
+[ROOMS] 
+======= 
+ 
+--- Room: rm_main.yy --- 
+{
+  "$GMRoom":"v1",
+  "%Name":"rm_main",
+  "creationCodeFile":"",
+  "inheritCode":false,
+  "inheritCreationOrder":false,
+  "inheritLayers":false,
+  "instanceCreationOrder":[
+    {"name":"inst_3600C4F6","path":"rooms/rm_main/rm_main.yy",},
+    {"name":"inst_6F50F7C7","path":"rooms/rm_main/rm_main.yy",},
+    {"name":"inst_784028F4","path":"rooms/rm_main/rm_main.yy",},
+    {"name":"inst_59096FA8","path":"rooms/rm_main/rm_main.yy",},
+  ],
+  "isDnd":false,
+  "layers":[
+    {"$GMRInstanceLayer":"","%Name":"Instances","depth":0,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[
+        {"$GMRInstance":"v4","%Name":"inst_3600C4F6","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_3600C4F6","objectId":{"name":"obj_console","path":"objects/obj_console/obj_console.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":0.0,"y":0.0,},
+        {"$GMRInstance":"v4","%Name":"inst_6F50F7C7","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_6F50F7C7","objectId":{"name":"obj_heartbeat","path":"objects/obj_heartbeat/obj_heartbeat.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":0.0,"y":0.0,},
+        {"$GMRInstance":"v4","%Name":"inst_784028F4","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_784028F4","objectId":{"name":"obj_input","path":"objects/obj_input/obj_input.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":0.0,"y":0.0,},
+        {"$GMRInstance":"v4","%Name":"inst_59096FA8","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_59096FA8","objectId":{"name":"obj_player","path":"objects/obj_player/obj_player.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":608.0,"y":384.0,},
+      ],"layers":[],"name":"Instances","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
+    {"$GMRBackgroundLayer":"","%Name":"Background","animationFPS":15.0,"animationSpeedType":0,"colour":4278190080,"depth":100,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"hspeed":0.0,"htiled":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"Background","properties":[],"resourceType":"GMRBackgroundLayer","resourceVersion":"2.0","spriteId":null,"stretch":false,"userdefinedAnimFPS":false,"userdefinedDepth":false,"visible":true,"vspeed":0.0,"vtiled":false,"x":0,"y":0,},
+  ],
+  "name":"rm_main",
+  "parent":{
+    "name":"Caravan",
+    "path":"Caravan.yyp",
+  },
+  "parentRoom":null,
+  "physicsSettings":{
+    "inheritPhysicsSettings":false,
+    "PhysicsWorld":false,
+    "PhysicsWorldGravityX":0.0,
+    "PhysicsWorldGravityY":10.0,
+    "PhysicsWorldPixToMetres":0.1,
+  },
+  "resourceType":"GMRoom",
+  "resourceVersion":"2.0",
+  "roomSettings":{
+    "Height":420,
+    "inheritRoomSettings":false,
+    "persistent":false,
+    "Width":640,
+  },
+  "sequenceId":null,
+  "views":[
+    {"hborder":32,"hport":768,"hspeed":-1,"hview":768,"inherit":false,"objectId":null,"vborder":32,"visible":false,"vspeed":-1,"wport":1366,"wview":1366,"xport":0,"xview":0,"yport":0,"yview":0,},
+    {"hborder":32,"hport":768,"hspeed":-1,"hview":768,"inherit":false,"objectId":null,"vborder":32,"visible":false,"vspeed":-1,"wport":1366,"wview":1366,"xport":0,"xview":0,"yport":0,"yview":0,},
+    {"hborder":32,"hport":768,"hspeed":-1,"hview":768,"inherit":false,"objectId":null,"vborder":32,"visible":false,"vspeed":-1,"wport":1366,"wview":1366,"xport":0,"xview":0,"yport":0,"yview":0,},
+    {"hborder":32,"hport":768,"hspeed":-1,"hview":768,"inherit":false,"objectId":null,"vborder":32,"visible":false,"vspeed":-1,"wport":1366,"wview":1366,"xport":0,"xview":0,"yport":0,"yview":0,},
+    {"hborder":32,"hport":768,"hspeed":-1,"hview":768,"inherit":false,"objectId":null,"vborder":32,"visible":false,"vspeed":-1,"wport":1366,"wview":1366,"xport":0,"xview":0,"yport":0,"yview":0,},
+    {"hborder":32,"hport":768,"hspeed":-1,"hview":768,"inherit":false,"objectId":null,"vborder":32,"visible":false,"vspeed":-1,"wport":1366,"wview":1366,"xport":0,"xview":0,"yport":0,"yview":0,},
+    {"hborder":32,"hport":768,"hspeed":-1,"hview":768,"inherit":false,"objectId":null,"vborder":32,"visible":false,"vspeed":-1,"wport":1366,"wview":1366,"xport":0,"xview":0,"yport":0,"yview":0,},
+    {"hborder":32,"hport":768,"hspeed":-1,"hview":768,"inherit":false,"objectId":null,"vborder":32,"visible":false,"vspeed":-1,"wport":1366,"wview":1366,"xport":0,"xview":0,"yport":0,"yview":0,},
+  ],
+  "viewSettings":{
+    "clearDisplayBuffer":true,
+    "clearViewBackground":false,
+    "enableViews":false,
+    "inheritViewSettings":false,
+  },
+  "volume":1.0,
+} 
+ 
+[NOTES] 
+======= 
+ 
+[DESIGN DOCUMENTATION] 
+====================== 
+# Caravan - Design Documentation
+
+**Genre:** Text-based trading/merchant simulation  
+**Inspirations:** Oregon Trail, Trade Wars, Merchant Prince  
+**Core Appeal:** Risk/reward progression fantasy with emergent economic gameplay
+
+---
+
+## Core Vision
+
+A text-based (initially) merchant caravan game where players start small and build trading empires through strategic decisions. The world features a blend of realistic medieval economics with fantasy elements (disappearing cities, magical encounters, mythical beasts). Success comes from understanding market dynamics, managing resources, and making calculated risks.
+
+---
+
+## Core Game Loop
+
+1. **Accept Contract/Choose Destination** - Evaluate risk vs. reward
+2. **Prepare Journey** - Buy provisions, hire guards, manage cargo
+3. **Travel** - Face random encounters, resource management challenges
+4. **Arrive & Trade** - Buy low, sell high, exploit market opportunities
+5. **Reinvest** - Upgrade wagons, hire crew, expand capacity
+6. **Repeat** - Progressive difficulty and opportunities
+
+---
+
+## Progression System
+
+### Tier System (Optional Structure for Players)
+
+Players can pursue **sandbox freeform play** OR follow structured **tier goals**:
+
+#### **Tier 1: "Freelancer"** (Starting State)
+- Own 1 wagon
+- Visit 5 locations
+- Complete 3 contracts
+- Earn 500 gold profit
+- **Unlock:** Can hire guards, access medium-danger routes
+
+#### **Tier 2: "Merchant"**
+- Own 2+ wagons OR upgrade to quality wagon
+- Visit 15 locations (including 2 medium-danger)
+- Complete 15 contracts OR 3 special contracts
+- Earn 2000 gold lifetime OR maintain 1000 gold savings
+- **Unlock:** Can join merchant guild, access hidden route rumors, romance options appear
+
+#### **Tier 3: "Caravan Master"**
+- Own 3+ wagons OR luxury caravan
+- Visit 30 locations (including 5 high-danger)
+- Complete 1 legendary contract
+- Earn 10,000 gold lifetime OR maintain 3000 savings
+- **Unlock:** Can hire champion guards, political contracts available, noble patronage
+
+#### **Tier 4: "Trade Prince"**
+- Own 5+ wagons OR own multiple caravan routes
+- Visit 50 locations (including all hidden locations)
+- Complete 3 legendary contracts
+- Earn 50,000 gold lifetime OR control trade monopoly in a region
+- **Unlock:** Everything, including end-game content (emperor's favor, magical trade routes, etc.)
+
+### Win Conditions
+- **Sandbox Mode:** Play until bored, no formal ending
+- **Achievement Mode:** Complete tier goals, unlock ending cutscenes
+- **Specific Goals:** Retire with X gold, discover all hidden locations, marry into nobility, etc.
+
+---
+
+## Resource Management
+
+### Four Core Resources
+
+1. **Provisions** - Food for people and animals (consumed daily)
+2. **Water** - Water for people and animals (consumed daily)
+3. **Gold** - Money for repairs, wages, bribes, purchases
+4. **Time** - Journey duration (affects consumption and opportunity cost)
+
+### Daily Consumption Model
+- **Provisions:** 1 per person + animal feed rates
+- **Water:** 1 per person + animal water rates
+- **Gold:** Wagon wear (0.1% condition loss/day) + crew wages
+- **Time:** Calculated from distance ÷ speed
+
+### Speed Calculation
+Speed factors:
+- **Terrain modifier** (ROAD = 1.0x, MOUNTAIN = 0.5x, DESERT = 0.7x, etc.)
+- **Wagon type** (Handcart = base 50 km/day)
+- **Animal speed** (Donkey = 0.8x, Horse = 1.2x, etc.)
+- **Condition penalty** (Wagon at 50% condition = 0.75x speed)
+
+---
+
+## Inventory System
+
+### Slot-Based Storage with Stacking Rules
+
+Inspired by Resident Evil/Diablo but adapted for caravan trading.
+
+#### Slot Categories
+
+1. **Cargo Slots** - Trade goods with stacking rules
+2. **Livestock Slots** - Live animals for trade (cattle, horses)
+3. **Equipment Slots** - Non-tradeable utility items (water barrels, tools)
+4. **Crew Slots** - People (player, guards, specialists)
+5. **Animal Slots** - Pack/draft animals (mules, oxen) that provide additional capacity
+
+#### Storage Types & Mixing Rules
+
+Commodities have storage requirements:
+
+- **BULK** (grain, salt, ore) - 50 units per slot, cannot mix with other types
+- **LIQUID** (wine, oil, water) - 30 units per slot, cannot mix with other types
+- **TEXTILE** (cloth, wool, silk) - 40 units per slot, textiles can mix together
+- **LUXURY** (jewelry, art, perfume) - 10 units per slot, luxuries can mix together
+- **LIVESTOCK_SMALL** (pigs, chickens) - Use regular cargo slots, 2-5 per slot
+- **LIVESTOCK_LARGE** (cattle, horses) - Require dedicated livestock slots, 1 per slot
+- **TOOL** (weapons, tools) - 20 units per slot, tools can mix together
+
+#### Partial Slot Usage
+
+Players can buy partial slot quantities:
+- Buy 10 salt (leaves 40 empty space in barrel/slot)
+- Allows "buy low, sell high" strategies for poor players
+- Empty space in slot can only be filled by compatible storage type
+
+#### Starting Equipment (Handcart)
+
+- **4 Cargo Slots** (total)
+- **1 Livestock Slot** (for mule)
+- **1 Equipment Slot** (water barrel occupies initially)
+- **1 Crew Slot** (player occupies)
+
+#### Pack Animals Add Capacity
+
+Example: Mule provides:
+- **2 Saddlebag Slots** (BULK type only)
+- Allows carrying additional grain, salt, ore
+- Cannot carry luxury goods or liquids in saddlebags
+
+---
+
+## World Generation
+
+### Procedural World Structure
+
+- **30 Locations** (expandable to 100+ in future)
+- **Spatial distribution** with minimum spacing (150 units apart)
+- **Connectivity validation** (every location reachable)
+- **Terrain types** affect production and travel speed
+
+### Location Types
+
+- **CITY** - Large population, diverse markets, luxury goods
+- **TOWN** - Medium size, mixed production, moderate prices
+- **VILLAGE** - Small, agricultural focus, basic goods
+
+### Terrain Types
+
+- **PLAINS** - Grains, livestock, easy travel
+- **FOREST** - Timber, furs, herbs, moderate travel
+- **DESERT** - Spices, precious metals, hard travel, high water consumption
+- **MOUNTAIN** - Metals, gems, very hard travel, slow speed
+- **COASTAL** - Fish, salt, trade hub
+- **ROAD** - Fast travel, well-established routes
+
+---
+
+## Trading Economy System
+
+### Commodity Database (30+ items)
+
+Categories:
+- **Grains:** wheat, barley, rice, corn
+- **Spices:** saffron, pepper, cinnamon, salt
+- **Textiles:** wool, silk, cotton, linen
+- **Metals:** iron, copper, silver, gold
+- **Luxury:** wine, jewelry, perfume, dyes, art
+- **Livestock:** horses, cattle, pigs, chickens, sheep
+- **Tools:** weapons, tools, pottery
+
+Each commodity has:
+- **id** - Unique identifier
+- **name** - Display name
+- **category** - Type grouping
+- **base_value** - Base price in gold
+- **storage_type** - How it's stored (BULK, LUXURY, etc.)
+- **units_per_slot** - Stacking limit
+- **terrain_affinity** - Where it's produced
+- **rarity** - Spawn probability modifier
+
+### Dynamic Pricing
+
+Prices fluctuate based on:
+
+1. **Production Bonus** - Locations that produce goods sell 30% cheaper
+2. **Demand Bonus** - Locations that demand goods buy 50% higher
+3. **Supply Modifier** - Low stock = higher prices (up to 1.5x)
+4. **Saturation Penalty** - Flooding market reduces prices (down to 0.5x)
+5. **Discovery Mechanic** - 10% chance cities "discover" they want new goods (becomes permanent demand)
+6. **Bulk Discount** - Buying 20+ units gets 5% off, 50+ gets additional discount
+
+### Location Economy Structure
+
+Each location has:
+```
+economy: {
+    produces: [
+        {good_id: "wheat", stock: 500, price_modifier: 0.7}
+    ],
+    demands: [
+        {good_id: "saffron", demand_level: 100, price_modifier: 1.5}
+    ],
+    discovered_wants: [], // Goods they've learned to value
+    last_simulated_day: 0,
+    ghost_trade_history: []
+}
+```
+
+### Ghost Caravan Simulation
+
+Markets evolve even when player isn't present:
+
+- **First Visit:** Simulate 1 NPC trade per 10 game-days (70% chance per check)
+- **Return Visits:** Simulate 1 NPC trade per 20 game-days (40% chance per check)
+- **Effects:** Stock levels change, prices shift, new goods appear
+- **Prevents exploitation:** Can't monopolize single route indefinitely
+
+**Future Extension:** Intelligence gathering system to monitor distant markets
+
+---
+
+## Travel System
+
+### Journey Preparation
+
+Players see destination options with:
+- **Distance** (in km)
+- **Terrain Type** (affects speed and water consumption)
+- **Journey Duration** (days based on current caravan speed)
+- **Resource Requirements:**
+  - Provisions needed
+  - Water needed
+  - Gold cost (repairs, wages)
+
+### Journey Execution
+
+- **Daily ticks** consume resources
+- **Random encounters** (bandits, merchants, weather, magical events)
+- **Choices matter** (flee, fight, bribe, negotiate)
+- **Failure states** (run out of provisions/water = stranded, must WORK for emergency funds)
+
+### Anti-Exploitation: WORK Command
+
+Emergency income when stranded:
+- Provides 10-20 gold per use
+- **Cooldown:** 3 days (prevents infinite money)
+- **Purpose:** Prevents softlock, not primary income strategy
+- Thematic: Odd jobs, manual labor, small trades
+
+---
+
+## Combat & Danger (Future Implementation)
+
+### Guard System
+- **Quality tiers** (militia, trained, veteran, champion)
+- **Cost vs. effectiveness** trade-off
+- **Combat as odds** (your guards vs. threat level)
+
+### Threat Types
+- **Bandits** - Common, attracted by visible wealth
+- **Assassins** - Rare, target high-value/political cargo
+- **Monsters** - Fantasy creatures in wilderness
+- **Weather** - Storms, sandstorms, blizzards
+- **Breakdowns** - Wagon damage, animal injury
+
+### Player Choices During Encounters
+- **FLEE** - Success based on speed vs. threat
+- **FIGHT** - Odds based on guards vs. enemies
+- **BRIBE** - Offer gold to avoid confrontation
+- **NEGOTIATE** - Talk your way out (skill/reputation based)
+
+---
+
+## Social & Romance System (Future Implementation)
+
+### Romance Options
+- **Trigger:** Appear after reaching Tier 2 (Merchant)
+- **Introduction:** Repeated routes, rescued travelers, merchant family alliances
+- **Progression:** Meet → Trust → Romance → Marriage
+- **Benefits:** Partner manages shop, provides capital, unlocks contracts
+- **Flavor:** PG-rated, thematic to setting
+- **Gender-neutral:** Options for male/female/non-binary players
+
+### Reputation System
+- **Affects:** Encounter frequency, prices, contract availability
+- **Built through:** Successful deliveries, helping NPCs, guild membership
+- **Consequences:** High reputation = fewer bandit attacks, better contracts
+- **Notoriety:** Opposite effect - more danger, worse prices
+
+---
+
+## Political System (Future Implementation)
+
+### Influence Mechanics
+- **Guild Memberships** (merchant, thieves, nobility)
+- **Political Contracts** (smuggling, espionage, noble escorts)
+- **Patronage** (nobles sponsor your ventures for favors)
+- **Power Through Commerce** (control trade = political influence)
+
+### End-Game Content
+- **Emperor's Favor** - Access to capital city, legendary contracts
+- **Magical Trade Routes** - Fantasy elements unlock
+- **Legacy** - Children inherit caravan empire
+
+---
+
+## Current Implementation Status
+
+### ✅ Completed Features
+
+**Core Architecture:**
+- obj_heartbeat (persistent game orchestrator)
+- obj_console (text display with scrolling, mouse wheel support)
+- obj_input (command processing with history, tab-complete)
+- Player data system (nested structs for caravan details)
+
+**World Generation:**
+- Procedural 30-location world with spatial algorithms
+- Minimum spacing constraints (150 units apart)
+- Connectivity validation
+- Terrain-based location types
+
+**Inventory System:**
+- Slot-based storage (cargo, livestock, equipment, crew, animals)
+- Storage type enforcement (BULK, LUXURY, LIQUID, etc.)
+- Stacking rules and mixing constraints
+- Partial slot usage support
+- Pack animal saddlebag system
+
+**Trading Economy:**
+- 30-commodity database with detailed properties
+- Dynamic pricing (supply/demand, production bonuses, saturation)
+- Location economy generation (produces/demands)
+- Ghost caravan NPC simulation
+- Discovery mechanic (cities learn to want new goods)
+
+**Player Commands:**
+- HELP (command reference)
+- STATUS (caravan overview)
+- LOCATION (current position details)
+- TRAVEL (journey with resource calculations)
+- MARKET (view buy/sell prices)
+- BUY/SELL (trade goods with flexible parsing)
+- INVENTORY (detailed cargo listing)
+- WORK (emergency income with cooldown)
+
+**Quality of Life:**
+- Arrow-up for command history
+- Tab-complete for commands
+- Console dump debugging tools
+- Flexible command aliases (e.g., "I" for INVENTORY)
+
+### 🚧 Partially Implemented
+
+**Travel System:**
+- Basic journey time calculation ✓
+- Resource consumption ✓
+- Random encounters ✗ (planned)
+- Event system ✗ (planned)
+
+**Inventory:**
+- Core slot system ✓
+- Water barrel mechanics ✓
+- Draft animal requirements ✗ (TODO: bigger wagons need oxen)
+- Livestock slot expansion ✗ (TODO: cattle/horse trading)
+
+### ❌ Not Yet Implemented
+
+**Combat & Danger:**
+- Guard hiring system
+- Combat resolution
+- Bandit encounters
+- Weather events
+- Breakdown mechanics
+
+**Social Systems:**
+- Romance options
+- Reputation tracking
+- NPC relationships
+
+**Political Systems:**
+- Guild memberships
+- Political contracts
+- Influence mechanics
+
+**Advanced Economy:**
+- Intelligence gathering (monitor distant markets)
+- Price history tracking
+- Contract system (timed deliveries)
+
+**Fantasy Elements:**
+- Hidden locations (time-gated, quest-locked)
+- Magical encounters
+- Disappearing cities
+- Mythical beasts as animals
+
+**Progression:**
+- Tier unlock tracking
+- Achievement system
+- Multiple caravan management
+
+---
+
+## Known Issues & TODOs
+
+### High Priority
+- [ ] Implement random encounter system during travel
+- [ ] Add contract system (timed deliveries with deadlines)
+- [ ] Expand wagon types (add wagons that require draft animals)
+- [ ] Implement guard hiring and combat resolution
+
+### Medium Priority
+- [ ] Add price history tracking (PRICES command)
+- [ ] Create discovery event notifications (when cities learn to want goods)
+- [ ] Implement weather effects on travel
+- [ ] Add breakdown/repair mechanics
+
+### Low Priority
+- [ ] Romance system implementation
+- [ ] Guild membership mechanics
+- [ ] Hidden location discovery system
+- [ ] Legendary contracts
+
+### Technical Debt
+- [ ] Refactor slot system for Option B (full animal categories) - see DESIGN.md note
+- [ ] Add save/load game functionality
+- [ ] Optimize ghost caravan simulation (currently checks all locations)
+
+---
+
+## Design Decisions & Rationale
+
+### Why Slot-Based Inventory?
+**Decision:** Use fixed slots with stacking rules rather than weight-based  
+**Rationale:** Creates interesting inventory puzzles, prevents "bag of holding" syndrome, forces meaningful choices about what to carry
+
+### Why Partial Slot Usage?
+**Decision:** Allow buying 10 salt in a 50-unit barrel  
+**Rationale:** Enables "buy low, sell high" for poor players, creates more strategic options, doesn't punish players who can't afford full slots
+
+### Why Ghost Caravans?
+**Decision:** Simulate NPC trading when player isn't present  
+**Rationale:** Prevents single-route exploitation, creates realistic economy, adds unpredictability, rewards exploration
+
+### Why Work Command Cooldown?
+**Decision:** 3-day cooldown on emergency income  
+**Rationale:** Prevents infinite money exploit while avoiding softlock (players stuck with no provisions)
+
+### Why Tier System Is Optional?
+**Decision:** Allow both sandbox and structured progression  
+**Rationale:** Appeals to both "I want goals" and "I want freedom" player types, doesn't force playstyle
+
+### Why Text-Based First?
+**Decision:** Start with text interface before adding graphics  
+**Rationale:** Faster iteration, focuses on mechanics over presentation, allows testing core gameplay loop, easier to prototype complex systems
+
+---
+
+## Future Expansion Ideas
+
+### Short-Term (Next 2-3 Months)
+- Contract delivery system with deadlines
+- Guard hiring and basic combat
+- Weather effects on travel
+- More wagon types (requiring draft animals)
+- Price history tracking
+
+### Medium-Term (3-6 Months)
+- Hidden location discovery
+- Romance system basics
+- Guild membership
+- Reputation tracking
+- Special cargo types (living creatures, artifacts)
+
+### Long-Term (6+ Months)
+- Political influence system
+- Multiple caravan management
+- Magical encounters and fantasy elements
+- Disappearing cities mechanic
+- Legendary contracts and end-game content
+- GUI implementation (transition from text to visual)
+
+### Dream Features (If Development Continues)
+- Multiplayer trading (shared world, player-to-player trades)
+- Mod support (custom commodities, locations, events)
+- Dynasty mode (children inherit empire)
+- Caravan customization (paint schemes, banners, reputation symbols)
+- Voice acting for key events
+- Animated encounters (still images with text)
+
+---
+
+## Target Audience
+
+**Primary:** Players who enjoy:
+- Oregon Trail-style resource management
+- Trading/merchant simulation (Patrician, Port Royale)
+- Progressive systems (start small, build empire)
+- Risk/reward decision making
+- Text-based RPGs (Zork, Anchorhead)
+
+**Secondary:** Players who enjoy:
+- Incremental/idle games (but more active)
+- Roguelike permadeath challenges
+- Fantasy worldbuilding
+- Economic simulation
+
+---
+
+## Inspirational References
+
+**Games:**
+- **Oregon Trail** - Resource management, journey tension
+- **Trade Wars** - Economic simulation, trade routes
+- **Merchant Prince (Machiavelli)** - Political trading
+- **King of Dragon Pass** - Event-driven narrative with choices
+- **FTL: Faster Than Light** - Roguelike progression, meaningful encounters
+- **Sunless Sea** - Narrative exploration with resource management
+
+**Literature:**
+- **Steven R. Donaldson - The One Tree** - Powerful caravan master concept
+- **Medieval trade routes** - Historical inspiration for goods and routes
+
+---
+
+## Development Philosophy
+
+### Core Principles
+1. **Systems over content** - Build robust, reusable systems
+2. **Emergent gameplay** - Let player decisions create stories
+3. **No arbitrary restrictions** - If player can't do something, there should be a thematic reason
+4. **Progressive complexity** - Simple to learn, deep to master
+5. **Respect player time** - No grind, just meaningful choices
+
+### Anti-Patterns to Avoid
+- ❌ Soft-locks (always provide escape valve)
+- ❌ Excessive RNG without player agency
+- ❌ Punishing experimentation
+- ❌ Hidden information that should be visible
+- ❌ Grinding as substitute for gameplay
+
+### Quality Standards
+- Every system should be fun in isolation
+- Every command should have clear feedback
+- Every choice should have meaningful consequences
+- Every failure should teach the player something
+
+---
+
+## Version History
+
+**v0.1** - Core Architecture (Dec 2025)
+- Basic command system
+- World generation
+- Player data structure
+
+**v0.2** - Trading Economy (Jan 2026)
+- Commodity database
+- Dynamic pricing
+- Ghost caravan simulation
+- Market commands (BUY/SELL)
+
+**v0.3** - Inventory System (Jan 2026)
+- Slot-based storage
+- Stacking rules
+- Pack animal saddlebags
+- Partial slot usage
+
+**Current:** v0.3 (In Development)
+
+---
+
+## Credits & Acknowledgments
+
+**Developer:** John (hoffe)  
+**Engine:** GameMaker Studio 2024.14.2.213  
+**Development Start:** December 2025  
+**Project Location:** C:\Users\hoffe\GameMakerProjects\Caravan
+
+**Special Thanks:**
+- ChatGPT & Claude (AI design consultants)
+- Oregon Trail (inspiration)
+- All the classic merchant sims that came before
+
+---
+
+*Last Updated: January 17, 2026* 
+ 
+================================================ 
+Snapshot complete 

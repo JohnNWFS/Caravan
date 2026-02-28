@@ -1,0 +1,51 @@
+I'm uploading a complete snapshot of my GameMaker Studio trading caravan game project. This file contains all objects, scripts, events, and project configuration.
+
+**Your task: Perform a comprehensive memory refresh and provide an architectural overview.**
+
+Please analyze the snapshot and provide:
+
+1. **ARCHITECTURAL MAP**
+   - Core persistent objects and their responsibilities
+   - Object interaction flow (which objects communicate with which)
+   - Event sequence (what happens on game start, during step, on draw)
+   - Global data structures and their purposes
+
+2. **OBJECT INVENTORY**
+   For each object, document:
+   - Object name and core purpose
+   - Events implemented (Create, Step, Draw, etc.) with brief descriptions
+   - Key variables/structs it manages
+   - Dependencies (what other objects/scripts it relies on)
+
+3. **SCRIPT CATALOG**
+   For each script, provide:
+   - Function name and signature (parameters)
+   - Purpose in one sentence
+   - Return value (if any)
+   - Which objects/scripts call this function
+   - Related scripts (what it works with)
+
+4. **DATA STRUCTURE MAP**
+   Document the key data structures:
+   - Player/caravan data structure
+   - World/location data structure
+   - Economy/market data structure
+   - Inventory/slot system structure
+   - Any other major nested structs
+
+5. **GAME FLOW**
+   - Initialization sequence (what happens first)
+   - Main game loop (step-by-step)
+   - Command processing flow
+   - State transitions
+
+**Output format:**
+- Use clear hierarchical organization
+- Use code blocks for struct definitions
+- Highlight architectural decisions
+- Focus on WHAT EXISTS, not speculation about what could be added
+- Note any obvious gaps or incomplete implementations
+
+After this analysis, I'll be ready to work on extending specific systems or debugging issues. This serves as your refreshed memory of the project state.
+
+[Attach: project_snapshot.txt]

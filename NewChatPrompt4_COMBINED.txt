@@ -1,0 +1,28 @@
+I'm uploading a complete snapshot of my GameMaker Studio trading caravan game. The snapshot includes code (objects, scripts, events) and a DESIGN.md document outlining intended features.
+
+**Your task: Perform a complete project health analysis in three phases.**
+
+## PHASE 1: MEMORY REFRESH & ARCHITECTURE
+Build a complete understanding of the codebase:
+- Map all objects and their responsibilities
+- Catalog all scripts with signatures and purposes  
+- Document data structures (player, world, economy, inventory)
+- Trace game flow and initialization sequence
+
+## PHASE 2: DESIGN ALIGNMENT CHECK
+Compare implemented code against DESIGN.md:
+- ✅ Verify features marked complete are actually implemented
+- ⚠️ Identify partial implementations or discrepancies
+- 🆕 Find implemented features not in design doc
+- 📝 Suggest specific DESIGN.md updates
+
+## PHASE 3: CODE HEALTH ANALYSIS
+Identify technical debt and inefficiencies:
+- **Orphaned scripts** (never called anywhere)
+- **Redundant functions** (duplicate implementations)
+- **Incomplete migrations** (half-finished refactoring)
+- **Unused data structures** (created but never read)
+- **Architectural inefficiencies** (over-complicated solutions)
+- **Naming inconsistencies** (mixed conventions)
+
+**Output format:**

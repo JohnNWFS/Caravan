@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_calculate_sell_price",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_calculate_sell_price",
+  "parent":{
+    "name":"Economy",
+    "path":"folders/Scripts/Economy.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

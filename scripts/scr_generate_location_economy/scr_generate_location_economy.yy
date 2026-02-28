@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_generate_location_economy",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_generate_location_economy",
+  "parent":{
+    "name":"Economy",
+    "path":"folders/Scripts/Economy.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
