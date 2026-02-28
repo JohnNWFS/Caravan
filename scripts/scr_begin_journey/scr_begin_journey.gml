@@ -211,6 +211,25 @@ function scr_begin_journey(destination_id, costs) {
         console_print("WARNING: Gold reserves are low!");
     }
     
-    console_print("");
-    console_print("Type 'TRAVEL' to see destinations from here.");
+    // === JOURNEY COUNTER ===
+    obj_heartbeat.journey_count++;
+
+    if (obj_heartbeat.setup_config.game_mode == "JOURNEY") {
+        var _done  = obj_heartbeat.journey_count;
+        var _limit = obj_heartbeat.setup_config.journey_limit;
+        var _left  = _limit - _done;
+        if (_done >= _limit) {
+            scr_show_end_screen();
+            obj_heartbeat.game_state = "GAMEOVER";
+        } else {
+            console_print("[Journey " + string(_done) + " / " + string(_limit)
+                          + "  --  " + string(_left) + " remaining]");
+            console_print("");
+            console_print("Type 'TRAVEL' to see destinations from here.");
+        }
+    } else {
+        // ENDLESS mode — no trip limit
+        console_print("");
+        console_print("Type 'TRAVEL' to see destinations from here.");
+    }
 }

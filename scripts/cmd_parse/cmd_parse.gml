@@ -16,6 +16,21 @@ function cmd_parse(input) {
         return;
     }
 
+    // === GAMEOVER STATE GATE ===
+    // After a JOURNEY run ends, only RESTART and QUIT are valid.
+    if (obj_heartbeat.game_state == "GAMEOVER") {
+        var _raw = string_upper(string_trim(input));
+        if (_raw == "RESTART" || _raw == "R") {
+            game_restart();
+        } else if (_raw == "QUIT" || _raw == "Q" || _raw == "QU") {
+            console_print("Farewell, traveler.");
+            game_end();
+        } else {
+            console_print("Game over. Type RESTART to play again or QUIT to exit.");
+        }
+        return;
+    }
+
     // Convert to uppercase for case-insensitive matching
     var cmd = string_upper(string_trim(input));
     

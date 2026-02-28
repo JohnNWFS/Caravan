@@ -50,4 +50,9 @@ case "SETUP":
     case "TRAVEL":
         // Travel state
         break;
+
+    case "GAMEOVER":
+        // End screen already displayed by scr_show_end_screen().
+        // Input is gated in cmd_parse -- nothing to do here each frame.
+        break;
 }

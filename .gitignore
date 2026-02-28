@@ -1,75 +1,47 @@
-# Windows
-nul
- 
-# Windows thumbnail cache files
+# ==============================
+# OS junk
+# ==============================
+.DS_Store
 Thumbs.db
-Thumbs.db:encryptable
 ehthumbs.db
-ehthumbs_vista.db
- 
-# Dump file
-*.stackdump
- 
-# Folder config file
 [Dd]esktop.ini
- 
-# Recycle Bin used on file shares
 $RECYCLE.BIN/
- 
-# Windows Installer files
-*.cab
-*.msi
-*.msix
-*.msm
-*.msp
- 
-# Windows shortcuts
-*.lnk
- 
-# Mac
- 
-## General
-.DS_Store
-.AppleDouble
-.LSOverride
- 
-## Icon must end with two \r
-Icon
- 
-## Thumbnails
-._*
- 
-## Files that might appear in the root of a volume
-.DocumentRevisions-V100
-.fseventsd
-.Spotlight-V100
-.TemporaryItems
-.Trashes
-.VolumeIcon.icns
-.com.apple.timemachine.donotpresent
- 
-## Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
- 
-# GameMaker temporary files
-*.resource_order
-*.old
 
-# GMRT build directory
-Build
-
-# OS / editor noise
-.DS_Store
-Thumbs.db
-
-# Logs
+# ==============================
+# Logs / temp
+# ==============================
 *.log
-
-# Temp/backup files
 *.tmp
 *.bak
 *.swp
+*.stackdump
+
+# ==============================
+# Editor / IDE folders
+# ==============================
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# ==============================
+# GameMaker build output
+# ==============================
+Build/
+build/
+output/
+Output/
+dist/
+bin/
+
+# ==============================
+# GameMaker auto backups
+# ==============================
+*.autosave
+*.autobackup
+*.yyp.bak
+*.yy.bak
+*.yyp~
+*.yy~

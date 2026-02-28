@@ -80,6 +80,7 @@
     {"id":{"name":"scr_run_all_competitors","path":"scripts/scr_run_all_competitors/scr_run_all_competitors.yy",},},
     {"id":{"name":"scr_run_competitor_turn","path":"scripts/scr_run_competitor_turn/scr_run_competitor_turn.yy",},},
     {"id":{"name":"scr_show_game_guide","path":"scripts/scr_show_game_guide/scr_show_game_guide.yy",},},
+    {"id":{"name":"scr_show_end_screen","path":"scripts/scr_show_end_screen/scr_show_end_screen.yy",},},
     {"id":{"name":"scr_show_setup_menu","path":"scripts/scr_show_setup_menu/scr_show_setup_menu.yy",},},
     {"id":{"name":"scr_simulate_ghost_trades","path":"scripts/scr_simulate_ghost_trades/scr_simulate_ghost_trades.yy",},},
     {"id":{"name":"scr_world_tick","path":"scripts/scr_world_tick/scr_world_tick.yy",},},
