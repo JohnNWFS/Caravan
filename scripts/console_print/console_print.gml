@@ -2,6 +2,18 @@
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 
 // ============================================================
+/// @func _hdr(text)
+/// @desc Returns a section-header string decorated with ═══ on each side.
+///       Example: _hdr("JOURNEY COMPLETE") → "═══ JOURNEY COMPLETE ═══"
+///       Uses chr(9552) = ═  (in fnt_console box-drawing range 9472–9631).
+// ============================================================
+function _hdr(text) {
+    var _e = chr(9552) + chr(9552) + chr(9552);
+    return _e + " " + text + " " + _e;
+}
+
+
+// ============================================================
 /// @func _console_wrap_lines(text)
 /// @desc Split text into an array of strings that each fit within
 ///       max_width pixels using the current fnt_console font.

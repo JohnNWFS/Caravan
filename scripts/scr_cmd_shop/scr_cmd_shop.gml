@@ -27,7 +27,7 @@ function scr_cmd_shop(sub, arg) {
         // ----------------------------------------------------------------
         case "":
             console_print("");
-            console_print("=== SHOP: " + _current_loc.name + " (" + _loc_type + ") ===");
+            console_print(_hdr("SHOP: " + _current_loc.name + " (" + _loc_type + ")"));
             console_print("  SHOP VEHICLES      — browse available carts and wagons");
             console_print("  SHOP ANIMALS       — browse available draft animals");
             console_print("  SHOP BUY <name>    — purchase a vehicle or animal");
@@ -103,7 +103,7 @@ function scr_cmd_shop(sub, arg) {
 /// @ignore
 function _scr_shop_list_vehicles(loc, loc_type) {
     console_print("");
-    console_print("=== VEHICLES FOR SALE AT " + loc.name + " (" + loc_type + ") ===");
+    console_print(_hdr("VEHICLES FOR SALE AT " + loc.name + " (" + loc_type + ")"));
 
     var _shown = 0;
     for (var _i = 0; _i < array_length(global.vehicles); _i++) {
@@ -136,7 +136,7 @@ function _scr_shop_list_vehicles(loc, loc_type) {
 /// @ignore
 function _scr_shop_list_animals(loc, loc_type) {
     console_print("");
-    console_print("=== ANIMALS FOR SALE AT " + loc.name + " (" + loc_type + ") ===");
+    console_print(_hdr("ANIMALS FOR SALE AT " + loc.name + " (" + loc_type + ")"));
 
     var _shown = 0;
     for (var _i = 0; _i < array_length(global.animals); _i++) {
@@ -373,7 +373,7 @@ function _scr_shop_sell_vehicle(loc, wagon_num) {
     var _is_last    = (_wagon_count == 1);
 
     console_print("");
-    console_print("=== SELL WAGON " + string(wagon_num) + ": " + _w.type + " ===");
+    console_print(_hdr("SELL WAGON " + string(wagon_num) + ": " + _w.type));
     console_print("  Condition:  " + string(floor(_w.condition)) + "%");
     console_print("  Sell price: " + string(_sell_price) + " gold");
 
@@ -441,8 +441,8 @@ function _scr_shop_sell_animal(loc, wagon_num) {
     var _req_anim = (_vdata != undefined && _vdata.requires_animal);
 
     console_print("");
-    console_print("=== SELL ANIMAL: " + _ani.type
-                  + "  (on wagon " + string(wagon_num) + ") ===");
+    console_print(_hdr("SELL ANIMAL: " + _ani.type
+                  + "  (on wagon " + string(wagon_num) + ")"));
     console_print("  Sell price: " + string(_sell_price) + " gold");
 
     if (_req_anim) {

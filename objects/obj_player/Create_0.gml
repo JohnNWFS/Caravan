@@ -13,6 +13,12 @@ provisions = 50;  // Food for people and animals
 // === RELATIONSHIPS ===
 relationships = {};
 
+// === CONTRACTS ===
+active_contracts = [];   // Accepted delivery contracts currently in progress
+
+// === HIRED CREW ===
+hired_crew = [];         // Active hired NPCs (GUARD, DRIVER, TRADER); max 3
+
 // === PENDING ACTION (for multi-step confirmations) ===
 pending_action = undefined;
 

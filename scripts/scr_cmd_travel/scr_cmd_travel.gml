@@ -3,7 +3,7 @@
 /// @desc Handle TRAVEL command - shows available destinations with costs
 
 function scr_cmd_travel() {
-    console_print("=== AVAILABLE DESTINATIONS ===");
+    console_print(_hdr("AVAILABLE DESTINATIONS"));
     console_print("");
     
     var options = scr_get_travel_options();
@@ -43,7 +43,41 @@ function scr_cmd_travel() {
         } else {
             console_print("   ERROR: Cannot calculate cost for this route");
         }
-        
+
+        // Calculate total sell value of current cargo at this destination
+        var _dest_loc = undefined;
+        for (var _li = 0; _li < array_length(obj_heartbeat.world.locations); _li++) {
+            if (obj_heartbeat.world.locations[_li].id == dest.id) {
+                _dest_loc = obj_heartbeat.world.locations[_li];
+                break;
+            }
+        }
+        var _cargo_val = 0;
+        if (_dest_loc != undefined && variable_struct_exists(obj_player, "caravan")) {
+            for (var _wi = 0; _wi < array_length(obj_player.caravan.wagons); _wi++) {
+                var _cargo = obj_player.caravan.wagons[_wi].slots.cargo.contents;
+                for (var _ci = 0; _ci < array_length(_cargo); _ci++) {
+                    var _slot = _cargo[_ci];
+                    if (_slot == undefined) continue;
+                    if (variable_struct_exists(_slot, "slot_type")
+                    &&  _slot.slot_type == "SADDLEBAG_BULK") {
+                        // Saddlebag container — value is in its contents
+                        if (_slot.contents != undefined) {
+                            _cargo_val += scr_calculate_sell_price(
+                                _dest_loc, _slot.contents.good_id, _slot.contents.quantity);
+                        }
+                    } else {
+                        // Standard cargo slot
+                        _cargo_val += scr_calculate_sell_price(
+                            _dest_loc, _slot.good_id, _slot.quantity);
+                    }
+                }
+            }
+        }
+        if (_cargo_val > 0) {
+            console_print("   Cargo value there: " + string(_cargo_val) + "g");
+        }
+
         console_print(""); // Blank line between destinations
     }
     

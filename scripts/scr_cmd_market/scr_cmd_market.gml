@@ -16,19 +16,78 @@ function scr_cmd_market() {
         console_print("ERROR: Current location not found.");
         return;
     }
-    
+
+    // === SPECIAL LOCATION ENTRY CHECKS ===
+    if (variable_struct_exists(current_loc, "subtype")) {
+
+        // Elven Outpost: reputation-gated
+        if (current_loc.subtype == "ELVEN_OUTPOST" && obj_player.reputation < 5) {
+            console_print("");
+            console_print(_hdr("ELVEN OUTPOST: " + string_upper(current_loc.name)));
+            console_print("");
+            console_print("Elven guards step forward, blocking the market entrance.");
+            console_print("\"Your reputation does not inspire trust, merchant. Come back");
+            console_print(" when the roads speak better of you.\"");
+            console_print("");
+            console_print("  Reputation required: 5   (yours: " + string(obj_player.reputation) + ")");
+            console_print("");
+            return;
+        }
+
+        // Goblin Market: 20% chance of flat refusal
+        if (current_loc.subtype == "GOBLIN_MARKET" && irandom(4) == 0) {
+            console_print("");
+            console_print(_hdr("GOBLIN MARKET: " + string_upper(current_loc.name)));
+            console_print("");
+            var _refuse = [
+                "A goblin barkeep slams the shutters. \"No customers today! Come back tomorrow!\"",
+                "Goblins scatter as you approach, knocking over stalls. The market is a chaos of fleeing merchants.",
+                "A sign goes up: CLOSED. A dozen goblins peer at you from behind it with wide eyes.",
+                "The market chief blocks your path. \"We are... reorganising! Yes. Come back later!\""
+            ];
+            console_print(_refuse[irandom(3)]);
+            console_print("");
+            return;
+        }
+
+    }
+
     var economy = current_loc.economy;
-    
+
+    // Build market header — use subtype label when available
+    var _mkt_label = "MARKET";
+    var _mkt_flavor = "";
+    if (variable_struct_exists(current_loc, "subtype") && current_loc.subtype != "") {
+        if (current_loc.subtype == "ARCANE_LIBRARY") {
+            _mkt_label  = "ARCANE LIBRARY";
+            _mkt_flavor = "Ancient knowledge and rare arcane wares. They prize dragon scales and relics.";
+        } else if (current_loc.subtype == "RUINED_SHRINE") {
+            _mkt_label  = "RUINED SHRINE";
+            _mkt_flavor = "A caretaker tends to what remains. A few curious relics are for sale.";
+        } else if (current_loc.subtype == "ELVEN_OUTPOST") {
+            _mkt_label  = "ELVEN OUTPOST";
+            _mkt_flavor = "Fine elven crafts — scarce and priced accordingly.";
+        } else if (current_loc.subtype == "GOBLIN_MARKET") {
+            _mkt_label  = "GOBLIN MARKET";
+            _mkt_flavor = "Chaotic. Loud. Somehow open for business today.";
+        }
+    }
+
     console_print("");
-    console_print("=== MARKET: " + string_upper(current_loc.name) + " ===");
+    console_print(_hdr(_mkt_label + ": " + string_upper(current_loc.name)));
+    if (_mkt_flavor != "") {
+        console_print(_mkt_flavor);
+    }
     console_print("");
     
     // === GOODS FOR SALE ===
     console_print("GOODS FOR SALE:");
     
-    var has_goods = false;
+    var has_goods      = false;
+    var _regular_lines = [];
+    var _prov_lines    = [];
     var stock_keys = variable_struct_get_names(economy.stock_levels);
-    
+
     for (var i = 0; i < array_length(stock_keys); i++) {
         var good_id = stock_keys[i];
         var stock = economy.stock_levels[$ good_id];
@@ -46,21 +105,22 @@ function scr_cmd_market() {
             }
             if (is_demanded) continue;
 
-            has_goods = true;
             var commodity = scr_get_commodity_by_id(good_id);
-
             if (commodity != undefined) {
                 var unit_price = scr_calculate_buy_price(current_loc, good_id, 1);
-
-                var line = "  " + commodity.name;
-                line += " - " + string(stock) + " available";
-                line += " @ " + string(unit_price) + " gold/unit";
-
-                console_print(line);
+                var line = "  " + commodity.name
+                         + " - " + string(stock) + " available"
+                         + " @ " + string(unit_price) + " gold/unit";
+                // Provisions are a resupply item — push to bottom so trade goods group together
+                if (good_id == "provisions") {
+                    array_push(_prov_lines, line);
+                } else {
+                    array_push(_regular_lines, line);
+                }
             }
         }
     }
-    
+
     // Also show resale stock — goods sold by the player that the local merchant
     // is now reselling.  These have a fixed price independent of normal supply/demand.
     if (variable_struct_exists(economy, "resale_stock")) {
@@ -77,15 +137,28 @@ function scr_cmd_market() {
             }
             if (_rdemanded) continue;
 
-            has_goods = true;
             var _rcommodity = scr_get_commodity_by_id(_rid);
             if (_rcommodity != undefined) {
-                var _rline = "  " + _rcommodity.name;
-                _rline += " - " + string(_rentry.qty) + " available";
-                _rline += " @ " + string(_rentry.unit_price) + " gold/unit";
-                console_print(_rline);
+                var _rline = "  " + _rcommodity.name
+                           + " - " + string(_rentry.qty) + " available"
+                           + " @ " + string(_rentry.unit_price) + " gold/unit";
+                if (_rid == "provisions") {
+                    array_push(_prov_lines, _rline);
+                } else {
+                    array_push(_regular_lines, _rline);
+                }
             }
         }
+    }
+
+    // Print trade goods first, provisions last
+    for (var i = 0; i < array_length(_regular_lines); i++) {
+        has_goods = true;
+        console_print(_regular_lines[i]);
+    }
+    for (var i = 0; i < array_length(_prov_lines); i++) {
+        has_goods = true;
+        console_print(_prov_lines[i]);
     }
 
     if (!has_goods) {

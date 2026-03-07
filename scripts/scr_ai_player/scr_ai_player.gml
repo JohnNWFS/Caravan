@@ -9,7 +9,7 @@
 function scr_ai_player(journey_goal = 10) {
 
     // ═══════════════════════════════════════════════════════════════════════
-    // CONFIG  — change these numbers to tune AI behaviour
+    // CONFIG  -change these numbers to tune AI behaviour
     // ═══════════════════════════════════════════════════════════════════════
     var AI_PROVISION_BUFFER  = 10;  // extra provisions to keep beyond journey cost
     var AI_GOLD_BUFFER       = 50;  // gold kept in reserve (not spent on goods)
@@ -33,14 +33,14 @@ function scr_ai_player(journey_goal = 10) {
     // OPENING BANNER
     // ═══════════════════════════════════════════════════════════════════════
     console_print("");
-    console_print("╔══════════════════════════════════════════╗");
-    console_print("║         AI AUTOPLAY STARTING             ║");
-    console_print("╠══════════════════════════════════════════╣");
-    console_print("║  Goal journeys : " + string(journey_goal));
-    console_print("║  Prov. buffer  : " + string(AI_PROVISION_BUFFER));
-    console_print("║  Gold reserve  : " + string(AI_GOLD_BUFFER));
-    console_print("║  Version       : " + AI_CODE_VERSION);
-    console_print("╚══════════════════════════════════════════╝");
+    console_print(string_repeat(chr(9552), 42));
+    console_print("         AI AUTOPLAY STARTING");
+    console_print("------------------------------------------");
+    console_print("  Goal journeys : " + string(journey_goal));
+    console_print("  Prov. buffer  : " + string(AI_PROVISION_BUFFER));
+    console_print("  Gold reserve  : " + string(AI_GOLD_BUFFER));
+    console_print("  Version       : " + AI_CODE_VERSION);
+    console_print(string_repeat(chr(9552), 42));
     console_print("");
 
     // Record starting location
@@ -79,16 +79,16 @@ function scr_ai_player(journey_goal = 10) {
             break;
         }
 
-        console_print("────────────────────────────────────────────────────────────────");
+        console_print("------------------------------------------------------");
         console_print("[AI] TURN " + string(journeys_done + 1) + "/" + string(journey_goal)
                       + "  |  Day "   + string(obj_heartbeat.day)
                       + "  |  "       + _cur_loc.name + " (" + _cur_loc.type + ")"
                       + "  |  Gold: " + string(obj_player.gold)
                       + "  |  Prov: " + string(obj_player.provisions));
-        console_print("────────────────────────────────────────────────────────────────");
+        console_print("------------------------------------------------------");
 
         // ── STEP 1 : Sell all cargo ───────────────────────────────────────
-        console_print("[AI] STEP 1 — Selling cargo");
+        console_print("[AI] STEP 1 - Selling cargo");
         var _sold_any = false;
         for (var _w = 0; _w < array_length(obj_player.caravan.wagons); _w++) {
             var _cargo = obj_player.caravan.wagons[_w].slots.cargo.contents;
@@ -145,7 +145,7 @@ function scr_ai_player(journey_goal = 10) {
         if (!_sold_any) console_print("[AI] (nothing to sell)");
 
         // ── STEP 1.5 : Auto-repair worn wagons ───────────────────────────
-        console_print("[AI] STEP 1.5 — Wagon condition check");
+        console_print("[AI] STEP 1.5 - Wagon condition check");
         var _worst_cond = 100;
         for (var _rw = 0; _rw < array_length(obj_player.caravan.wagons); _rw++) {
             if (obj_player.caravan.wagons[_rw].condition < _worst_cond) {
@@ -155,7 +155,7 @@ function scr_ai_player(journey_goal = 10) {
 
         if (_worst_cond < AI_REPAIR_THRESHOLD) {
             console_print("[AI] Worst wagon at " + string(floor(_worst_cond))
-                          + "% — requesting repair...");
+                          + "% -requesting repair...");
             scr_cmd_repair();  // sets pending_action if affordable, returns quietly if not
 
             if (obj_player.pending_action != undefined
@@ -168,7 +168,7 @@ function scr_ai_player(journey_goal = 10) {
                 }
                 obj_player.pending_action = undefined;
                 console_print("[AI] Repair confirmed. Paid " + string(_repair_cost)
-                              + "g — all wagons restored to 100%.");
+                              + "g -all wagons restored to 100%.");
             } else {
                 console_print("[AI] Cannot afford repairs right now.");
             }
@@ -177,7 +177,7 @@ function scr_ai_player(journey_goal = 10) {
         }
 
         // ── STEP 1.6 : Auto-upgrade vehicles and animals ─────────────────
-        console_print("[AI] STEP 1.6 — Upgrade check");
+        console_print("[AI] STEP 1.6 - Upgrade check");
 
         // Only upgrade at TOWN or CITY (VILLAGE has no better stock)
         if (_cur_loc.type != "VILLAGE" && obj_player.gold >= AI_UPGRADE_GOLD_MIN) {
@@ -218,7 +218,7 @@ function scr_ai_player(journey_goal = 10) {
                         }
                         if (_ca_ok && _ca.price < _cheapest_ani) _cheapest_ani = _ca.price;
                     }
-                    if (_cheapest_ani == 999999) continue; // no animal sold here — skip this vehicle
+                    if (_cheapest_ani == 999999) continue; // no animal sold here -skip this vehicle
                     _bundle += _cheapest_ani;
                 }
 
@@ -232,7 +232,7 @@ function scr_ai_player(journey_goal = 10) {
             }
 
             if (_upgrade_veh != undefined) {
-                console_print("[AI] UPGRADE — Buying " + _upgrade_veh.name
+                console_print("[AI] UPGRADE - Buying " + _upgrade_veh.name
                               + " (" + string(_upgrade_veh.cargo_slots) + " cargo slots)...");
                 scr_cmd_shop("BUY", _upgrade_veh.id);
 
@@ -256,7 +256,7 @@ function scr_ai_player(journey_goal = 10) {
                         console_print("[AI] Buying required animal " + _buy_ani_id + " for new wagon...");
                         scr_cmd_shop("BUY", _buy_ani_id);
                     } else {
-                        console_print("[AI] WARNING: No animal available for new wagon — journey may be blocked.");
+                        console_print("[AI] WARNING: No animal available for new wagon - journey may be blocked.");
                     }
                 }
             } else {
@@ -296,14 +296,14 @@ function scr_ai_player(journey_goal = 10) {
             }
 
         } else if (_cur_loc.type == "VILLAGE") {
-            console_print("[AI] Village — no upgrade shop.");
+            console_print("[AI] Village - no upgrade shop.");
         } else {
             console_print("[AI] Below upgrade gold threshold (" + string(obj_player.gold)
-                          + "g < " + string(AI_UPGRADE_GOLD_MIN) + "g) — skipping.");
+                          + "g < " + string(AI_UPGRADE_GOLD_MIN) + "g) -skipping.");
         }
 
         // ── STEP 2 : Choose destination ───────────────────────────────────
-        console_print("[AI] STEP 2 — Choosing destination");
+        console_print("[AI] STEP 2 - Choosing destination");
         var _options = scr_get_travel_options();
         if (array_length(_options) == 0) {
             console_print("[AI] No routes from " + _cur_loc.name + ". Aborting.");
@@ -332,7 +332,7 @@ function scr_ai_player(journey_goal = 10) {
             var _opt = _options[_oi];
             var _c   = scr_calculate_travel_cost(obj_player.current_location, _opt.id);
             if (_c == noone) continue;
-            if (_c.water > _max_water) continue; // physically impossible — barrel too small
+            if (_c.water > _max_water) continue; // physically impossible -barrel too small
 
             // ── Multi-factor scoring ──────────────────────────────────────
             var _sc = 0;
@@ -391,12 +391,12 @@ function scr_ai_player(journey_goal = 10) {
                       + (variable_struct_exists(unique_locs_visited, _dest.id) ? "  [REVISIT]" : "  [NEW]"));
 
         // ── STEP 3 : Buy provisions if needed ────────────────────────────
-        console_print("[AI] STEP 3 — Provisions check");
+        console_print("[AI] STEP 3 - Provisions check");
         var _prov_target = _dest_cost.provisions + AI_PROVISION_BUFFER;
         if (obj_player.provisions < _prov_target) {
             var _prov_buy = _prov_target - obj_player.provisions;
             console_print("[AI] Need " + string(_prov_target) + ", have " + string(obj_player.provisions)
-                          + " — buying " + string(_prov_buy) + " provisions...");
+                          + " -buying " + string(_prov_buy) + " provisions...");
             scr_buy_provisions(_cur_loc, _prov_buy);
         } else {
             console_print("[AI] Provisions OK (" + string(obj_player.provisions) + " >= " + string(_prov_target) + ")");
@@ -407,7 +407,7 @@ function scr_ai_player(journey_goal = 10) {
         // shorter route we CAN reach rather than triggering the work path.
         if (obj_player.provisions < _dest_cost.provisions) {
             console_print("[AI] Still short on provisions (" + string(obj_player.provisions)
-                          + " have, " + string(_dest_cost.provisions) + " needed) — town may be out of stock.");
+                          + " have, " + string(_dest_cost.provisions) + " needed) -town may be out of stock.");
             console_print("[AI] Seeking shorter route reachable with current provisions...");
 
             // _options is already sorted by distance (shortest first)
@@ -435,29 +435,29 @@ function scr_ai_player(journey_goal = 10) {
             }
         }
 
-        // ── STEP 4 : Work only if GOLD is short — never for provisions ───
-        console_print("[AI] STEP 4 — Affordability check");
+        // ── STEP 4 : Work only if GOLD is short -never for provisions ───
+        console_print("[AI] STEP 4 - Affordability check");
         var _afford = scr_can_afford_journey(_dest_cost);
 
         if (!_afford.can_afford) {
             if (_afford.missing.gold > 0) {
-                // Need more gold — work for it
+                // Need more gold -work for it
                 var _gold_short = _afford.missing.gold;
                 var _work_days  = min(AI_MAX_WORK_DAYS, ceil(max(_gold_short, 5) / 8));
-                console_print("[AI] Short " + string(_gold_short) + " gold — working " + string(_work_days) + " day(s)...");
+                console_print("[AI] Short " + string(_gold_short) + " gold - working " + string(_work_days) + " day(s)...");
                 scr_cmd_work(_work_days);
 
-                // Work consumes provisions — top up again if needed (but don't loop back into work)
+                // Work consumes provisions -top up again if needed (but don't loop back into work)
                 if (obj_player.provisions < _dest_cost.provisions) {
                     var _pb2 = _dest_cost.provisions + AI_PROVISION_BUFFER - obj_player.provisions;
                     console_print("[AI] Re-buying " + string(_pb2) + " provisions after working...");
                     scr_buy_provisions(_cur_loc, _pb2);
                 }
 
-                // Final gold check — if still short, find the cheapest affordable route
+                // Final gold check -if still short, find the cheapest affordable route
                 _afford = scr_can_afford_journey(_dest_cost);
                 if (!_afford.can_afford) {
-                    console_print("[AI] Still short on gold — finding cheapest affordable route...");
+                    console_print("[AI] Still short on gold - finding cheapest affordable route...");
                     var _min_gold = 999999;
                     for (var _oi2 = 0; _oi2 < array_length(_options); _oi2++) {
                         var _c2 = scr_calculate_travel_cost(obj_player.current_location, _options[_oi2].id);
@@ -471,7 +471,7 @@ function scr_ai_player(journey_goal = 10) {
                     }
                     _afford = scr_can_afford_journey(_dest_cost);
                     if (!_afford.can_afford) {
-                        console_print("[AI] Completely stuck — no affordable route. Aborting.");
+                        console_print("[AI] Completely stuck - no affordable route. Aborting.");
                         break;
                     }
                     console_print("[AI] Switched destination to: " + _dest.name);
@@ -482,7 +482,7 @@ function scr_ai_player(journey_goal = 10) {
                 console_print("[AI] Route infeasible (prov short: "
                               + string(_afford.missing.provisions)
                               + ", water short: " + string(_afford.missing.water)
-                              + ") — seeking alternative...");
+                              + ") -seeking alternative...");
                 var _fb4      = undefined;
                 var _fb4_cost = undefined;
                 var _fb4_best = -999999;
@@ -515,7 +515,7 @@ function scr_ai_player(journey_goal = 10) {
         }
 
         // ── STEP 5 : Buy trade goods ──────────────────────────────────────
-        console_print("[AI] STEP 5 — Trade buying");
+        console_print("[AI] STEP 5 - Trade buying");
 
         // Resolve destination location struct for margin calculation
         var _dest_loc = _loc_map[$ _dest.id];
@@ -548,7 +548,7 @@ function scr_ai_player(journey_goal = 10) {
                 var _trade_com = scr_get_commodity_by_id(_gid);
                 if (_trade_com == undefined) continue;
 
-                // Skip livestock goods — scr_cmd_sell cannot sell from livestock_trade slots,
+                // Skip livestock goods -scr_cmd_sell cannot sell from livestock_trade slots,
                 // so buying them as trade cargo is a dead end (they can never be offloaded).
                 if (_trade_com.storage_type == "LIVESTOCK_LARGE") continue;
 
@@ -620,13 +620,13 @@ function scr_ai_player(journey_goal = 10) {
             if (_gold_budget <= 0)
                 console_print("[AI] No trade budget left after reserving travel/buffer gold.");
             if (_empty_slots <= 0)
-                console_print("[AI] All cargo slots full — no room to buy.");
+                console_print("[AI] All cargo slots full - no room to buy.");
             if (_dest_loc == undefined)
-                console_print("[AI] Destination struct unavailable — skipping trade.");
+                console_print("[AI] Destination struct unavailable - skipping trade.");
         }
 
         // ── STEP 6 : Execute the journey ─────────────────────────────────
-        console_print("[AI] STEP 6 — Departing");
+        console_print("[AI] STEP 6 - Departing");
         var _final_afford = scr_can_afford_journey(_dest_cost);
         if (!_final_afford.can_afford) {
             console_print("[AI] Pre-departure check failed. Aborting.");
@@ -654,21 +654,21 @@ function scr_ai_player(journey_goal = 10) {
     var _unique_count = array_length(variable_struct_get_names(unique_locs_visited));
 
     console_print("");
-    console_print("╔══════════════════════════════════════════╗");
-    console_print("║         AI AUTOPLAY COMPLETE             ║");
-    console_print("╠══════════════════════════════════════════╣");
-    console_print("║  Journeys:       " + string(journeys_done) + "/" + string(journey_goal));
-    console_print("║  Unique places:  " + string(_unique_count));
-    console_print("║  Final gold:     " + string(obj_player.gold));
-    console_print("║  Final day:      " + string(obj_heartbeat.day));
-    console_print("║  Provisions:     " + string(obj_player.provisions));
-    console_print("╠══════════════════════════════════════════╣");
-    console_print("║  ROUTE LOG:");
+    console_print(string_repeat(chr(9552), 42));
+    console_print("         AI AUTOPLAY COMPLETE");
+    console_print("------------------------------------------");
+    console_print("  Journeys:       " + string(journeys_done) + "/" + string(journey_goal));
+    console_print("  Unique places:  " + string(_unique_count));
+    console_print("  Final gold:     " + string(obj_player.gold));
+    console_print("  Final day:      " + string(obj_heartbeat.day));
+    console_print("  Provisions:     " + string(obj_player.provisions));
+    console_print("------------------------------------------");
+    console_print("  ROUTE LOG:");
     for (var _vi = 0; _vi < array_length(loc_visit_log); _vi++) {
         var _vl = loc_visit_log[_vi];
         var _tag = "  [" + _vl.role + "]";
-        console_print("║    Day " + string(_vl.day) + " — " + _vl.name + _tag);
+        console_print("  Day " + string(_vl.day) + " - " + _vl.name + _tag);
     }
-    console_print("╚══════════════════════════════════════════╝");
+    console_print(string_repeat(chr(9552), 42));
     console_print("");
 }

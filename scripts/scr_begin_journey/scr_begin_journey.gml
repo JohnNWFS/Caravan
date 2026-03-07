@@ -25,7 +25,17 @@ function scr_begin_journey(destination_id, costs) {
     }
 
     // === DEDUCT RESOURCES ===
-    obj_player.provisions -= costs.provisions;
+    // HEDGE_WITCH reduces provisions consumed by 20%
+    var _journey_prov_cost = costs.provisions;
+    if (variable_struct_exists(obj_player, "hired_crew")) {
+        for (var _hwi = 0; _hwi < array_length(obj_player.hired_crew); _hwi++) {
+            if (obj_player.hired_crew[_hwi].type == "HEDGE_WITCH") {
+                _journey_prov_cost = max(0, floor(_journey_prov_cost * 0.8));
+                break;
+            }
+        }
+    }
+    obj_player.provisions -= _journey_prov_cost;
     scr_consume_water(costs.water);  // Use barrel system
     obj_player.gold -= costs.gold;
 
@@ -50,6 +60,14 @@ function scr_begin_journey(destination_id, costs) {
 	        break;
 	    }
 	}
+
+    // Capture visited flag BEFORE scr_simulate_ghost_trades sets it to true on first visit
+    var _was_visited = (dest_location != undefined
+                     && variable_struct_exists(dest_location, "economy")
+                     && dest_location.economy.player_visited);
+
+    // Clear any map selection so it doesn't linger after the journey
+    obj_heartbeat.selected_location_id = "";
 
 	// === SIMULATE GHOST TRADES AT DESTINATION ===
 	// Also sets player_visited = true and applies the first-visit catch-up logic.
@@ -93,9 +111,66 @@ function scr_begin_journey(destination_id, costs) {
         wagon.condition = max(0, wagon.condition - total_wear);
     }
     
+    // === JOURNEY EVENT ===
+    // Roll for a random event (bandit, storm, shortcut, etc.) and apply effects.
+    // The event is reported later in the output section.
+    var _event = scr_journey_event(costs);
+    if (_event != undefined) {
+        obj_player.gold       = max(0, obj_player.gold       + _event.gold_delta);
+        obj_player.provisions = max(0, obj_player.provisions + _event.prov_delta);
+        obj_player.reputation += _event.rep_delta;
+        if (_event.cond_delta != 0) {
+            for (var _ewi = 0; _ewi < array_length(obj_player.caravan.wagons); _ewi++) {
+                obj_player.caravan.wagons[_ewi].condition =
+                    clamp(obj_player.caravan.wagons[_ewi].condition + _event.cond_delta, 0, 100);
+            }
+        }
+    }
+
+    // === ALCHEMIST PRODUCTION ===
+    // 25% chance per journey to synthesise a random fantasy trade good (placed in first free cargo slot).
+    var _alch_good_id   = "";
+    var _alch_good_name = "";
+    var _alch_placed    = false;
+    if (variable_struct_exists(obj_player, "hired_crew")) {
+        for (var _ali = 0; _ali < array_length(obj_player.hired_crew); _ali++) {
+            if (obj_player.hired_crew[_ali].type == "ALCHEMIST") {
+                if (irandom(3) == 0) { // 25% chance
+                    var _alch_pool = ["alchemical_reagents", "spell_components", "moonstone",
+                                      "enchanted_cloth", "grimoire"];
+                    _alch_good_id = _alch_pool[irandom(array_length(_alch_pool) - 1)];
+                    // Resolve display name
+                    for (var _aci = 0; _aci < array_length(global.commodities); _aci++) {
+                        if (global.commodities[_aci].id == _alch_good_id) {
+                            _alch_good_name = global.commodities[_aci].name;
+                            break;
+                        }
+                    }
+                    // Place in first empty standard cargo slot
+                    for (var _awi = 0; _awi < array_length(obj_player.caravan.wagons) && !_alch_placed; _awi++) {
+                        var _cargo = obj_player.caravan.wagons[_awi].slots.cargo.contents;
+                        for (var _asi = 0; _asi < array_length(_cargo) && !_alch_placed; _asi++) {
+                            if (_cargo[_asi] == undefined) {
+                                _cargo[_asi] = { good_id: _alch_good_id, quantity: 1 };
+                                _alch_placed = true;
+                            }
+                        }
+                    }
+                    if (!_alch_placed) _alch_good_id = ""; // no space — nothing produced
+                }
+                break;
+            }
+        }
+    }
+
     // === REFILL WATER AT DESTINATION ===
     var refill_info = scr_refill_water();
-    
+
+    // === CHECK CONTRACT COMPLETION ===
+    // Resolve active contracts: award gold/rep for successes, penalise failures.
+    // Results printed after the resource summary section below.
+    var _contract_result = scr_check_contract_completion(destination_id);
+
     // === JOURNEY COMMENTARY ===
     // Randomly assembled narrative sentence describing the trip.
     // Structure: build a pool of eligible templates, then pick one and fill in variables.
@@ -161,9 +236,55 @@ function scr_begin_journey(destination_id, costs) {
         array_push(_pool, "Many days of hard travel finally ended as the caravan limped into {dest} after {days} {dw}.");
     }
 
-    // --- TODO: Event templates (weather, bandits, discoveries) ---
-    // When events are added, append event-specific lines here based on the event result,
-    // e.g.: if (journey_event == "STORM") { array_push(_pool, "..."); }
+    // Event-specific narrative lines (appended to _pool when an event occurred)
+    if (_event != undefined) {
+        // Blend event into journey narrative for negative events
+        switch (_event.type) {
+            case "BANDIT":
+                array_push(_pool, "Despite trouble on the road, the caravan arrived in {dest} after {days} {dw}.");
+                array_push(_pool, "Through bandit-ridden territory, the caravan pressed on and reached {dest} in {days} {dw}.");
+                break;
+            case "STORM":
+            case "DESERT_HEAT":
+                array_push(_pool, "Battling harsh conditions, the caravan endured and reached {dest} after {days} {dw}.");
+                array_push(_pool, "The weather was unkind, but {dest} welcomed the battered caravan after {days} {dw}.");
+                break;
+            case "BREAKDOWN":
+                array_push(_pool, "After a difficult stretch of road, the caravan limped into {dest} after {days} {dw}.");
+                array_push(_pool, "Wagon troubles slowed progress, but the caravan finally rolled into {dest} after {days} {dw}.");
+                break;
+            case "SHORTCUT":
+                array_push(_pool, "Thanks to a fortunate shortcut, the caravan arrived in {dest} ahead of schedule.");
+                array_push(_pool, "Good fortune on the road brought the caravan to {dest} faster than expected.");
+                break;
+            case "FAIR_WEATHER":
+                array_push(_pool, "Fine weather blessed the journey and the caravan reached {dest} in good spirits after {days} {dw}.");
+                break;
+            case "DISCOVERY":
+                array_push(_pool, "The journey to {dest} yielded more than expected — {days} {dw} well spent.");
+                break;
+            case "DRAGON_SIGHTING":
+                array_push(_pool, "A dragon's shadow fell over the road, but the caravan pressed on and reached {dest} after {days} {dw}.");
+                array_push(_pool, "The caravan weathered a terrifying encounter en route to {dest}, arriving shaken but intact after {days} {dw}.");
+                break;
+            case "ARCANE_STORM":
+                array_push(_pool, "Through magical havoc, the caravan endured and reached {dest} after {days} {dw}.");
+                array_push(_pool, "An arcane tempest tested the caravan's resolve, but {dest} was reached after {days} {dw}.");
+                break;
+            case "WANDERING_MAGE":
+                array_push(_pool, "An unexpected encounter on the road made the journey to {dest} memorable — {days} {dw} well spent.");
+                array_push(_pool, "Magic touched the road to {dest}. The caravan arrived after {days} {dw} with a story to tell.");
+                break;
+            case "FAE_CROSSROADS":
+                array_push(_pool, "The road to {dest} took a strange turn — the caravan arrived after {days} {dw}, however that happened.");
+                array_push(_pool, "Time played tricks on the journey to {dest}. The caravan arrived after {days} {dw}, bewildered but intact.");
+                break;
+            case "WITCH_CURSE":
+                array_push(_pool, "Despite dark forces at work on the road, the caravan limped into {dest} after {days} {dw}.");
+                array_push(_pool, "A curse dogged the caravan's steps, but {dest} was reached after {days} {dw}.");
+                break;
+        }
+    }
 
     // Pick a random line and substitute variables
     var _line = _pool[irandom(array_length(_pool) - 1)];
@@ -173,8 +294,45 @@ function scr_begin_journey(destination_id, costs) {
 
     // === REPORT JOURNEY OUTCOME ===
     console_print("");
-    console_print("=== JOURNEY COMPLETE ===");
+    console_print(_hdr("JOURNEY COMPLETE"));
     console_print(_line);
+    if (_was_visited) {
+        console_print(dest_name + " -- you've been here before.");
+    }
+
+    // Event report block (printed between narrative and journey summary)
+    if (_event != undefined) {
+        console_print("");
+        console_print(_hdr("EVENT: " + _event.title));
+        console_print(_event.narrative);
+        // Build a compact effects line
+        var _eff = "";
+        if (_event.gold_delta != 0) {
+            _eff += "  Gold: " + ((_event.gold_delta > 0) ? "+" : "") + string(_event.gold_delta);
+        }
+        if (_event.prov_delta != 0) {
+            if (_eff != "") _eff += "  |";
+            _eff += "  Provisions: " + ((_event.prov_delta > 0) ? "+" : "") + string(_event.prov_delta);
+        }
+        if (_event.cond_delta != 0) {
+            if (_eff != "") _eff += "  |";
+            _eff += "  Wagon condition: " + ((_event.cond_delta > 0) ? "+" : "") + string(_event.cond_delta) + "%";
+        }
+        if (_event.rep_delta != 0) {
+            if (_eff != "") _eff += "  |";
+            _eff += "  Reputation: " + ((_event.rep_delta > 0) ? "+" : "") + string(_event.rep_delta);
+        }
+        if (_eff != "") console_print(_eff);
+    }
+
+    // Alchemist production report
+    if (_alch_good_id != "") {
+        console_print("");
+        console_print(_hdr("ALCHEMIST: " + _alch_good_name + " Produced"));
+        console_print("Your alchemist worked through the journey and synthesised 1 unit of "
+                      + _alch_good_name + ". It has been added to cargo.");
+    }
+
     console_print("");
     console_print("Journey summary:");
     console_print("  Distance traveled: " + string(round(costs.distance)) + " km");
@@ -199,7 +357,31 @@ function scr_begin_journey(destination_id, costs) {
     console_print("  Water: " + string(scr_get_total_water()) + "/" + string(scr_get_max_water_capacity()));
     console_print("  Gold: " + string(obj_player.gold));
     console_print("");
-    
+
+    // === CONTRACT OUTCOME REPORT ===
+    for (var _cri = 0; _cri < array_length(_contract_result.completed); _cri++) {
+        var _cc = _contract_result.completed[_cri];
+        console_print(_hdr("CONTRACT COMPLETE: " + _cc.good_name + " Delivery"));
+        console_print("Delivered " + string(_cc.quantity) + " " + _cc.good_name
+                      + " to " + _cc.dest_name + ".");
+        console_print("Reward:  +" + string(_cc.reward_gold) + " gold"
+                      + "  |  Reputation: +2  |  Gold total: " + string(obj_player.gold));
+        console_print("");
+    }
+    for (var _crf = 0; _crf < array_length(_contract_result.failed); _crf++) {
+        var _cf = _contract_result.failed[_crf];
+        console_print(_hdr("CONTRACT FAILED: " + _cf.good_name + " Delivery"));
+        if (_cf.fail_reason == "cargo") {
+            console_print("Arrived at " + _cf.dest_name + " with only "
+                          + string(_cf.in_cargo) + "/" + string(_cf.quantity)
+                          + " " + _cf.good_name + " in cargo.");
+        } else {
+            console_print("Deadline was Day " + string(_cf.deadline_day) + " — contract expired.");
+        }
+        console_print("Reputation: -1");
+        console_print("");
+    }
+
     // Warn if resources are low
     if (obj_player.provisions < 10) {
         console_print("WARNING: Provisions are running low!");

@@ -88,7 +88,7 @@ function scr_show_end_screen() {
     // ----------------------------------------------------------------
     console_clear();
 
-    console_print("=== CARAVAN: JOURNEY COMPLETE ===");
+    console_print(_hdr("CARAVAN: JOURNEY COMPLETE"));
     console_print("");
     console_print("  Trips completed : " + string(_trips));
     console_print("  Days elapsed    : " + string(_days));

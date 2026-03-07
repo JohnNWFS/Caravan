@@ -62,4 +62,15 @@ function scr_debug_log_open() {
     if (_count > 0) {
         console_print("[DEBUG] " + string(_count) + " lines of history written.");
     }
+
+    // Remind the developer of available undocumented commands
+    console_print("[DEBUG] --- Developer commands ---");
+    console_print("[DEBUG]  DEBUG              toggle log off");
+    console_print("[DEBUG]  DEBUG EVENT <type> force next journey event");
+    console_print("[DEBUG]    types: BANDIT STORM DESERT_HEAT BREAKDOWN");
+    console_print("[DEBUG]           SHORTCUT FAIR_WEATHER DISCOVERY");
+    console_print("[DEBUG]           DRAGON_SIGHTING ARCANE_STORM");
+    console_print("[DEBUG]           WANDERING_MAGE FAE_CROSSROADS WITCH_CURSE");
+    console_print("[DEBUG]  DEBUG EVENT CLEAR  cancel pending forced event");
+    console_print("[DEBUG]  AUTOPLAY <n>       run AI simulation for n journeys");
 }

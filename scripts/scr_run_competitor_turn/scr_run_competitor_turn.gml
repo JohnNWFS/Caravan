@@ -200,7 +200,7 @@ function scr_run_competitor_turn(comp) {
         }
         if (_cargo_str == "") _cargo_str = "empty";
         console_print("[RIVAL: " + comp.name + "]  "
-                      + _from_name + " → " + _best_dest.name
+                      + _from_name + " > " + _best_dest.name
                       + "  |  gold: " + string(comp.gold)
                       + "  |  cargo: " + _cargo_str);
     }

@@ -76,9 +76,20 @@ function scr_calculate_sell_price(location, good_id, quantity) {
         final_modifier *= 0.90; // Additional 10% penalty (total ~15% off)
     }
     
+    // === TRADER BONUS ===
+    // A hired trader negotiates better sell prices (+10%)
+    if (variable_struct_exists(obj_player, "hired_crew")) {
+        for (var _ti = 0; _ti < array_length(obj_player.hired_crew); _ti++) {
+            if (obj_player.hired_crew[_ti].type == "TRADER") {
+                final_modifier *= 1.10;
+                break;
+            }
+        }
+    }
+
     // Calculate final price
     var unit_price = base_value * final_modifier;
     var total_price = unit_price * quantity;
-    
+
     return floor(total_price); // Round down (player gets slightly less)
 }

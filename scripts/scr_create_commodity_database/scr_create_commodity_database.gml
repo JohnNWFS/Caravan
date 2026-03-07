@@ -432,6 +432,105 @@ array_push(commodities, {
         rarity: "COMMON"
     });
     
+    // === FANTASY / RARE GOODS ===
+    array_push(commodities, {
+        id: "moonstone",
+        name: "Moonstone",
+        aliases: ["moon stone", "moon gem", "moonstones"],
+        category: "LUXURY",
+        storage_type: "LUXURY",
+        units_per_slot: 10,
+        can_mix_with: ["gems", "jewelry", "silver"],
+        base_value: 80,
+        weight: 1,
+        terrain_affinity: ["MOUNTAIN", "FOREST"],
+        rarity: "UNCOMMON"
+    });
+
+    array_push(commodities, {
+        id: "dragon_scale",
+        name: "Dragon Scale",
+        aliases: ["dragonscale", "dragon scales", "scales"],
+        category: "LUXURY",
+        storage_type: "LUXURY",
+        units_per_slot: 10,
+        can_mix_with: [],
+        base_value: 220,
+        weight: 2,
+        terrain_affinity: ["MOUNTAIN"],
+        rarity: "RARE"
+    });
+
+    array_push(commodities, {
+        id: "spell_components",
+        name: "Spell Components",
+        aliases: ["spell component", "components", "arcane components", "spell comp"],
+        category: "MATERIAL",
+        storage_type: "CRATE",
+        units_per_slot: 10,
+        can_mix_with: ["alchemical_reagents"],
+        base_value: 45,
+        weight: 1,
+        terrain_affinity: ["FOREST", "MOUNTAIN"],
+        rarity: "UNCOMMON"
+    });
+
+    array_push(commodities, {
+        id: "alchemical_reagents",
+        name: "Alchemical Reagents",
+        aliases: ["alchemy", "alchemical", "reagent", "reagents"],
+        category: "MATERIAL",
+        storage_type: "CASK",
+        units_per_slot: 10,
+        can_mix_with: ["spell_components"],
+        base_value: 65,
+        weight: 1,
+        terrain_affinity: ["PLAINS", "FOREST"],
+        rarity: "UNCOMMON"
+    });
+
+    array_push(commodities, {
+        id: "ancient_relic",
+        name: "Ancient Relic",
+        aliases: ["relic", "relics", "artifact", "artifacts", "ancient artifact"],
+        category: "LUXURY",
+        storage_type: "LUXURY",
+        units_per_slot: 5,
+        can_mix_with: [],
+        base_value: 350,
+        weight: 2,
+        terrain_affinity: ["MOUNTAIN", "DESERT"],
+        rarity: "RARE"
+    });
+
+    array_push(commodities, {
+        id: "enchanted_cloth",
+        name: "Enchanted Cloth",
+        aliases: ["enchanted fabric", "magic cloth", "arcane cloth", "enchanted textile"],
+        category: "TEXTILE",
+        storage_type: "BALE",
+        units_per_slot: 10,
+        can_mix_with: ["silk", "linen"],
+        base_value: 130,
+        weight: 1,
+        terrain_affinity: ["PLAINS", "FOREST"],
+        rarity: "UNCOMMON"
+    });
+
+    array_push(commodities, {
+        id: "grimoire",
+        name: "Grimoire",
+        aliases: ["grimoires", "spellbook", "spellbooks", "tome", "tomes", "arcane book"],
+        category: "LUXURY",
+        storage_type: "LUXURY",
+        units_per_slot: 10,
+        can_mix_with: [],
+        base_value: 180,
+        weight: 1,
+        terrain_affinity: ["ROAD"],
+        rarity: "RARE"
+    });
+
 	// === PROVISIONS (ALWAYS AVAILABLE) ===
 	array_push(commodities, {
 	    id: "provisions",

@@ -8,7 +8,7 @@
   ],
   "ResourceOrderSettings":[
     {"name":"fnt_console","order":1,"path":"fonts/fnt_console/fnt_console.yy",},
-    {"name":"Font2","order":8,"path":"fonts/Font2/Font2.yy",},
+    {"name":"fnt_extended","order":8,"path":"fonts/fnt_extended/fnt_extended.yy",},
     {"name":"obj_heartbeat","order":1,"path":"objects/obj_heartbeat/obj_heartbeat.yy",},
     {"name":"obj_input","order":2,"path":"objects/obj_input/obj_input.yy",},
     {"name":"obj_player","order":3,"path":"objects/obj_player/obj_player.yy",},
