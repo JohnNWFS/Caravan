@@ -118,7 +118,7 @@ function scr_cmd_work(days) {
     
     // === REPORT ===
     console_print("");
-    console_print("=== WORK COMPLETE ===");
+    console_print(_hdr("WORK COMPLETE"));
     console_print(flavor);
     console_print("");
     console_print("Days worked: " + string(days));

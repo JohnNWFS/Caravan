@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_cmd_load",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_cmd_load",
+  "parent":{
+    "name":"Commands",
+    "path":"folders/Scripts/Commands.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

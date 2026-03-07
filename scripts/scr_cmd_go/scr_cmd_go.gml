@@ -55,7 +55,7 @@ function scr_cmd_go(argument) {
     }
     
     // === DISPLAY JOURNEY PLAN ===
-    console_print("=== JOURNEY TO " + string_upper(dest_name) + " ===");
+    console_print(_hdr("JOURNEY TO " + string_upper(dest_name)));
     console_print("Distance: " + string(round(cost.distance)) + " km");
     console_print("Terrain: " + string_upper(cost.terrain));
     console_print("Duration: " + string(cost.days) + " days");
@@ -90,10 +90,45 @@ if (!check.can_afford) {
     return;
 }
 
-// TODO: Phase 3 - Actually execute the journey
-//console_print("[Travel execution not yet implemented]");
-console_print("You have enough resources to make this journey!");
-console_print("When complete, this will deduct resources and move you to " + dest_name + ".");
-// === EXECUTE JOURNEY ===
-scr_begin_journey(destination.id, cost);
+// === LAUNCH TRAVEL ANIMATION (journey executes when animation ends) ===
+// Look up world x/y for origin and destination
+var _dest_wx = 500;  var _dest_wy = 400;  // sensible fallback centre
+var _from_wx = 500;  var _from_wy = 400;
+var _from_id = obj_player.current_location;
+for (var _ti = 0; _ti < array_length(obj_heartbeat.world.locations); _ti++) {
+    var _tl = obj_heartbeat.world.locations[_ti];
+    if (_tl.id == destination.id) { _dest_wx = _tl.x;  _dest_wy = _tl.y; }
+    if (_tl.id == _from_id)       { _from_wx = _tl.x;  _from_wy = _tl.y; }
+}
+
+// Look up the route's bezier ctrl point so travel dot follows the curve
+var _travel_ctrl_x = (_from_wx + _dest_wx) * 0.5;  // fallback: straight midpoint
+var _travel_ctrl_y = (_from_wy + _dest_wy) * 0.5;
+for (var _tri = 0; _tri < array_length(obj_heartbeat.world.routes); _tri++) {
+    var _trt = obj_heartbeat.world.routes[_tri];
+    if ((_trt.from_id == _from_id && _trt.to_id == destination.id) ||
+        (_trt.from_id == destination.id && _trt.to_id == _from_id)) {
+        if (variable_struct_exists(_trt, "ctrl_x")) {
+            _travel_ctrl_x = _trt.ctrl_x;
+            _travel_ctrl_y = _trt.ctrl_y;
+        }
+        break;
+    }
+}
+
+obj_heartbeat.map_travel_active   = true;
+obj_heartbeat.map_travel_timer    = 0;
+obj_heartbeat.map_travel_duration = clamp(cost.days * 18, 120, 240);
+obj_heartbeat.map_travel_progress = 0;
+obj_heartbeat.map_travel_from_x   = _from_wx;
+obj_heartbeat.map_travel_from_y   = _from_wy;
+obj_heartbeat.map_travel_to_x     = _dest_wx;
+obj_heartbeat.map_travel_to_y     = _dest_wy;
+obj_heartbeat.map_travel_ctrl_x   = _travel_ctrl_x;
+obj_heartbeat.map_travel_ctrl_y   = _travel_ctrl_y;
+obj_heartbeat.map_travel_to_name  = dest_name;
+obj_heartbeat.map_travel_dest_id  = destination.id;
+obj_heartbeat.map_travel_costs    = cost;
+obj_heartbeat.map_open            = true;
+obj_heartbeat.map_close_delay     = 0;
 }

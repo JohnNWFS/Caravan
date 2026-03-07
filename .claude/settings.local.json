@@ -7,7 +7,23 @@
       "Bash(findstr \"competitors\" \"C:\\\\Users\\\\hoffe\\\\GameMakerProjects\\\\Caravan\\\\scripts\\\\world_generate\\\\world_generate.gml\")",
       "Bash(findstr \"scr_run_all_competitors\" \"C:\\\\Users\\\\hoffe\\\\GameMakerProjects\\\\Caravan\\\\scripts\\\\scr_begin_journey\\\\scr_begin_journey.gml\")",
       "Bash(findstr \"comp\")",
-      "Bash(findstr \"scr_competitor\\\\|scr_create_comp\\\\|scr_run_all\\\\|scr_run_comp\" \"C:\\\\Users\\\\hoffe\\\\GameMakerProjects\\\\Caravan\\\\Caravan.yyp\")"
+      "Bash(findstr \"scr_competitor\\\\|scr_create_comp\\\\|scr_run_all\\\\|scr_run_comp\" \"C:\\\\Users\\\\hoffe\\\\GameMakerProjects\\\\Caravan\\\\Caravan.yyp\")",
+      "Bash(git commit:*)",
+      "Bash(git push)",
+      "Bash(python3:*)",
+      "Bash(node -e \":*)",
+      "Bash(node /tmp/patch_yyp.js)",
+      "Bash(xargs grep -l \"competitors\")",
+      "Bash(xargs grep -l \"scr_run_competitor\")",
+      "Bash(Get-ChildItem \"C:\\\\Users\\\\hoffe\\\\GameMakerProjects\\\\Caravan\" -Filter \"*.yyp\")",
+      "Bash(Select-Object Name, FullName)",
+      "Bash(find /c/Users/hoffe/GameMakerProjects/Caravan -name \"*.gml\" -type f -exec grep -l \"draw_set_font\" {} ;)",
+      "Bash(grep -rn \"\\\\\\\\u[0-9a-fA-F]\" --include=\"*.gml\" .)",
+      "Bash(find . -name \"*.gml\" -type f -exec grep -l \"rival\\\\|Rival\\\\|RIVAL\\\\|status\" {} ;)",
+      "Bash(grep -v \"//\")",
+      "Bash(find . -name \"*.gml\" -type f -exec grep -P '\\\\\\\\\\\\\\\\u[0-9a-fA-F]{4}' {} +)",
+      "Bash(git add -u)",
+      "Bash(git add fonts/fnt_extended/ scripts/scr_build_terrain_surface/ scripts/scr_check_contract_completion/ scripts/scr_cmd_accept_contract/ scripts/scr_cmd_contracts/ scripts/scr_cmd_hire/ scripts/scr_cmd_load/ scripts/scr_cmd_save/ scripts/scr_find_path/ scripts/scr_generate_contracts/ scripts/scr_generate_crew_pool/ scripts/scr_journey_event/)"
     ]
   }
 }

@@ -7,17 +7,23 @@
 function cmd_parse(input) {
     // === SETUP STATE GATE ===
     // During the pre-game setup screen all commands are handled by scr_cmd_setup.
+    // Exception: LOAD is intercepted here so the player can resume a saved game
+    // without going through setup.
     if (obj_heartbeat.game_state == "SETUP") {
         var _raw = string_upper(string_trim(input));
         var _sp  = string_pos(" ", _raw);
         var _cmd = (_sp > 0) ? string_copy(_raw, 1, _sp - 1) : _raw;
         var _arg = (_sp > 0) ? string_delete(_raw, 1, _sp)   : "";
+        if (_cmd == "LOAD" || _cmd == "LO") {
+            scr_cmd_load();
+            return;
+        }
         scr_cmd_setup(_cmd, _arg);
         return;
     }
 
     // === GAMEOVER STATE GATE ===
-    // After a JOURNEY run ends, only RESTART and QUIT are valid.
+    // After a JOURNEY run ends, RESTART, LOAD, and QUIT are valid.
     if (obj_heartbeat.game_state == "GAMEOVER") {
         var _raw = string_upper(string_trim(input));
         if (_raw == "RESTART" || _raw == "R") {
@@ -25,8 +31,10 @@ function cmd_parse(input) {
         } else if (_raw == "QUIT" || _raw == "Q" || _raw == "QU") {
             console_print("Farewell, traveler.");
             game_end();
+        } else if (_raw == "LOAD" || _raw == "LO") {
+            scr_cmd_load();
         } else {
-            console_print("Game over. Type RESTART to play again or QUIT to exit.");
+            console_print("Game over. Type RESTART to play again, LOAD to resume a saved game, or QUIT to exit.");
         }
         return;
     }
@@ -59,6 +67,11 @@ function cmd_parse(input) {
             console_print("  WORK (W, WO)       - Earn gold through day labor (WORK <days>)");
             console_print("  SHOP (SH)          - Buy/sell vehicles & animals (SHOP VEHICLES / SHOP ANIMALS)");
             console_print("  REPAIR (REP)       - Repair all wagons (shows cost, asks YES/NO)");
+            console_print("  CONTRACTS (CON)    - View delivery contracts at current city/town");
+            console_print("  ACCEPT (ACC)       - Accept a contract (ACCEPT <number>)");
+            console_print("  HIRE (HIR)         - Hire crew at cities (GUARD / DRIVER / TRADER)");
+            console_print("  SAVE               - Save game to disk");
+            console_print("  LOAD (LO)          - Load last saved game");
             console_print("  QUIT (Q, QU)       - Exit game");
             console_print("  GUIDE              - Full game tutorial (typewriter style)");
             console_print("");
@@ -84,11 +97,82 @@ function cmd_parse(input) {
                 console_print("Type 'TRAVEL' to see available destinations.");
             }
             break;
-    
+
+        case "DIRECTIONS":
+        case "DIR":
+        {
+            // Close the map immediately — route is printed in the console
+            obj_heartbeat.map_open = false;
+
+            var _sel_id = obj_heartbeat.selected_location_id;
+            if (_sel_id == "") {
+                console_print("No location selected. Open MAP, click a city, then type DIRECTIONS.");
+                break;
+            }
+            obj_heartbeat.selected_location_id = "";   // consume the selection
+
+            // Resolve selected location name
+            var _sel_name = _sel_id;
+            for (var _dli = 0; _dli < array_length(obj_heartbeat.world.locations); _dli++) {
+                if (obj_heartbeat.world.locations[_dli].id == _sel_id) {
+                    _sel_name = obj_heartbeat.world.locations[_dli].name;
+                    break;
+                }
+            }
+
+            var _from_id = obj_player.current_location;
+            if (_from_id == _sel_id) {
+                console_print("You are already at " + _sel_name + ".");
+                break;
+            }
+
+            var _path = scr_find_path(_from_id, _sel_id);
+            if (_path == undefined) {
+                console_print("No route found to " + _sel_name + ".");
+                break;
+            }
+
+            // Build "A → B → C" string and sum estimated travel days per leg
+            var _route_str  = "";
+            var _total_days = 0;
+            for (var _pi = 0; _pi < array_length(_path); _pi++) {
+                var _pid  = _path[_pi];
+                var _pnam = _pid;
+                for (var _dli2 = 0; _dli2 < array_length(obj_heartbeat.world.locations); _dli2++) {
+                    if (obj_heartbeat.world.locations[_dli2].id == _pid) {
+                        _pnam = obj_heartbeat.world.locations[_dli2].name;
+                        break;
+                    }
+                }
+                if (_pi > 0) _route_str += " > ";
+                _route_str += _pnam;
+
+                // Sum days for each leg
+                if (_pi > 0) {
+                    var _prev_pid = _path[_pi - 1];
+                    for (var _dri = 0; _dri < array_length(obj_heartbeat.world.routes); _dri++) {
+                        var _drt = obj_heartbeat.world.routes[_dri];
+                        if ((_drt.from_id == _prev_pid && _drt.to_id == _pid)
+                        ||  (_drt.from_id == _pid      && _drt.to_id == _prev_pid)) {
+                            _total_days += max(1, ceil(_drt.distance / 40));
+                            break;
+                        }
+                    }
+                }
+            }
+
+            var _stops = array_length(_path) - 1;
+            console_print(_hdr("DIRECTIONS: " + _sel_name));
+            console_print(_route_str);
+            console_print("~" + string(_total_days) + " days  |  "
+                        + string(_stops) + " " + ((_stops == 1) ? "stop" : "stops"));
+        }
+            break;
+
         case "STATUS":
         case "ST":
             console_print("");
-            console_print("=== PLAYER STATUS ===");
+            console_print(_hdr("PLAYER STATUS"));
             
             // Show current location
             var loc_name = "Unknown";
@@ -111,7 +195,7 @@ function cmd_parse(input) {
             console_print("Day: " + string(obj_heartbeat.day));
             console_print("");
             
-            console_print("=== CARAVAN ===");
+            console_print(_hdr("CARAVAN"));
             var wagon_count = array_length(obj_player.caravan.wagons);
             console_print("Wagons: " + string(wagon_count));
             console_print("");
@@ -503,6 +587,27 @@ case "S":
             scr_cmd_repair();
             break;
 
+        case "CONTRACTS":
+        case "CON":
+            scr_cmd_contracts(args);
+            break;
+
+        case "ACCEPT":
+        case "ACC":
+            if (args != "") {
+                scr_cmd_accept_contract(args);
+            } else {
+                console_print("Usage: ACCEPT <number>");
+                console_print("Type CONTRACTS to see available contracts.");
+            }
+            break;
+
+        case "HIRE":
+        case "HIR":
+        case "HI":
+            scr_cmd_hire(args);
+            break;
+
 case "~":
     // Hidden debug command - dump console to output window
     var dump_count = -1; // -1 = all lines
@@ -541,6 +646,15 @@ case "~":
             scr_cmd_inventory();
 		    break;
 			
+        case "SAVE":
+            scr_cmd_save();
+            break;
+
+        case "LOAD":
+        case "LO":
+            scr_cmd_load();
+            break;
+
         case "QUIT":
         case "QU":
         case "Q":
@@ -701,7 +815,31 @@ case "~":
             // ON:  Opens caravan_debug.log (append), dumps full console history,
             //      then logs every subsequent console_print() call until toggled off.
             // OFF: Writes a session-end marker and closes the file cleanly.
-            if (!global.debug_log_enabled) {
+            //
+            // Subcommand: DEBUG EVENT <type>
+            //   Forces the next journey to fire a specific event, bypassing the
+            //   probability roll. Valid types: BANDIT STORM DESERT_HEAT BREAKDOWN
+            //   SHORTCUT FAIR_WEATHER DISCOVERY DRAGON_SIGHTING ARCANE_STORM
+            //   WANDERING_MAGE FAE_CROSSROADS WITCH_CURSE
+            //   Example: DEBUG EVENT BANDIT
+            if (string_upper(string_copy(args, 1, 5)) == "EVENT") {
+                var _forced = string_upper(string_trim(string_delete(args, 1, 5)));
+                if (_forced == "") {
+                    console_print("[DEBUG] Current forced event: " +
+                        (obj_heartbeat.debug_force_event == "" ? "(none)" : obj_heartbeat.debug_force_event));
+                    console_print("[DEBUG] Usage: DEBUG EVENT <type>  (or DEBUG EVENT CLEAR)");
+                } else if (_forced == "CLEAR") {
+                    obj_heartbeat.debug_force_event = "";
+                    console_print("[DEBUG] Forced event cleared.");
+                } else {
+                    obj_heartbeat.debug_force_event = _forced;
+                    console_print("[DEBUG] Next journey will fire: " + _forced);
+                    // Bump resources so the player can afford any journey immediately
+                    obj_player.gold       = max(obj_player.gold,       500);
+                    obj_player.provisions = max(obj_player.provisions,  50);
+                    console_print("[DEBUG] Resources bumped: " + string(obj_player.gold) + "g, " + string(obj_player.provisions) + " prov.");
+                }
+            } else if (!global.debug_log_enabled) {
                 scr_debug_log_open();
             } else {
                 scr_debug_log_close("USER");

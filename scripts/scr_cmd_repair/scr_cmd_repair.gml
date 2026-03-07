@@ -10,7 +10,7 @@ function scr_cmd_repair() {
     var _any_damaged = false;
 
     console_print("");
-    console_print("=== REPAIR ESTIMATE ===");
+    console_print(_hdr("REPAIR ESTIMATE"));
 
     for (var _i = 0; _i < _wagon_count; _i++) {
         var _w      = obj_player.caravan.wagons[_i];

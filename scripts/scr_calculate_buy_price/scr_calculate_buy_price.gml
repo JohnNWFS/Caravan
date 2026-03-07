@@ -91,6 +91,17 @@ function scr_calculate_buy_price(location, good_id, quantity) {
         final_modifier *= 0.93; // Additional 7% (total ~12% off)
     }
 
+    // === TRADER BONUS ===
+    // A hired trader negotiates better buy prices (-10%)
+    if (variable_struct_exists(obj_player, "hired_crew")) {
+        for (var _ti = 0; _ti < array_length(obj_player.hired_crew); _ti++) {
+            if (obj_player.hired_crew[_ti].type == "TRADER") {
+                final_modifier *= 0.90;
+                break;
+            }
+        }
+    }
+
     // Can't buy more than they have
     var actual_quantity = min(quantity, available_stock);
 

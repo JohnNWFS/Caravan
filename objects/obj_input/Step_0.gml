@@ -1,5 +1,8 @@
 /// @description Handle player keyboard input and typewriter skip
 
+// === BLOCK INPUT DURING MAP TRAVEL ANIMATION ===
+if (instance_exists(obj_heartbeat) && obj_heartbeat.map_travel_active) exit;
+
 // === TYPEWRITER CONTROL ===
 // Behaviour when the typewriter queue is non-empty:
 //   SPACE              → toggle pause / resume (key is NOT passed to the input buffer)

@@ -11,7 +11,7 @@ function scr_show_game_guide() {
     // HEADER
     // ================================================================
     console_print_slow("  CARAVAN  --  THE PLAYER'S GUIDE");
-    console_print_slow("  ================================");
+    console_print_slow("  " + string_repeat(chr(9552), 32));
     console_print_slow("  [ SPACE = pause/resume  |  any other key = skip all ]");
     console_print_slow("");
 
