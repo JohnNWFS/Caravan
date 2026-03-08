@@ -907,11 +907,26 @@ function scr_ai_player(journey_goal = 10) {
             role: _is_new_dest ? "NEW" : "REVISIT"
         });
 
-        // Periodic save checkpoint (scr_cmd_save only works in TOWN game_state, which we are)
+        // Periodic save + log-flush checkpoint
         if (journeys_done mod AI_SAVE_INTERVAL == 0) {
-            console_print("[DEBUG] Save checkpoint (turn " + string(journeys_done) + ")");
+            console_print("[DEBUG] Checkpoint (turn " + string(journeys_done) + "): saving...");
             scr_cmd_save();
             saves_done++;
+
+            // Flush debug log to disk: GML only writes the buffer on file_text_close().
+            // Close and immediately reopen so progress is safe even if the game is force-quit.
+            if (global.debug_log_enabled
+            &&  global.debug_log_file != -1
+            &&  global.debug_log_path != "") {
+                file_text_close(global.debug_log_file);
+                global.debug_log_file = file_text_open_append(global.debug_log_path);
+                if (global.debug_log_file == -1) {
+                    // Lost the log handle — disable to avoid crashes
+                    global.debug_log_enabled = false;
+                } else {
+                    console_print("[DEBUG] Log flushed to disk at turn " + string(journeys_done));
+                }
+            }
         }
 
         console_print("");

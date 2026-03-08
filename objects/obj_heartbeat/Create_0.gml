@@ -31,6 +31,7 @@ global.animals  = scr_create_animal_database();
 // === DEBUG LOGGING ===
 global.debug_log_enabled = false;  // true when actively writing to disk
 global.debug_log_file    = -1;     // GML file handle; -1 = not open
+global.debug_log_path    = "";     // full path used for periodic flush (close+reopen)
 
 // === DEBUG EVENT INJECTION ===
 debug_force_event = "";  // If non-empty, scr_journey_event fires this type next trip (then clears)
