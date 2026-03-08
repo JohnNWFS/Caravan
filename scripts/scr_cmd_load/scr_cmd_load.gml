@@ -13,9 +13,9 @@
 
 // ---------------------------------------------------------------------------
 
-function scr_cmd_load() {
+function scr_cmd_load(filename = "caravan_save.json") {
 
-    var _path = working_directory + "caravan_save.json";
+    var _path = working_directory + filename;
 
     // ------------------------------------------------------------------
     // File existence check

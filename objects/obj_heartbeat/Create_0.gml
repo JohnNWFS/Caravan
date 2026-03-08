@@ -31,6 +31,7 @@ global.animals  = scr_create_animal_database();
 // === DEBUG LOGGING ===
 global.debug_log_enabled = false;  // true when actively writing to disk
 global.debug_log_file    = -1;     // GML file handle; -1 = not open
+global.debug_log_path    = "";     // full path used for periodic flush (close+reopen)
 
 // === DEBUG EVENT INJECTION ===
 debug_force_event = "";  // If non-empty, scr_journey_event fires this type next trip (then clears)
@@ -63,6 +64,9 @@ selected_location_id = "";   // ID of last left-clicked node; persists until DIR
 
 // === JOURNEY TRACKING ===
 journey_count = 0;    // Number of completed journeys this run
+
+// === BEAT AI ===
+beat_ai_target_gold = 0;   // set during BEAT_AI pre-run; 0 in other modes
 
 // === SETUP CONFIG (player's pre-game choices, set during SETUP state) ===
 setup_config = {

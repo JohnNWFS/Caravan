@@ -26,6 +26,7 @@ function scr_debug_log_open() {
     }
 
     global.debug_log_enabled = true;
+    global.debug_log_path    = _path;   // stored so AUTOPLAY can flush (close+reopen) periodically
 
     // --- Session header ---
     var _now = string(current_year)   + "-"

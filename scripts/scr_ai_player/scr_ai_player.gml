@@ -4,23 +4,32 @@
 /// @desc  Simulate an AI trader completing [journey_goal] journeys.
 ///        Every decision is printed to the console so the debug log captures a
 ///        full play-through.  Tweak the CONFIG block below to adjust behaviour.
-/// @param {Real} [journey_goal]  Number of journeys to attempt (default: 10)
+/// @param {Real}    [journey_goal]  Number of journeys to attempt (default: 10)
+/// @param {Bool}    [silent]        If true, skips periodic saves (used by BEAT AI pre-run)
 
-function scr_ai_player(journey_goal = 10) {
+function scr_ai_player(journey_goal = 10, silent = false) {
 
     // ═══════════════════════════════════════════════════════════════════════
     // CONFIG  -change these numbers to tune AI behaviour
     // ═══════════════════════════════════════════════════════════════════════
-    var AI_PROVISION_BUFFER  = 10;  // extra provisions to keep beyond journey cost
-    var AI_GOLD_BUFFER       = 50;  // gold kept in reserve (not spent on goods)
-    var AI_MAX_WORK_DAYS     = 7;   // max days the AI will work at one stop
-    var AI_DEMAND_BONUS      = 100; // scoring bonus when destination actively demands a good
-    var AI_REPAIR_THRESHOLD  = 70;  // auto-repair when worst wagon drops below this % condition
-    var AI_UPGRADE_GOLD_MIN  = 3000; // minimum gold surplus before attempting any upgrade
-    var AI_RECENCY_PENALTY   = 800;  // max score deducted for a recently-visited location
-    var AI_RECENCY_TURNS     = 10;   // turns over which the recency penalty fades to zero
-    var AI_MARGIN_BONUS_MULT = 5;    // score added per gold of estimated trade margin on a route
-    var AI_CODE_VERSION      = "v1.5.0"; // increment with every Claude Code change
+    var AI_PROVISION_BUFFER        = 10;    // extra provisions to keep beyond journey cost
+    var AI_GOLD_BUFFER             = 50;    // gold kept in reserve (not spent on goods)
+    var AI_MAX_WORK_DAYS           = 7;     // max days the AI will work at one stop
+    var AI_DEMAND_BONUS            = 100;   // scoring bonus when destination actively demands a good
+    var AI_REPAIR_THRESHOLD        = 70;    // auto-repair when worst wagon drops below this % condition
+    var AI_UPGRADE_GOLD_MIN        = 3000;  // minimum gold surplus before attempting any upgrade
+    var AI_RECENCY_PENALTY         = 800;   // max score deducted for a recently-visited location
+    var AI_RECENCY_TURNS           = 10;    // turns over which the recency penalty fades to zero
+    var AI_MARGIN_BONUS_MULT       = 5;     // score added per gold of estimated trade margin on a route
+    var AI_HIRE_GOLD_MIN           = 600;   // minimum gold surplus before hiring crew
+    var AI_DISMISS_GOLD_FLOOR      = 120;   // dismiss crew when gold falls below this
+    var AI_MAX_ACTIVE_CONTRACTS    = 2;     // don't overcommit on contracts
+    var AI_CONTRACT_REWARD_MIN     = 60;    // minimum reward gold to accept a contract
+    var AI_CONTRACT_URGENCY_BASE   = 1500;  // destination scoring bonus per active contract
+    var AI_CONTRACT_DEADLINE_PANIC = 3000;  // extra bonus when deadline < 5 days away
+    var AI_SAVE_INTERVAL           = 100;   // save to disk every N journeys
+    var AI_CONTRACT_MAX_HOPS       = 2;     // BFS hop limit for contract reachability (2 = 1 intermediate stop)
+    var AI_CODE_VERSION            = "v1.8.0";
 
     // ═══════════════════════════════════════════════════════════════════════
     // STATE
@@ -29,12 +38,22 @@ function scr_ai_player(journey_goal = 10) {
     var unique_locs_visited  = {};   // struct used as a visited-set
     var loc_visit_log        = [];   // ordered list of {name, day, role} for the summary
 
+    // ── New stat counters ────────────────────────────────────────────────────
+    var contracts_accepted   = 0;
+    var contracts_resolved   = 0;   // completed + failed combined
+    var crew_hired           = 0;
+    var crew_dismissed       = 0;
+    var saves_done           = 0;
+    var total_wages_paid     = 0;
+    var _rep_start           = obj_player.reputation;
+
     // ═══════════════════════════════════════════════════════════════════════
     // OPENING BANNER
     // ═══════════════════════════════════════════════════════════════════════
     console_print("");
     console_print(string_repeat(chr(9552), 42));
     console_print("         AI AUTOPLAY STARTING");
+    console_print("  [DEBUG] tags mark AI reasoning - not shown in normal play");
     console_print("------------------------------------------");
     console_print("  Goal journeys : " + string(journey_goal));
     console_print("  Prov. buffer  : " + string(AI_PROVISION_BUFFER));
@@ -302,13 +321,308 @@ function scr_ai_player(journey_goal = 10) {
                           + "g < " + string(AI_UPGRADE_GOLD_MIN) + "g) -skipping.");
         }
 
-        // ── STEP 2 : Choose destination ───────────────────────────────────
-        console_print("[AI] STEP 2 - Choosing destination");
+        // ── Pre-compute travel options (needed by Steps 1.55, 1.7, and 2) ──
         var _options = scr_get_travel_options();
         if (array_length(_options) == 0) {
             console_print("[AI] No routes from " + _cur_loc.name + ". Aborting.");
             break;
         }
+
+        // ── STEP 1.55 : Crew management ───────────────────────────────────
+        console_print("[AI] STEP 1.55 - Crew management");
+
+        // ── A. DISMISS: if gold is below floor, release highest-wage crew ──
+        if (obj_player.gold < AI_DISMISS_GOLD_FLOOR
+        &&  array_length(obj_player.hired_crew) > 0) {
+            var _dismiss_idx  = 0;
+            var _dismiss_wage = obj_player.hired_crew[0].wage;
+            for (var _di = 1; _di < array_length(obj_player.hired_crew); _di++) {
+                if (obj_player.hired_crew[_di].wage > _dismiss_wage) {
+                    _dismiss_wage = obj_player.hired_crew[_di].wage;
+                    _dismiss_idx  = _di;
+                }
+            }
+            var _gone = obj_player.hired_crew[_dismiss_idx];
+            console_print("[DEBUG] Dismiss: " + _gone.name + " (" + _gone.type + ") "
+                          + string(_gone.wage) + "g/day"
+                          + " -- gold=" + string(obj_player.gold)
+                          + " below floor=" + string(AI_DISMISS_GOLD_FLOOR));
+            scr_cmd_hire("DISMISS " + string(_dismiss_idx + 1));
+            crew_dismissed++;
+        }
+
+        // ── B. HIRE: only at locations tagged "hire", with gold surplus ────
+        var _loc_has_hire = false;
+        if (variable_struct_exists(_cur_loc, "tags")) {
+            for (var _ht = 0; _ht < array_length(_cur_loc.tags); _ht++) {
+                if (_cur_loc.tags[_ht] == "hire") { _loc_has_hire = true; break; }
+            }
+        }
+
+        if (_loc_has_hire
+        &&  obj_player.gold > AI_HIRE_GOLD_MIN
+        &&  array_length(obj_player.hired_crew) < 3) {
+
+            // scr_cmd_hire("") prints menu and generates/refreshes available_crew
+            scr_cmd_hire("");
+
+            if (variable_struct_exists(_cur_loc, "available_crew")
+            &&  array_length(_cur_loc.available_crew) > 0) {
+
+                // Priority order: GUARD first (bandit defence), then profit/efficiency
+                var _hire_priority = [
+                    "GUARD", "TRADER", "DRIVER",
+                    "HEDGE_WITCH", "NAVIGATOR",
+                    "MERCENARY_CAPTAIN", "ALCHEMIST"
+                ];
+
+                // Build set of already-hired types
+                var _have_types = {};
+                for (var _hci = 0; _hci < array_length(obj_player.hired_crew); _hci++) {
+                    _have_types[$ obj_player.hired_crew[_hci].type] = true;
+                }
+
+                // Find highest-priority pool member not already hired
+                var _hire_pool_idx  = -1;
+                var _hire_best_rank = 999;
+                for (var _api = 0; _api < array_length(_cur_loc.available_crew); _api++) {
+                    var _ac = _cur_loc.available_crew[_api];
+                    if (variable_struct_exists(_have_types, _ac.type)) continue;
+                    for (var _pri = 0; _pri < array_length(_hire_priority); _pri++) {
+                        if (_hire_priority[_pri] == _ac.type && _pri < _hire_best_rank) {
+                            _hire_best_rank = _pri;
+                            _hire_pool_idx  = _api;
+                            break;
+                        }
+                    }
+                }
+
+                if (_hire_pool_idx >= 0) {
+                    var _to_hire = _cur_loc.available_crew[_hire_pool_idx];
+                    console_print("[DEBUG] Crew at " + _cur_loc.name + ": "
+                                  + _to_hire.type + " " + _to_hire.name
+                                  + " " + string(_to_hire.wage) + "g/day -> HIRE");
+                    scr_cmd_hire(string(_hire_pool_idx + 1));
+                    crew_hired++;
+                } else {
+                    console_print("[DEBUG] Crew at " + _cur_loc.name
+                                  + ": no new type available (all types already hired).");
+                }
+            }
+
+        } else {
+            if (!_loc_has_hire) {
+                console_print("[AI] No hire market here.");
+            } else if (obj_player.gold <= AI_HIRE_GOLD_MIN) {
+                console_print("[AI] Below hire gold threshold ("
+                              + string(obj_player.gold) + "g) - skipping hire.");
+            } else {
+                console_print("[AI] Crew full (3/3).");
+            }
+        }
+
+        // Log daily crew wage for observability
+        var _daily_crew_wage = 0;
+        for (var _cwi = 0; _cwi < array_length(obj_player.hired_crew); _cwi++) {
+            _daily_crew_wage += obj_player.hired_crew[_cwi].wage;
+        }
+        if (_daily_crew_wage > 0) {
+            console_print("[DEBUG] Crew wages: "
+                          + string(array_length(obj_player.hired_crew))
+                          + " crew, " + string(_daily_crew_wage) + "g/day total");
+        }
+
+        // ── BFS reachability (limited to AI_CONTRACT_MAX_HOPS hops) ─────────
+        // Returns true if to_id is reachable from from_id within max_hops steps.
+        // Routes are bidirectional: each route is checked in both directions.
+        var _ai_reachable = method({
+            routes:    obj_heartbeat.world.routes,
+            max_hops:  AI_CONTRACT_MAX_HOPS
+        }, function(from_id, to_id) {
+            if (from_id == to_id) return true;
+            var _q    = [{ id: from_id, hops: 0 }];
+            var _seen = {};
+            _seen[$ string(from_id)] = true;
+            while (array_length(_q) > 0) {
+                var _cur = _q[0];
+                array_delete(_q, 0, 1);
+                if (_cur.hops >= max_hops) continue;
+                for (var _ri = 0; _ri < array_length(routes); _ri++) {
+                    var _r   = routes[_ri];
+                    var _nxt = noone;
+                    if      (_r.from_id == _cur.id) _nxt = _r.to_id;
+                    else if (_r.to_id   == _cur.id) _nxt = _r.from_id;
+                    if (_nxt == noone) continue;
+                    if (_nxt == to_id) return true;
+                    if (!variable_struct_exists(_seen, string(_nxt))) {
+                        _seen[$ string(_nxt)] = true;
+                        array_push(_q, { id: _nxt, hops: _cur.hops + 1 });
+                    }
+                }
+            }
+            return false;
+        });
+
+        // ── STEP 1.7 : Contract management ───────────────────────────────
+        console_print("[AI] STEP 1.7 - Contracts check");
+
+        var _loc_has_contracts = false;
+        if (variable_struct_exists(_cur_loc, "tags")) {
+            for (var _ct = 0; _ct < array_length(_cur_loc.tags); _ct++) {
+                if (_cur_loc.tags[_ct] == "contracts") { _loc_has_contracts = true; break; }
+            }
+        }
+
+        if (_loc_has_contracts) {
+
+            // scr_cmd_contracts("") generates/refreshes pool and prints the board
+            scr_cmd_contracts("");
+
+            var _avail_raw = variable_struct_exists(_cur_loc, "available_contracts")
+                             ? array_length(_cur_loc.available_contracts) : 0;
+            var _exp_count  = 0;
+            var _tkn_count  = 0;
+            for (var _cti = 0; _cti < _avail_raw; _cti++) {
+                var _raw_c = _cur_loc.available_contracts[_cti];
+                if (_raw_c.deadline_day <= obj_heartbeat.day) { _exp_count++; continue; }
+                var _is_taken = false;
+                for (var _tai = 0; _tai < array_length(obj_player.active_contracts); _tai++) {
+                    if (obj_player.active_contracts[_tai].id == _raw_c.id) {
+                        _is_taken = true; break;
+                    }
+                }
+                if (_is_taken) _tkn_count++;
+            }
+            console_print("[DEBUG] Contracts at " + _cur_loc.name + ": "
+                          + string(_avail_raw - _exp_count - _tkn_count) + " available ("
+                          + string(_exp_count) + " expired, "
+                          + string(_tkn_count) + " already accepted)");
+
+            // Build display list that EXACTLY matches scr_cmd_accept_contract's indexing
+            var _display_contracts = [];
+            for (var _dci = 0; _dci < _avail_raw; _dci++) {
+                var _dc = _cur_loc.available_contracts[_dci];
+                if (_dc.deadline_day <= obj_heartbeat.day) continue;
+                var _dc_taken = false;
+                for (var _dta = 0; _dta < array_length(obj_player.active_contracts); _dta++) {
+                    if (obj_player.active_contracts[_dta].id == _dc.id) {
+                        _dc_taken = true; break;
+                    }
+                }
+                if (!_dc_taken) array_push(_display_contracts, {
+                    contract:      _dc,
+                    display_index: array_length(_display_contracts) + 1  // 1-based
+                });
+            }
+
+            // Evaluate and accept profitable contracts
+            for (var _dli = 0; _dli < array_length(_display_contracts); _dli++) {
+                if (array_length(obj_player.active_contracts) >= AI_MAX_ACTIVE_CONTRACTS) break;
+
+                var _entry   = _display_contracts[_dli];
+                var _cand_c  = _entry.contract;
+                var _days_left = _cand_c.deadline_day - obj_heartbeat.day;
+
+                // Destination reachable within AI_CONTRACT_MAX_HOPS hops
+                var _dest_reachable = _ai_reachable(obj_player.current_location, _cand_c.dest_id);
+
+                var _skip_reason = "";
+                if (_cand_c.reward_gold < AI_CONTRACT_REWARD_MIN) {
+                    _skip_reason = "reward " + string(_cand_c.reward_gold)
+                                   + "g < min " + string(AI_CONTRACT_REWARD_MIN) + "g";
+                } else if (!_dest_reachable) {
+                    _skip_reason = "dest " + _cand_c.dest_name
+                                   + " not reachable in " + string(AI_CONTRACT_MAX_HOPS) + " hops";
+                }
+
+                // Good must be purchasable here in sufficient quantity — no point accepting
+                // a contract for goods we cannot actually load onto the caravan.
+                var _cg_id    = "";   // good_id for the contract cargo
+                var _cg_stock = 0;   // units in stock at this location
+                var _cg_uslot = 1;   // units that stack per cargo slot
+                if (_skip_reason == ""
+                &&  variable_struct_exists(_cur_loc, "economy")
+                &&  variable_struct_exists(_cur_loc.economy, "stock_levels")) {
+                    var _cgkeys = variable_struct_get_names(_cur_loc.economy.stock_levels);
+                    for (var _cgki = 0; _cgki < array_length(_cgkeys); _cgki++) {
+                        var _cgid  = _cgkeys[_cgki];
+                        var _cgcom = scr_get_commodity_by_id(_cgid);
+                        if (_cgcom != undefined && _cgcom.name == _cand_c.good_name) {
+                            var _cgbp = scr_calculate_buy_price(_cur_loc, _cgid, 1);
+                            if (_cgbp > 0) {
+                                _cg_id    = _cgid;
+                                _cg_stock = _cur_loc.economy.stock_levels[$ _cgid];
+                                _cg_uslot = _cgcom.units_per_slot;
+                            }
+                            break;
+                        }
+                    }
+                    if (_cg_id == "") {
+                        _skip_reason = _cand_c.good_name + " not purchasable here";
+                    } else if (_cg_stock < _cand_c.quantity) {
+                        _skip_reason = "only " + string(_cg_stock) + "/"
+                                       + string(_cand_c.quantity) + " " + _cand_c.good_name + " in stock";
+                    }
+                }
+
+                var _decision = (_skip_reason == "") ? "ACCEPT" : "SKIP";
+                console_print("[DEBUG] Contract #" + string(_entry.display_index) + ": "
+                              + _cand_c.good_name + " x" + string(_cand_c.quantity)
+                              + " -> " + _cand_c.dest_name
+                              + "  reward=" + string(_cand_c.reward_gold) + "g"
+                              + "  deadline=day" + string(_cand_c.deadline_day)
+                              + " (" + string(_days_left) + "d left)"
+                              + "  -> " + _decision
+                              + (_skip_reason != "" ? " (" + _skip_reason + ")" : ""));
+
+                if (_decision == "ACCEPT") {
+                    scr_cmd_accept_contract(string(_entry.display_index));
+                    contracts_accepted++;
+
+                    // ── Immediately buy the required cargo ───────────────────
+                    // Budget: gold minus rough travel cost to destination minus buffer.
+                    // Step 5 will then fill remaining slots with profit goods.
+                    var _rough_tc     = scr_calculate_travel_cost(obj_player.current_location, _cand_c.dest_id);
+                    var _rough_travel = (_rough_tc != noone) ? _rough_tc.gold : 0;
+                    var _cargo_budget = max(0, obj_player.gold - _rough_travel - AI_GOLD_BUFFER);
+                    var _cg_bp        = scr_calculate_buy_price(_cur_loc, _cg_id, 1);
+
+                    // Count empty cargo slots now
+                    var _cg_slots = 0;
+                    for (var _cgw = 0; _cgw < array_length(obj_player.caravan.wagons); _cgw++) {
+                        var _cgc = obj_player.caravan.wagons[_cgw].slots.cargo.contents;
+                        for (var _cgs = 0; _cgs < array_length(_cgc); _cgs++) {
+                            if (_cgc[_cgs] == undefined) _cg_slots++;
+                        }
+                    }
+
+                    var _can_buy = floor(_cargo_budget / max(1, _cg_bp));
+                    _can_buy     = min(_can_buy, _cg_stock);
+                    _can_buy     = min(_can_buy, _cg_slots * _cg_uslot);
+                    _can_buy     = min(_can_buy, _cand_c.quantity);  // don't over-buy
+
+                    if (_can_buy > 0) {
+                        console_print("[AI] CONTRACT CARGO: Buying " + string(_can_buy) + "x "
+                                      + _cand_c.good_name + " @" + string(_cg_bp) + "g  ("
+                                      + string(_can_buy) + "/" + string(_cand_c.quantity) + " needed)");
+                        scr_cmd_buy(_cand_c.good_name, _can_buy, true);
+                    } else {
+                        console_print("[DEBUG] CONTRACT CARGO: No budget/space for "
+                                      + _cand_c.good_name + " right now");
+                    }
+                }
+            }
+
+            console_print("[DEBUG] Active contracts: "
+                          + string(array_length(obj_player.active_contracts))
+                          + " -- deadline urgency will influence routing");
+
+        } else {
+            console_print("[AI] No contract board here.");
+        }
+
+        // ── STEP 2 : Choose destination ───────────────────────────────────
+        console_print("[AI] STEP 2 - Choosing destination");
 
         var _dest      = undefined;
         var _dest_cost = undefined;
@@ -372,6 +686,31 @@ function scr_ai_player(journey_goal = 10) {
                 }
                 _sc += _margin_est * AI_MARGIN_BONUS_MULT;
             }
+
+            // 5. Contract deadline urgency: bonus when this destination fulfils a contract
+            var _contract_bonus = 0;
+            for (var _aci = 0; _aci < array_length(obj_player.active_contracts); _aci++) {
+                var _ac = obj_player.active_contracts[_aci];
+                if (_ac.dest_id == _opt.id) {
+                    var _days_rem = _ac.deadline_day - obj_heartbeat.day;
+                    var _urgency  = AI_CONTRACT_URGENCY_BASE * (1 + 1 / max(1, _days_rem));
+                    _contract_bonus += _urgency;
+                    if (_days_rem < 5) _contract_bonus += AI_CONTRACT_DEADLINE_PANIC;
+                    console_print("[DEBUG] Contract urgency: " + _opt.name
+                                  + " +" + string(round(_urgency))
+                                  + (_days_rem < 5 ? " [PANIC]" : "")
+                                  + " (deadline in " + string(_days_rem) + " days)");
+                }
+            }
+            _sc += _contract_bonus;
+
+            // DEBUG: show full scoring breakdown for this destination
+            var _novelty_dbg = !variable_struct_exists(unique_locs_visited, _opt.id) ? 1000 : 0;
+            console_print("[DEBUG] Route score: " + _opt.name
+                          + "  novelty=" + string(_novelty_dbg)
+                          + "  dist=" + string(-round(_c.distance))
+                          + "  contract=" + string(round(_contract_bonus))
+                          + "  total=" + string(round(_sc)));
 
             if (_sc > _best_score) {
                 _best_score = _sc;
@@ -529,6 +868,16 @@ function scr_ai_player(journey_goal = 10) {
             }
         }
 
+        // Crew wages are already embedded in _dest_cost.gold by scr_calculate_travel_cost.
+        // Log separately for observability.
+        if (variable_struct_exists(_dest_cost, "crew_wage") && _dest_cost.crew_wage > 0) {
+            var _journey_wages = _dest_cost.crew_wage * _dest_cost.days;
+            console_print("[DEBUG] Crew wages: " + string(_dest_cost.crew_wage)
+                          + "g/day x " + string(_dest_cost.days) + " days = "
+                          + string(_journey_wages) + "g (included in journey cost)");
+            total_wages_paid += _journey_wages;
+        }
+
         var _gold_budget = obj_player.gold - _dest_cost.gold - AI_GOLD_BUFFER;
 
         if (_gold_budget > 0 && _dest_loc != undefined && _empty_slots > 0) {
@@ -634,9 +983,26 @@ function scr_ai_player(journey_goal = 10) {
         }
 
         var _is_new_dest = !variable_struct_exists(unique_locs_visited, _dest.id);
+        var _contracts_before = array_length(obj_player.active_contracts);
+
+        // ── Snapshot rival state before journey (rivals run inside scr_begin_journey) ──
+        var _comp_snap = [];
+        if (!silent) {
+            var _rv = obj_heartbeat.world.competitors;
+            for (var _rsi = 0; _rsi < array_length(_rv); _rsi++) {
+                array_push(_comp_snap, {
+                    gold:     _rv[_rsi].gold,
+                    location: _rv[_rsi].current_location
+                });
+            }
+        }
+
         console_print("[AI] ▶ DEPARTING for " + _dest.name + " ◀");
         scr_begin_journey(_dest.id, _dest_cost);
         journeys_done++;
+
+        // Track contracts resolved (completed or failed) during this journey
+        contracts_resolved += max(0, _contracts_before - array_length(obj_player.active_contracts));
 
         unique_locs_visited[$ _dest.id] = { last_turn: journeys_done };
         array_push(loc_visit_log, {
@@ -644,6 +1010,59 @@ function scr_ai_player(journey_goal = 10) {
             day:  obj_heartbeat.day,
             role: _is_new_dest ? "NEW" : "REVISIT"
         });
+
+        // ── Rival activity summary (delta from snapshot taken before journey) ─────
+        if (!silent && array_length(_comp_snap) > 0
+        &&  obj_heartbeat.game_state != "GAMEOVER") {
+            var _rv = obj_heartbeat.world.competitors;
+            for (var _rli = 0; _rli < array_length(_rv); _rli++) {
+                var _rc   = _rv[_rli];
+                var _rsnp = _comp_snap[_rli];
+                var _rdg  = _rc.gold - _rsnp.gold;
+                var _rdg_str = (_rdg >= 0 ? "+" : "") + string(_rdg) + "g";
+
+                var _from_loc = _loc_map[$ _rsnp.location];
+                var _to_loc   = _loc_map[$ _rc.current_location];
+                var _rfrom = (_from_loc != undefined) ? _from_loc.name : _rsnp.location;
+                var _rto   = (_to_loc   != undefined) ? _to_loc.name   : _rc.current_location;
+
+                var _rcargo = "";
+                for (var _rci = 0; _rci < array_length(_rc.cargo); _rci++) {
+                    var _ri   = _rc.cargo[_rci];
+                    var _rcom = scr_get_commodity_by_id(_ri.good_id);
+                    var _rnm  = (_rcom != undefined) ? _rcom.name : _ri.good_id;
+                    if (_rcargo != "") _rcargo += ", ";
+                    _rcargo += string(_ri.quantity) + " " + _rnm;
+                }
+                if (_rcargo == "") _rcargo = "empty";
+
+                console_print("[RIVAL] " + _rc.name + ": " + _rfrom + " -> " + _rto
+                              + "  " + _rdg_str + "  cargo: " + _rcargo);
+            }
+        }
+
+        // Periodic save + log-flush checkpoint (skipped in silent/BEAT_AI pre-run mode)
+        if (!silent && journeys_done mod AI_SAVE_INTERVAL == 0
+        &&  obj_heartbeat.game_state == "TOWN") {
+            console_print("[DEBUG] Checkpoint (turn " + string(journeys_done) + "): saving...");
+            scr_cmd_save();
+            saves_done++;
+
+            // Flush debug log to disk: GML only writes the buffer on file_text_close().
+            // Close and immediately reopen so progress is safe even if the game is force-quit.
+            if (global.debug_log_enabled
+            &&  global.debug_log_file != -1
+            &&  global.debug_log_path != "") {
+                file_text_close(global.debug_log_file);
+                global.debug_log_file = file_text_open_append(global.debug_log_path);
+                if (global.debug_log_file == -1) {
+                    // Lost the log handle — disable to avoid crashes
+                    global.debug_log_enabled = false;
+                } else {
+                    console_print("[DEBUG] Log flushed to disk at turn " + string(journeys_done));
+                }
+            }
+        }
 
         console_print("");
     } // end while
@@ -657,11 +1076,24 @@ function scr_ai_player(journey_goal = 10) {
     console_print(string_repeat(chr(9552), 42));
     console_print("         AI AUTOPLAY COMPLETE");
     console_print("------------------------------------------");
+    var _rep_final     = obj_player.reputation;
+    var _rep_delta     = _rep_final - _rep_start;
+    var _rep_delta_str = (_rep_delta >= 0 ? "+" : "") + string(_rep_delta);
+
     console_print("  Journeys:       " + string(journeys_done) + "/" + string(journey_goal));
     console_print("  Unique places:  " + string(_unique_count));
     console_print("  Final gold:     " + string(obj_player.gold));
     console_print("  Final day:      " + string(obj_heartbeat.day));
     console_print("  Provisions:     " + string(obj_player.provisions));
+    console_print("------------------------------------------");
+    console_print("  Reputation:     " + string(_rep_start) + " -> "
+                  + string(_rep_final) + " (" + _rep_delta_str + ")");
+    console_print("  Contracts:      " + string(contracts_accepted)
+                  + " accepted, " + string(contracts_resolved) + " resolved");
+    console_print("  Crew:           " + string(crew_hired) + " hired, "
+                  + string(crew_dismissed) + " dismissed");
+    console_print("  Crew wages pd:  " + string(total_wages_paid) + "g total");
+    console_print("  Saves:          " + string(saves_done) + " checkpoints");
     console_print("------------------------------------------");
     console_print("  ROUTE LOG:");
     for (var _vi = 0; _vi < array_length(loc_visit_log); _vi++) {
