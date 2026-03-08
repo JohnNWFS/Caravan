@@ -506,6 +506,36 @@ function scr_ai_player(journey_goal = 10) {
                     _skip_reason = "dest " + _cand_c.dest_name + " not directly reachable";
                 }
 
+                // Good must be purchasable here in sufficient quantity — no point accepting
+                // a contract for goods we cannot actually load onto the caravan.
+                var _cg_id    = "";   // good_id for the contract cargo
+                var _cg_stock = 0;   // units in stock at this location
+                var _cg_uslot = 1;   // units that stack per cargo slot
+                if (_skip_reason == ""
+                &&  variable_struct_exists(_cur_loc, "economy")
+                &&  variable_struct_exists(_cur_loc.economy, "stock_levels")) {
+                    var _cgkeys = variable_struct_get_names(_cur_loc.economy.stock_levels);
+                    for (var _cgki = 0; _cgki < array_length(_cgkeys); _cgki++) {
+                        var _cgid  = _cgkeys[_cgki];
+                        var _cgcom = scr_get_commodity_by_id(_cgid);
+                        if (_cgcom != undefined && _cgcom.name == _cand_c.good_name) {
+                            var _cgbp = scr_calculate_buy_price(_cur_loc, _cgid, 1);
+                            if (_cgbp > 0) {
+                                _cg_id    = _cgid;
+                                _cg_stock = _cur_loc.economy.stock_levels[$ _cgid];
+                                _cg_uslot = _cgcom.units_per_slot;
+                            }
+                            break;
+                        }
+                    }
+                    if (_cg_id == "") {
+                        _skip_reason = _cand_c.good_name + " not purchasable here";
+                    } else if (_cg_stock < _cand_c.quantity) {
+                        _skip_reason = "only " + string(_cg_stock) + "/"
+                                       + string(_cand_c.quantity) + " " + _cand_c.good_name + " in stock";
+                    }
+                }
+
                 var _decision = (_skip_reason == "") ? "ACCEPT" : "SKIP";
                 console_print("[DEBUG] Contract #" + string(_entry.display_index) + ": "
                               + _cand_c.good_name + " x" + string(_cand_c.quantity)
@@ -519,6 +549,38 @@ function scr_ai_player(journey_goal = 10) {
                 if (_decision == "ACCEPT") {
                     scr_cmd_accept_contract(string(_entry.display_index));
                     contracts_accepted++;
+
+                    // ── Immediately buy the required cargo ───────────────────
+                    // Budget: gold minus rough travel cost to destination minus buffer.
+                    // Step 5 will then fill remaining slots with profit goods.
+                    var _rough_tc     = scr_calculate_travel_cost(obj_player.current_location, _cand_c.dest_id);
+                    var _rough_travel = (_rough_tc != noone) ? _rough_tc.gold : 0;
+                    var _cargo_budget = max(0, obj_player.gold - _rough_travel - AI_GOLD_BUFFER);
+                    var _cg_bp        = scr_calculate_buy_price(_cur_loc, _cg_id, 1);
+
+                    // Count empty cargo slots now
+                    var _cg_slots = 0;
+                    for (var _cgw = 0; _cgw < array_length(obj_player.caravan.wagons); _cgw++) {
+                        var _cgc = obj_player.caravan.wagons[_cgw].slots.cargo.contents;
+                        for (var _cgs = 0; _cgs < array_length(_cgc); _cgs++) {
+                            if (_cgc[_cgs] == undefined) _cg_slots++;
+                        }
+                    }
+
+                    var _can_buy = floor(_cargo_budget / max(1, _cg_bp));
+                    _can_buy     = min(_can_buy, _cg_stock);
+                    _can_buy     = min(_can_buy, _cg_slots * _cg_uslot);
+                    _can_buy     = min(_can_buy, _cand_c.quantity);  // don't over-buy
+
+                    if (_can_buy > 0) {
+                        console_print("[AI] CONTRACT CARGO: Buying " + string(_can_buy) + "x "
+                                      + _cand_c.good_name + " @" + string(_cg_bp) + "g  ("
+                                      + string(_can_buy) + "/" + string(_cand_c.quantity) + " needed)");
+                        scr_cmd_buy(_cand_c.good_name, _can_buy, true);
+                    } else {
+                        console_print("[DEBUG] CONTRACT CARGO: No budget/space for "
+                                      + _cand_c.good_name + " right now");
+                    }
                 }
             }
 
