@@ -7,7 +7,7 @@
 ///       undefined cargo slots serialize to null in JSON; scr_fixup_loaded_cargo()
 ///       converts them back on load.
 
-function scr_cmd_save() {
+function scr_cmd_save(filename = "caravan_save.json") {
 
     if (obj_heartbeat.game_state != "TOWN") {
         console_print("You can only save while resting at a location.");
@@ -47,7 +47,7 @@ function scr_cmd_save() {
     // Serialize to JSON and write to disk
     // ------------------------------------------------------------------
     var _json = json_stringify(_save);
-    var _path = working_directory + "caravan_save.json";
+    var _path = working_directory + filename;
     var _f = file_text_open_write(_path);
     file_text_write_string(_f, _json);
     file_text_close(_f);
@@ -63,7 +63,9 @@ function scr_cmd_save() {
         }
     }
 
-    console_print("");
-    console_print("Game saved.  (Day " + string(obj_heartbeat.day) + " — " + _loc_name + ")");
-    console_print("");
+    if (filename == "caravan_save.json") {
+        console_print("");
+        console_print("Game saved.  (Day " + string(obj_heartbeat.day) + " — " + _loc_name + ")");
+        console_print("");
+    }
 }

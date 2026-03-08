@@ -109,6 +109,31 @@ function scr_show_end_screen() {
     console_print("");
     console_print(_outcome_line);
     console_print("");
+
+    // ── BEAT AI result ──────────────────────────────────────────────────
+    if (obj_heartbeat.setup_config.game_mode == "BEAT_AI"
+    &&  obj_heartbeat.beat_ai_target_gold > 0) {
+        var _ai_g   = obj_heartbeat.beat_ai_target_gold;
+        var _margin = obj_player.gold - _ai_g;
+        console_print(string_repeat(chr(9552), 44));
+        if (_margin > 0) {
+            console_print("  *** YOU BEAT THE AI! ***");
+            console_print("  Your gold:  " + string(obj_player.gold) + "g");
+            console_print("  AI gold:    " + string(_ai_g) + "g");
+            console_print("  Advantage:  +" + string(_margin) + "g");
+        } else if (_margin == 0) {
+            console_print("  A DRAW — you matched the AI exactly.");
+            console_print("  Gold: " + string(obj_player.gold) + "g");
+        } else {
+            console_print("  The AI wins this time.");
+            console_print("  Your gold:  " + string(obj_player.gold) + "g");
+            console_print("  AI gold:    " + string(_ai_g) + "g");
+            console_print("  Deficit:    " + string(_margin) + "g");
+        }
+        console_print(string_repeat(chr(9552), 44));
+        console_print("");
+    }
+
     console_print("Type RESTART to start a new run or QUIT to exit.");
     console_print("");
 }

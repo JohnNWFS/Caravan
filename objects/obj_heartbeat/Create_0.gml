@@ -65,6 +65,9 @@ selected_location_id = "";   // ID of last left-clicked node; persists until DIR
 // === JOURNEY TRACKING ===
 journey_count = 0;    // Number of completed journeys this run
 
+// === BEAT AI ===
+beat_ai_target_gold = 0;   // set during BEAT_AI pre-run; 0 in other modes
+
 // === SETUP CONFIG (player's pre-game choices, set during SETUP state) ===
 setup_config = {
     world_size:    "SMALL",    // "SMALL" (25 locs) | "MEDIUM" (40 locs) | "LARGE" (60 locs)

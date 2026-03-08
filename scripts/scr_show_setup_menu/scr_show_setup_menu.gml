@@ -21,6 +21,8 @@ function scr_show_setup_menu() {
     var _mode_str = "ENDLESS";
     if (_s.game_mode == "JOURNEY") {
         _mode_str = "JOURNEY - " + string(_s.journey_limit) + " trips";
+    } else if (_s.game_mode == "BEAT_AI") {
+        _mode_str = "BEAT THE AI - 100 trips";
     }
 
     // === Full-width box layout (56 chars wide, 54-char inner content) ===

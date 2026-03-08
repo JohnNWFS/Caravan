@@ -4,9 +4,10 @@
 /// @desc  Simulate an AI trader completing [journey_goal] journeys.
 ///        Every decision is printed to the console so the debug log captures a
 ///        full play-through.  Tweak the CONFIG block below to adjust behaviour.
-/// @param {Real} [journey_goal]  Number of journeys to attempt (default: 10)
+/// @param {Real}    [journey_goal]  Number of journeys to attempt (default: 10)
+/// @param {Bool}    [silent]        If true, skips periodic saves (used by BEAT AI pre-run)
 
-function scr_ai_player(journey_goal = 10) {
+function scr_ai_player(journey_goal = 10, silent = false) {
 
     // ═══════════════════════════════════════════════════════════════════════
     // CONFIG  -change these numbers to tune AI behaviour
@@ -27,7 +28,8 @@ function scr_ai_player(journey_goal = 10) {
     var AI_CONTRACT_URGENCY_BASE   = 1500;  // destination scoring bonus per active contract
     var AI_CONTRACT_DEADLINE_PANIC = 3000;  // extra bonus when deadline < 5 days away
     var AI_SAVE_INTERVAL           = 100;   // save to disk every N journeys
-    var AI_CODE_VERSION            = "v1.7.0";
+    var AI_CONTRACT_MAX_HOPS       = 2;     // BFS hop limit for contract reachability (2 = 1 intermediate stop)
+    var AI_CODE_VERSION            = "v1.8.0";
 
     // ═══════════════════════════════════════════════════════════════════════
     // STATE
@@ -430,6 +432,37 @@ function scr_ai_player(journey_goal = 10) {
                           + " crew, " + string(_daily_crew_wage) + "g/day total");
         }
 
+        // ── BFS reachability (limited to AI_CONTRACT_MAX_HOPS hops) ─────────
+        // Returns true if to_id is reachable from from_id within max_hops steps.
+        // Routes are bidirectional: each route is checked in both directions.
+        var _ai_reachable = method({
+            routes:    obj_heartbeat.world.routes,
+            max_hops:  AI_CONTRACT_MAX_HOPS
+        }, function(from_id, to_id) {
+            if (from_id == to_id) return true;
+            var _q    = [{ id: from_id, hops: 0 }];
+            var _seen = {};
+            _seen[$ string(from_id)] = true;
+            while (array_length(_q) > 0) {
+                var _cur = _q[0];
+                array_delete(_q, 0, 1);
+                if (_cur.hops >= max_hops) continue;
+                for (var _ri = 0; _ri < array_length(routes); _ri++) {
+                    var _r   = routes[_ri];
+                    var _nxt = noone;
+                    if      (_r.from_id == _cur.id) _nxt = _r.to_id;
+                    else if (_r.to_id   == _cur.id) _nxt = _r.from_id;
+                    if (_nxt == noone) continue;
+                    if (_nxt == to_id) return true;
+                    if (!variable_struct_exists(_seen, string(_nxt))) {
+                        _seen[$ string(_nxt)] = true;
+                        array_push(_q, { id: _nxt, hops: _cur.hops + 1 });
+                    }
+                }
+            }
+            return false;
+        });
+
         // ── STEP 1.7 : Contract management ───────────────────────────────
         console_print("[AI] STEP 1.7 - Contracts check");
 
@@ -490,20 +523,16 @@ function scr_ai_player(journey_goal = 10) {
                 var _cand_c  = _entry.contract;
                 var _days_left = _cand_c.deadline_day - obj_heartbeat.day;
 
-                // Destination must be in direct travel options
-                var _dest_reachable = false;
-                for (var _rci = 0; _rci < array_length(_options); _rci++) {
-                    if (_options[_rci].id == _cand_c.dest_id) {
-                        _dest_reachable = true; break;
-                    }
-                }
+                // Destination reachable within AI_CONTRACT_MAX_HOPS hops
+                var _dest_reachable = _ai_reachable(obj_player.current_location, _cand_c.dest_id);
 
                 var _skip_reason = "";
                 if (_cand_c.reward_gold < AI_CONTRACT_REWARD_MIN) {
                     _skip_reason = "reward " + string(_cand_c.reward_gold)
                                    + "g < min " + string(AI_CONTRACT_REWARD_MIN) + "g";
                 } else if (!_dest_reachable) {
-                    _skip_reason = "dest " + _cand_c.dest_name + " not directly reachable";
+                    _skip_reason = "dest " + _cand_c.dest_name
+                                   + " not reachable in " + string(AI_CONTRACT_MAX_HOPS) + " hops";
                 }
 
                 // Good must be purchasable here in sufficient quantity — no point accepting
@@ -955,6 +984,19 @@ function scr_ai_player(journey_goal = 10) {
 
         var _is_new_dest = !variable_struct_exists(unique_locs_visited, _dest.id);
         var _contracts_before = array_length(obj_player.active_contracts);
+
+        // ── Snapshot rival state before journey (rivals run inside scr_begin_journey) ──
+        var _comp_snap = [];
+        if (!silent) {
+            var _rv = obj_heartbeat.world.competitors;
+            for (var _rsi = 0; _rsi < array_length(_rv); _rsi++) {
+                array_push(_comp_snap, {
+                    gold:     _rv[_rsi].gold,
+                    location: _rv[_rsi].current_location
+                });
+            }
+        }
+
         console_print("[AI] ▶ DEPARTING for " + _dest.name + " ◀");
         scr_begin_journey(_dest.id, _dest_cost);
         journeys_done++;
@@ -969,8 +1011,39 @@ function scr_ai_player(journey_goal = 10) {
             role: _is_new_dest ? "NEW" : "REVISIT"
         });
 
-        // Periodic save + log-flush checkpoint
-        if (journeys_done mod AI_SAVE_INTERVAL == 0) {
+        // ── Rival activity summary (delta from snapshot taken before journey) ─────
+        if (!silent && array_length(_comp_snap) > 0
+        &&  obj_heartbeat.game_state != "GAMEOVER") {
+            var _rv = obj_heartbeat.world.competitors;
+            for (var _rli = 0; _rli < array_length(_rv); _rli++) {
+                var _rc   = _rv[_rli];
+                var _rsnp = _comp_snap[_rli];
+                var _rdg  = _rc.gold - _rsnp.gold;
+                var _rdg_str = (_rdg >= 0 ? "+" : "") + string(_rdg) + "g";
+
+                var _from_loc = _loc_map[$ _rsnp.location];
+                var _to_loc   = _loc_map[$ _rc.current_location];
+                var _rfrom = (_from_loc != undefined) ? _from_loc.name : _rsnp.location;
+                var _rto   = (_to_loc   != undefined) ? _to_loc.name   : _rc.current_location;
+
+                var _rcargo = "";
+                for (var _rci = 0; _rci < array_length(_rc.cargo); _rci++) {
+                    var _ri   = _rc.cargo[_rci];
+                    var _rcom = scr_get_commodity_by_id(_ri.good_id);
+                    var _rnm  = (_rcom != undefined) ? _rcom.name : _ri.good_id;
+                    if (_rcargo != "") _rcargo += ", ";
+                    _rcargo += string(_ri.quantity) + " " + _rnm;
+                }
+                if (_rcargo == "") _rcargo = "empty";
+
+                console_print("[RIVAL] " + _rc.name + ": " + _rfrom + " -> " + _rto
+                              + "  " + _rdg_str + "  cargo: " + _rcargo);
+            }
+        }
+
+        // Periodic save + log-flush checkpoint (skipped in silent/BEAT_AI pre-run mode)
+        if (!silent && journeys_done mod AI_SAVE_INTERVAL == 0
+        &&  obj_heartbeat.game_state == "TOWN") {
             console_print("[DEBUG] Checkpoint (turn " + string(journeys_done) + "): saving...");
             scr_cmd_save();
             saves_done++;

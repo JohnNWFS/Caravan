@@ -38,12 +38,15 @@ function scr_cmd_setup(command, args) {
 
         // ----------------------------------------------------------------
         // [4] Cycle game mode:
-        //   JOURNEY-10 -> JOURNEY-25 -> JOURNEY-50 -> JOURNEY-100 -> ENDLESS -> back
+        //   JOURNEY-10 -> JOURNEY-25 -> JOURNEY-50 -> JOURNEY-100 -> ENDLESS -> BEAT_AI -> back
         // ----------------------------------------------------------------
         case "4":
-            if (_s.game_mode == "ENDLESS") {
+            if (_s.game_mode == "BEAT_AI") {
                 _s.game_mode     = "JOURNEY";
                 _s.journey_limit = 10;
+            } else if (_s.game_mode == "ENDLESS") {
+                _s.game_mode     = "BEAT_AI";
+                _s.journey_limit = 100;   // fixed: both AI and player get 100 journeys
             } else if (_s.journey_limit == 10) {
                 _s.journey_limit = 25;
             } else if (_s.journey_limit == 25) {
@@ -97,9 +100,38 @@ function scr_cmd_setup(command, args) {
                           + ((_n_rivals == 1) ? "" : "s") + ".");
             console_print("");
             console_print("You begin your journey in " + _start_name + ".");
-            console_print("Type HELP for commands. Type GUIDE for a full tutorial.");
-            console_print("");
             obj_heartbeat.game_state = "TOWN";
+
+            if (_s.game_mode == "BEAT_AI") {
+                // ── BEAT AI pre-run ──────────────────────────────────────────────
+                // Save starting snapshot → run AI 100 turns silently → record gold
+                // → reload snapshot → show briefing.
+                console_print("Preparing AI benchmark — please wait...");
+                scr_cmd_save("beat_ai_snapshot.json");
+
+                scr_ai_player(100, true);   // silent=true: no periodic saves
+
+                obj_heartbeat.beat_ai_target_gold = obj_player.gold;
+                var _ai_gold = obj_player.gold;
+
+                // Restore starting state (scr_cmd_load calls console_clear internally)
+                scr_cmd_load("beat_ai_snapshot.json");
+
+                // Show Beat AI briefing, overriding the "GAME LOADED" screen
+                console_clear();
+                console_print(_hdr("BEAT THE AI"));
+                console_print("The AI trader completed 100 journeys and earned:");
+                console_print("  " + string(_ai_gold) + " gold");
+                console_print("");
+                console_print("Now it's your turn — same world, same starting gold.");
+                console_print("Earn more than " + string(_ai_gold) + "g in 100 journeys to win.");
+                console_print("");
+                console_print("Type HELP for commands. Good luck!");
+                console_print("");
+            } else {
+                console_print("Type HELP for commands. Type GUIDE for a full tutorial.");
+                console_print("");
+            }
             break;
 
         // ----------------------------------------------------------------
@@ -121,7 +153,7 @@ function scr_cmd_setup(command, args) {
             console_print("  1          - Cycle world size (SMALL / MEDIUM / LARGE)");
             console_print("  2          - Cycle starting kit (gear + gold preset)");
             console_print("  3          - Toggle rival difficulty (NORMAL / AGGRESSIVE)");
-            console_print("  4          - Cycle mode (JOURNEY 10/25/50/100 trips or ENDLESS)");
+            console_print("  4          - Cycle mode (JOURNEY 10/25/50/100, ENDLESS, or BEAT AI)");
             console_print("  START      - Begin the game with current settings");
             console_print("  GUIDE      - Full game tutorial (typewriter)");
             console_print("");

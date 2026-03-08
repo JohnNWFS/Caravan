@@ -396,7 +396,8 @@ function scr_begin_journey(destination_id, costs) {
     // === JOURNEY COUNTER ===
     obj_heartbeat.journey_count++;
 
-    if (obj_heartbeat.setup_config.game_mode == "JOURNEY") {
+    if (obj_heartbeat.setup_config.game_mode == "JOURNEY"
+    ||  obj_heartbeat.setup_config.game_mode == "BEAT_AI") {
         var _done  = obj_heartbeat.journey_count;
         var _limit = obj_heartbeat.setup_config.journey_limit;
         var _left  = _limit - _done;
